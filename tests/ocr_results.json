@@ -1,0 +1,102 @@
+{
+ "01_plain_unit": {
+  "expected": 4.79,
+  "got": 4.79,
+  "ok": true,
+  "inAlternatives": true,
+  "note": "",
+  "name": "Kelloggs Frosted Flakes",
+  "secs": 0.3,
+  "text": "KELLOGGS FROSTED FLAKES\n\n13.50Z\n\n$4.79\n\nUNIT PRICE $0.35 PER OZ\n\n038000 12345 6"
+ },
+ "02_superscript": {
+  "expected": 3.49,
+  "got": 3.49,
+  "ok": true,
+  "inAlternatives": true,
+  "note": "Read \"$349\" as $3.49 (small cents)",
+  "name": "Whole Milk Gal",
+  "secs": 0.1,
+  "text": "WHOLE MILK 1 GAL\n\n#349\n\nUnit price 2.7\u00a2 per fl oz"
+ },
+ "03_yellow_multibuy": {
+  "expected": 2.5,
+  "got": 2.5,
+  "ok": true,
+  "inAlternatives": true,
+  "note": "2 for $5.00 = $2.50 each",
+  "name": "Barilla Pasta",
+  "secs": 0.2,
+  "text": "I\n\nBarilla Pasta 16 oz\n\n2/$5\n\nReg $3.29 Save up to $1.58 on 2"
+ },
+ "04_red_inverted": {
+  "expected": 4.49,
+  "got": 4.49,
+  "ok": true,
+  "inAlternatives": true,
+  "note": "",
+  "name": "Ground Beef",
+  "secs": 0.2,
+  "text": "GROUND BEEF 80/20\n\n$4.49\n\nper lb"
+ },
+ "05_photo_glare_blur": {
+  "expected": 5.29,
+  "got": 5.29,
+  "ok": true,
+  "inAlternatives": true,
+  "note": "",
+  "name": "Cheerios",
+  "secs": 0.1,
+  "text": "CHEERIOS 18 oz\n\n$5.29\n\n$0.29/02"
+ },
+ "06_cents_lb": {
+  "expected": 0.59,
+  "got": 0.59,
+  "ok": true,
+  "inAlternatives": true,
+  "note": "Read as cents",
+  "name": "",
+  "secs": 0.1,
+  "text": "59\u00a2"
+ },
+ "07_member_reg_save": {
+  "expected": 11.99,
+  "got": 11.99,
+  "ok": true,
+  "inAlternatives": true,
+  "note": "",
+  "name": "Tide Pods",
+  "secs": 0.2,
+  "text": "Tide Pods 42 ct\n\n$11.99\n\nReg $14.99 You Save $3.00"
+ },
+ "08_lowres": {
+  "expected": 2.99,
+  "got": 2.99,
+  "ok": true,
+  "inAlternatives": true,
+  "note": "",
+  "name": "Corn Tortillas",
+  "secs": 0.1,
+  "text": "Corn Tortillas 30 ct\n\n$2.99"
+ },
+ "09_3for10": {
+  "expected": 3.33,
+  "got": 3.33,
+  "ok": true,
+  "inAlternatives": true,
+  "note": "3 for $10.00 = $3.33 each",
+  "name": "Goya Black Beans",
+  "secs": 0.1,
+  "text": "Goya Black Beans 15.5 oz\n\n3 FOR $10\n\n$0.22 per oz"
+ },
+ "10_glossy_glare_stripe": {
+  "expected": 3.99,
+  "got": 5.99,
+  "ok": false,
+  "inAlternatives": false,
+  "note": "",
+  "name": "",
+  "secs": 0.2,
+  "text": "$5.99"
+ }
+}
