@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tamayo Cart</title>
+<meta name="description" content="Scan shelf price tags and keep a running grocery total against your budget. Works offline. No accounts, no tracking.">
+<meta name="theme-color" content="#0f7a4a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b1410" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Tamayo Cart">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'unsafe-eval' blob:; worker-src 'self' blob:; img-src 'self' data: blob:; media-src 'self' blob: mediastream:; style-src 'self' 'unsafe-inline'; connect-src 'self' data: blob:; object-src 'none'; base-uri 'self'">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="summary" id="summary">
+  <div class="sum-top">
+    <div>
+      <div class="label">Cart total</div>
+      <div class="total" id="total">$0.00</div>
+      <div class="sub" id="subline">0 items</div>
+    </div>
+    <button class="budget-pill" id="budgetBtn" aria-label="Set budget">
+      <span class="label">Left of budget</span>
+      <span class="remaining" id="remaining">Set budget</span>
+    </button>
+  </div>
+  <div class="bar" role="progressbar" aria-label="Budget used" aria-valuemin="0" aria-valuemax="100" id="bar"><div class="fill" id="barFill"></div></div>
+  <div class="bar-caption" id="barCaption"></div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Views">
+  <button class="tab on" role="tab" id="tabCart" aria-selected="true" data-view="cart">🛒 Cart</button>
+  <button class="tab" role="tab" id="tabPlan" aria-selected="false" data-view="plan">📋 Meal plan list</button>
+</nav>
+
+<main id="main">
+ <div id="cartView">
+  <section class="store-row">
+    <label for="store" class="sr">Store</label>
+    <input id="store" class="store" placeholder="Store (optional) — e.g. Food 4 Less Downey" autocomplete="off" enterkeyhint="done">
+  </section>
+
+  <ul class="items" id="items" aria-live="polite"></ul>
+  <div class="empty" id="empty">
+    <p class="big">🛒 Cart is empty</p>
+    <p>Tap <b>Scan tag</b> and point at a shelf price, or <b>Type price</b>.</p>
+  </div>
+
+  <section class="actions-secondary">
+    <button class="btn ghost" id="finishBtn">✅ Finish trip</button>
+    <button class="btn ghost" id="historyBtn">📜 History</button>
+    <button class="btn ghost" id="settingsBtn">⚙️ Tax &amp; settings</button>
+    <button class="btn ghost danger" id="clearBtn">🗑️ Clear cart</button>
+  </section>
+ </div>
+
+ <div id="planView" hidden>
+  <div class="seg" role="radiogroup" aria-label="Week" id="weekSeg">
+    <button class="seg-btn on" role="radio" aria-checked="true" data-week="1">Week 1</button>
+    <button class="seg-btn" role="radio" aria-checked="false" data-week="2">Week 2</button>
+  </div>
+  <section class="plan-card plan-stats" id="planStats" aria-live="polite"></section>
+  <section class="plan-card">
+    <h2 class="plan-h">🍽️ Dinners</h2>
+    <ul class="dinners" id="dinners"></ul>
+  </section>
+  <div id="planList"></div>
+  <p class="muted plan-note" id="planNote"></p>
+  <section class="actions-secondary">
+    <button class="btn ghost" id="planAddBtn">＋ Add item</button>
+    <button class="btn ghost danger" id="planResetBtn">↺ Reset week</button>
+  </section>
+  <button class="btn ghost restore" id="planRestoreBtn" hidden></button>
+ </div>
+  <p class="privacy">Tamayo Cart runs only on this phone. No account, no server, no tracking, no ads. Data is stored in this browser.</p>
+</main>
+
+<nav class="dock">
+  <button class="btn primary xl" id="scanBtn">📷 Scan tag</button>
+  <button class="btn secondary xl" id="addBtn">＋ Type price</button>
+</nav>
+
+<!-- Camera -->
+<div class="camera" id="camera" hidden>
+  <video id="video" playsinline muted autoplay></video>
+  <div class="guide"><div class="guide-box" id="guideBox"><span>Fit the price tag here</span></div></div>
+  <div class="cam-status" id="camStatus"></div>
+  <div class="cam-controls">
+    <button class="btn ghost-dark" id="camClose" aria-label="Close camera">✕</button>
+    <button class="shutter" id="shutter" aria-label="Snap price tag"></button>
+    <button class="btn ghost-dark" id="torchBtn" aria-label="Toggle flashlight" hidden>🔦</button>
+    <label class="btn ghost-dark" id="photoPick" aria-label="Use a photo">🖼️<input type="file" accept="image/*" capture="environment" id="fileInput" hidden></label>
+  </div>
+</div>
+
+<!-- Item sheet (confirm scanned / manual add / edit) -->
+<div class="sheet-wrap" id="sheetWrap" hidden>
+  <form class="sheet" id="sheet" autocomplete="off">
+    <div class="sheet-head">
+      <h2 id="sheetTitle">Add item</h2>
+      <button type="button" class="x" id="sheetClose" aria-label="Close">✕</button>
+    </div>
+    <div class="ocr-preview" id="ocrPreview" hidden>
+      <img id="ocrImg" alt="Snapped tag">
+      <div>
+        <div class="ocr-note" id="ocrNote"></div>
+        <div class="chips" id="chips"></div>
+      </div>
+    </div>
+    <label class="field">
+      <span>Price (each)</span>
+      <div class="price-input"><span>$</span><input id="fPrice" inputmode="decimal" placeholder="0.00" required enterkeyhint="done"></div>
+    </label>
+    <label class="field">
+      <span>Name (optional)</span>
+      <input id="fName" placeholder="e.g. Milk 1 gal" enterkeyhint="done" maxlength="60">
+    </label>
+    <div class="field">
+      <span>Quantity</span>
+      <div class="qty big">
+        <button type="button" class="qbtn" id="qMinus" aria-label="Less">−</button>
+        <input id="fQty" inputmode="decimal" value="1" aria-label="Quantity">
+        <button type="button" class="qbtn" id="qPlus" aria-label="More">+</button>
+      </div>
+    </div>
+    <div class="field list-link" id="listLinkField">
+      <span id="listLinkLabel">Check off on shopping list</span>
+      <select id="fList" class="select"><option value="">— Not on the list —</option></select>
+      <button type="button" class="chip suggest" id="listSuggest" hidden></button>
+    </div>
+    <label class="toggle">
+      <input type="checkbox" id="fTaxable">
+      <span class="sw"></span>
+      <span>Taxable item <small>In CA: non-food (paper towels, soap), alcohol, soda &amp; other carbonated drinks, hot prepared food</small></span>
+    </label>
+    <div class="line-total" id="lineTotal"></div>
+    <div class="sheet-actions">
+      <button type="button" class="btn ghost danger" id="sheetDelete" hidden>Remove</button>
+      <button type="button" class="btn ghost" id="sheetRescan" hidden>📷 Rescan</button>
+      <button type="submit" class="btn primary xl" id="sheetSave">Add to cart</button>
+    </div>
+  </form>
+</div>
+
+<!-- Generic dialog sheet -->
+<div class="sheet-wrap" id="dlgWrap" hidden>
+  <div class="sheet" id="dlg">
+    <div class="sheet-head"><h2 id="dlgTitle"></h2><button type="button" class="x" id="dlgClose" aria-label="Close">✕</button></div>
+    <div id="dlgBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="parser.js"></script>
+<script src="meals.js"></script>
+<script src="mealplan.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
