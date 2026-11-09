@@ -1,7 +1,7 @@
 /* Tamayo Cart service worker: precache everything (incl. the OCR engine) so the app works offline. */
-var VERSION = 'tamayo-cart-v2'; // bump on every release so phones pick up new files
+var VERSION = 'tamayo-cart-v3'; // bump on every release so phones pick up new files
 var ASSETS = [
-  './', './index.html', './styles.css', './parser.js', './meals.js', './mealplan.js', './app.js', './manifest.webmanifest',
+  './', './index.html', './styles.css', './parser.js', './meals.js', './recipes.js', './mealplan.js', './app.js', './manifest.webmanifest',
   './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-512.png', './icons/apple-touch-icon.png',
   './vendor/tesseract/tesseract.min.js', './vendor/tesseract/worker.min.js',
   './vendor/tesseract/core/tesseract-core-simd-lstm.wasm.js', './vendor/tesseract/core/tesseract-core-lstm.wasm.js',
