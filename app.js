@@ -1,7 +1,7 @@
 /* Tamayo Cart — app logic. No network calls besides loading its own files. */
 (function () {
   'use strict';
-  var Core = window.TamayoCore, Plan = window.TamayoPlan, Meals = window.TamayoMeals;
+  var Core = window.TamayoCore, Plan = window.TamayoPlan, Meals = window.TamayoMeals, Recipes = window.TamayoRecipes;
   var $ = function (id) { return document.getElementById(id); };
   var money = Core.money;
 
@@ -496,6 +496,7 @@
     plan.week = b.dataset.week; save(); renderPlan(); buzz();
   });
 
+  var expandedDinners = {};
   function renderPlan() {
     var wk = Meals.weeks[plan.week], items = curItems(), s = Plan.summary(items), t = totals();
     Array.prototype.forEach.call($('weekSeg').children, function (b) { var on = b.dataset.week === plan.week; b.classList.toggle('on', on); b.setAttribute('aria-checked', on); });
@@ -511,8 +512,16 @@
       '<div class="bar-caption" id="planCaption">' + s.checked + ' of ' + s.total + ' checked · list estimate ' + money(s.estTotal) +
       (state.budget ? '<br>Cart ' + money(t.total) + ' + est. remaining ' + money(s.remaining) + ' ≈ <b>' + money(projected) + '</b> of ' + money(state.budget) + ' budget' : '') + '</div>';
     $('dinners').innerHTML = wk.dinners.map(function (d, i) {
-      return '<li><button class="dinner" data-i="' + i + '"' + (d.meal ? '' : ' data-nometa="1"') + '><span class="day">' + esc(d.day) + '</span><span class="dn"><span class="dt">' + esc(d.title) + '</span>' +
-        (d.detail ? '<span class="dd">' + esc(d.detail) + '</span>' : '') + '</span>' + (d.meal ? '<span class="chev" aria-hidden="true">›</span>' : '') + '</button></li>';
+      var recipe = dinnerRecipe(d, plan.week);
+      var open = !!expandedDinners[plan.week + ':' + i];
+      var has = !!recipe;
+      return '<li class="dinner-wrap' + (open ? ' open' : '') + '">' +
+        '<button type="button" class="dinner" data-i="' + i + '"' + (has ? ' aria-expanded="' + open + '"' : ' data-nometa="1"') + '>' +
+        '<span class="day">' + esc(d.day) + '</span><span class="dn"><span class="dt">' + esc(d.title) + '</span>' +
+        (d.detail ? '<span class="dd">' + esc(d.detail) + '</span>' : '') + '</span>' +
+        (has ? '<span class="chev" aria-hidden="true">›</span>' : '') + '</button>' +
+        (has ? '<div class="recipe-panel" data-recipe-i="' + i + '"' + (open ? '' : ' hidden') + '>' + renderRecipeHtml(recipe) + '</div>' : '') +
+        '</li>';
     }).join('');
     $('planList').innerHTML = Plan.groupBySection(Meals, items).map(function (g) {
       return '<section class="plan-sec"><h3 class="sec-h"><span>' + g.icon + ' ' + esc(g.label) + '</span>' + (g.est ? '<span class="sec-est">~' + money(g.est) + '</span>' : '') + '</h3><ul class="plist">' +
@@ -533,12 +542,38 @@
     $('planRestoreBtn').textContent = '↩︎ Restore ' + nRemoved + ' removed item' + (nRemoved === 1 ? '' : 's');
   }
 
+  function dinnerRecipe(d, week) {
+    if (!d) return null;
+    if (d.meal && Recipes && Recipes.byMeal && Recipes.byMeal[d.meal]) return Recipes.byMeal[d.meal];
+    if (!d.meal && Recipes && Recipes.sundayByWeek && Recipes.sundayByWeek[week]) return Recipes.sundayByWeek[week];
+    return null;
+  }
+  function renderRecipeHtml(r) {
+    var meta = '<div class="recipe-meta">' +
+      '<div><b>Servings</b>' + esc(r.servings) + '</div>' +
+      '<div><b>Equipment</b>' + esc(r.equipment) + '</div>' +
+      '<div><b>Prep</b>' + esc(r.prep) + '</div>' +
+      '<div><b>Cook</b>' + esc(r.cook) + '</div></div>';
+    var ings = '<div class="recipe-sec">Ingredients</div><ul class="recipe-list">' +
+      (r.ingredients || []).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>';
+    var steps = '<div class="recipe-sec">Steps</div><ol class="recipe-steps">' +
+      (r.steps || []).map(function (s) {
+        if (typeof s === 'string') return '<li>' + esc(s) + '</li>';
+        return '<li><b>' + esc(s.title) + '.</b> ' + esc(s.detail || '') + '</li>';
+      }).join('') + '</ol>';
+    var done = r.doneness ? '<div class="recipe-sec">Doneness &amp; safety</div><p class="recipe-note">' + esc(r.doneness) + '</p>' : '';
+    var tip = r.tip ? '<p class="recipe-tip"><b>Tip:</b> ' + esc(r.tip) + '</p>' : '';
+    return '<div class="recipe-h">How to make it</div>' + meta + ings + steps + done + tip;
+  }
   $('dinners').addEventListener('click', function (e) {
-    var b = e.target.closest('.dinner'); if (!b) return;
-    var d = Meals.weeks[plan.week].dinners[+b.dataset.i];
-    var m = d && d.meal && Meals.meals.find(function (x) { return x.id === d.meal; }); if (!m) return;
-    openDlg(d.day + ': ' + m.name, '<div class="stack"><p class="muted">' + esc(m.method) + ' · ' + m.hands + ' min hands-on · ' + esc(m.time) + ' · about ' + money(m.cost) + ' for 5 (estimate)</p>' +
-      '<p><b>Core ingredients:</b> ' + esc(m.ingredients) + '</p><p class="muted">From the “Tamayo Weeknight Meals” page.</p></div>');
+    var b = e.target.closest('.dinner'); if (!b || b.hasAttribute('data-nometa')) return;
+    var i = +b.dataset.i, key = plan.week + ':' + i;
+    expandedDinners[key] = !expandedDinners[key];
+    renderPlan();
+    if (expandedDinners[key]) {
+      var panel = $('dinners').querySelector('[data-recipe-i="' + i + '"]');
+      if (panel) try { panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch (err) {}
+    }
   });
 
   $('planList').addEventListener('click', function (e) {
