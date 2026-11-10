@@ -9,15 +9,15 @@
 })(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
   return {
-  "version": 1,
+  "version": 2,
   "byMeal": {
-    "salsa": {
+    "salsabeef": {
       "servings": "5",
-      "prep": "5 min",
-      "cook": "2.5 hr on HIGH or 5 hr on LOW",
-      "equipment": "Crockpot, 2 forks for shredding",
+      "prep": "10 min",
+      "cook": "About 25 min",
+      "equipment": "Large pot or deep skillet",
       "ingredients": [
-        "2 lb boneless chicken breasts",
+        "1 lb ground beef",
         "1 jar salsa (16 oz)",
         "1 tsp chili powder",
         "1 tsp garlic powder",
@@ -26,28 +26,28 @@
       ],
       "steps": [
         {
-          "title": "Load",
-          "detail": "Put chicken in the crockpot. Pour salsa over it. Sprinkle chili powder, garlic powder, and onion powder. No need to add water."
+          "title": "Brown the beef",
+          "detail": "Put ground beef in a large pot over medium heat. Break it up with a spoon and cook until no pink remains. Drain extra fat."
         },
         {
-          "title": "Cook",
-          "detail": "Cover and cook on HIGH 2.5 hours or LOW 5 hours."
+          "title": "Simmer in salsa",
+          "detail": "Stir in the salsa, chili powder, garlic powder, and onion powder. Simmer 10 minutes, stirring once or twice. Add a splash of water if it looks dry."
         },
         {
-          "title": "Shred and serve",
-          "detail": "Shred chicken in the salsa with two forks. Serve in tortillas or over rice with beans, cheese, and lettuce."
+          "title": "Serve",
+          "detail": "Spoon into tortillas or over rice. Add beans, cheese, and lettuce."
         }
       ],
-      "doneness": "Chicken must reach 165°F in the thickest piece before shredding. Fridge leftovers within 2 hours.",
-      "tip": "Start on HIGH after school — ready by dinner with almost no work."
+      "doneness": "Ground beef is done when no pink remains (160°F). Fridge leftovers within 2 hours.",
+      "tip": "One pot and about 25 minutes — start it when you get home and dinner is ready without a long wait."
     },
-    "tinga": {
+    "tingabeef": {
       "servings": "5",
       "prep": "10 min",
-      "cook": "3–4 hr on HIGH or 6–8 hr on LOW",
-      "equipment": "Crockpot, 2 forks for shredding",
+      "cook": "About 30 min",
+      "equipment": "Large pot or deep skillet",
       "ingredients": [
-        "2 lb boneless chicken breasts",
+        "1 lb ground beef",
         "1 onion, diced",
         "4 garlic cloves (or 1 Tbsp jarred garlic)",
         "1 tsp cumin",
@@ -60,23 +60,23 @@
       ],
       "steps": [
         {
-          "title": "Load the crockpot",
-          "detail": "Put chicken in the crockpot. Add diced onion, garlic, cumin, oregano, salt, pepper, the can of tomatoes (with juice), the 2 chipotle peppers (chopped), and 1 Tbsp of the adobo sauce. Stir once so chicken is coated."
+          "title": "Brown the beef",
+          "detail": "Cook ground beef with the diced onion and garlic over medium heat until the beef has no pink left. Drain extra fat."
         },
         {
-          "title": "Cook",
-          "detail": "Cover and cook on HIGH 3–4 hours or LOW 6–8 hours, until chicken shreds easily with two forks."
+          "title": "Simmer the sauce",
+          "detail": "Stir in cumin, oregano, salt, pepper, the can of tomatoes (with juice), the 2 chipotle peppers (chopped), and 1 Tbsp of the adobo sauce. Simmer 15 minutes, stirring a few times."
         },
         {
-          "title": "Shred and mix",
-          "detail": "Pull chicken out onto a plate, shred with two forks, then return it to the sauce and stir. Taste and add a pinch more salt if needed."
+          "title": "Taste",
+          "detail": "Taste and add a pinch more salt if needed."
         },
         {
           "title": "Serve",
           "detail": "Warm tostadas in a dry pan or oven for 1–2 minutes. Spoon tinga on each tostada. Top with lettuce, crema, and sliced avocado."
         }
       ],
-      "doneness": "Chicken is done when it shreds easily and reaches 165°F in the thickest piece. Do not leave cooked chicken sitting out more than 2 hours.",
+      "doneness": "Ground beef is done when no pink remains (160°F). Do not leave cooked beef sitting out more than 2 hours.",
       "tip": "Chipotles are spicy — use 1 pepper the first time if the family likes milder food."
     },
     "carnitas": {
@@ -195,13 +195,13 @@
       "doneness": "Beef chuck is done when it shreds with little effort. Fridge any leftover meat within 2 hours.",
       "tip": "Ask the butcher to cut the roast into chunks — less knife work at home."
     },
-    "bbq": {
+    "bbqbeef": {
       "servings": "5",
-      "prep": "5 min",
-      "cook": "2.5 hr on HIGH or 4–5 hr on LOW",
-      "equipment": "Crockpot",
+      "prep": "10 min",
+      "cook": "About 25 min",
+      "equipment": "Large skillet",
       "ingredients": [
-        "2 lb chicken breasts",
+        "1.25 lb ground beef",
         "1 tsp smoked paprika",
         "1 tsp garlic powder",
         "1 tsp salt",
@@ -212,23 +212,23 @@
       ],
       "steps": [
         {
-          "title": "Season and load",
-          "detail": "Put chicken in the crockpot. Sprinkle paprika, garlic powder, salt, and pepper. Pour enough BBQ sauce to coat (save some for serving)."
+          "title": "Brown the beef",
+          "detail": "Cook ground beef in a skillet over medium heat, breaking it up, until no pink remains. Drain extra fat."
         },
         {
-          "title": "Cook",
-          "detail": "Cook on HIGH 2.5 hours or LOW 4–5 hours until chicken shreds."
+          "title": "Season and sauce",
+          "detail": "Stir in paprika, garlic powder, salt, and pepper. Add enough BBQ sauce to coat (save some for serving). Simmer 8–10 minutes, stirring once or twice."
         },
         {
-          "title": "Shred and sauce",
-          "detail": "Shred chicken in the pot. Stir in more BBQ sauce to taste."
+          "title": "Slaw",
+          "detail": "Toss coleslaw mix with dressing while the beef simmers."
         },
         {
-          "title": "Slaw and serve",
-          "detail": "Toss coleslaw mix with dressing. Pile chicken on buns and add a scoop of slaw (or serve slaw on the side)."
+          "title": "Serve",
+          "detail": "Pile beef on buns and add a scoop of slaw (or serve slaw on the side)."
         }
       ],
-      "doneness": "Chicken must reach 165°F before shredding.",
+      "doneness": "Ground beef is done when no pink remains (160°F). Sauce should look thick enough to stay on the bun.",
       "tip": "This is one of the easiest nights — almost no chopping."
     },
     "whitechili": {
@@ -270,15 +270,15 @@
       "doneness": "Chicken must reach 165°F before shredding. Chili should be steaming hot.",
       "tip": "Rinse the canned beans — it cuts the salty canned taste."
     },
-    "tortillasoup": {
+    "beeftacosoup": {
       "servings": "5",
       "prep": "10 min",
-      "cook": "4 hr on HIGH or 8 hr on LOW",
-      "equipment": "Crockpot",
+      "cook": "3–4 hr on HIGH or 6–8 hr on LOW",
+      "equipment": "Skillet (to brown beef), crockpot",
       "ingredients": [
+        "1 lb ground beef",
         "1 onion, diced",
         "2 garlic cloves, minced",
-        "About 1 lb chicken breast",
         "1 tsp chili powder",
         "1 tsp cumin",
         "1/2 tsp smoked paprika",
@@ -286,28 +286,28 @@
         "1 can diced tomatoes with green chiles",
         "1 can black beans, drained and rinsed",
         "1 cup frozen corn",
-        "6 cups chicken broth",
+        "4 cups beef broth (one 32 oz carton)",
         "Tortilla chips, avocado, sour cream, lime"
       ],
       "steps": [
         {
-          "title": "Load",
-          "detail": "Add onion, garlic, chicken, spices, both tomato cans, black beans, corn, and broth to the crockpot. Stir."
+          "title": "Brown the beef",
+          "detail": "Brown ground beef with onion and garlic in a skillet until no pink remains. Drain extra fat."
+        },
+        {
+          "title": "Load the crockpot",
+          "detail": "Add the beef mix, spices, both tomato cans, black beans, corn, and beef broth to the crockpot. Stir."
         },
         {
           "title": "Cook",
-          "detail": "Cook on HIGH 4 hours or LOW 8 hours."
-        },
-        {
-          "title": "Shred",
-          "detail": "Shred chicken in the pot. Taste for salt."
+          "detail": "Cover and cook on HIGH 3–4 hours or LOW 6–8 hours."
         },
         {
           "title": "Serve",
-          "detail": "Ladle into bowls. Top with crushed tortilla chips, avocado, sour cream, and a squeeze of lime."
+          "detail": "Taste for salt. Ladle into bowls. Top with crushed tortilla chips, avocado, sour cream, and a squeeze of lime."
         }
       ],
-      "doneness": "Chicken to 165°F before shredding. Soup should be steaming hot.",
+      "doneness": "Ground beef must be fully browned (no pink, 160°F) before it goes in the crockpot. Soup should be steaming hot.",
       "tip": "Keep toppings on the side so leftovers stay crisp-friendly."
     },
     "teriyaki": {
@@ -662,14 +662,14 @@
       "doneness": "Beef fully browned before baking. Casserole center steaming hot (165°F).",
       "tip": "Warm tortillas 10 seconds so they do not crack when you layer them."
     },
-    "burritobowls": {
+    "beefbowls": {
       "servings": "5",
       "prep": "10 min",
-      "cook": "About 30 min with pressure-up time",
-      "equipment": "Instant Pot (or large pot with lid)",
+      "cook": "About 30 min",
+      "equipment": "Large pot with lid",
       "ingredients": [
-        "1.5 lb chicken breast in chunks",
-        "1 cup chicken broth",
+        "1 lb ground beef",
+        "1 cup beef broth",
         "1 taco seasoning packet",
         "1 can corn, drained",
         "1 can black beans, drained and rinsed",
@@ -680,24 +680,24 @@
       ],
       "steps": [
         {
-          "title": "Layer (do not stir)",
-          "detail": "Add chicken, broth, and taco seasoning. Add rice on top. Add corn, beans, salsa, and green chiles on top of the rice. Do not stir."
+          "title": "Brown the beef",
+          "detail": "In a large pot, cook ground beef over medium heat until no pink remains. Drain extra fat. Stir in the taco seasoning."
         },
         {
-          "title": "Cook",
-          "detail": "Seal Instant Pot. Cook on Manual/Pressure Cook HIGH for 10 minutes. Natural release 10 minutes, then quick release."
+          "title": "Add rice and the rest",
+          "detail": "Stir in broth, rice, corn, beans, salsa, and green chiles. Bring to a boil."
+        },
+        {
+          "title": "Simmer",
+          "detail": "Cover and cook on low 18–20 minutes, until the rice is tender. Add a splash of water if the pot looks dry before the rice is done."
         },
         {
           "title": "Finish",
-          "detail": "Shred chicken into the pot if needed. Stir. Sprinkle cheese on top and let it melt with the lid on for 2 minutes."
-        },
-        {
-          "title": "Stovetop option",
-          "detail": "If no Instant Pot: simmer everything covered on low about 20–25 minutes until rice is tender and chicken hits 165°F, adding a splash of water if dry."
+          "detail": "Stir, sprinkle cheese on top, and cover 2 minutes so it melts."
         }
       ],
-      "doneness": "Chicken to 165°F. Rice tender, not crunchy.",
-      "tip": "Layering (not stirring) keeps the rice from sticking to the bottom in the Instant Pot."
+      "doneness": "Ground beef fully browned (160°F) before the rice goes in. Rice tender, not crunchy. Center steaming hot.",
+      "tip": "One pot on the stove. Keep the lid on while the rice cooks so it steams evenly."
     },
     "onepotteriyaki": {
       "servings": "5",

@@ -28,14 +28,14 @@
   ];
 
   var meals = [
-    { id: 'salsa', name: 'Crock Pot Salsa Chicken', method: 'Crockpot', hands: 5, time: '2.5 hr on HIGH or 5 hr on LOW', cost: 18, ingredients: '2 lb boneless chicken breasts, 1 jar salsa (16 oz), chili powder, garlic powder, onion powder. Serve with tortillas or rice, beans, cheese, lettuce.' },
-    { id: 'tinga', name: 'Slow Cooker Chicken Tinga', method: 'Crockpot', hands: 10, time: '3–4 hr on HIGH or 6–8 hr on LOW', cost: 18, ingredients: '2 lb chicken breasts, 1 onion (diced), 4 garlic cloves or 1 Tbsp jarred garlic, cumin, oregano, salt, pepper, 1 can fire-roasted diced tomatoes, 2 chipotle peppers in adobo plus 1 Tbsp of the sauce. Tostadas, lettuce, crema, avocado.' },
+    { id: 'salsabeef', name: 'One-Pot Salsa Beef', method: 'One pot', hands: 10, time: 'About 25 min', cost: 14, ingredients: '1 lb ground beef, 1 jar salsa (16 oz), chili powder, garlic powder, onion powder. Serve with tortillas or rice, beans, cheese, lettuce.' },
+    { id: 'tingabeef', name: 'One-Pot Beef Tinga', method: 'One pot', hands: 10, time: 'About 30 min', cost: 15, ingredients: '1 lb ground beef, 1 onion (diced), 4 garlic cloves or 1 Tbsp jarred garlic, cumin, oregano, salt, pepper, 1 can fire-roasted diced tomatoes, 2 chipotle peppers in adobo plus 1 Tbsp of the sauce. Tostadas, lettuce, crema, avocado.' },
     { id: 'carnitas', name: 'Slow Cooker Carnitas', method: 'Crockpot', hands: 15, time: 'About 4–5 hr on HIGH', cost: 16, ingredients: '2 lb pork butt or shoulder (ask the meat counter to cut it into chunks, or buy pre-cut carnitas meat), 1 onion, 4 garlic cloves, 2 cinnamon sticks, oregano, cumin, salt, pepper, chipotle powder, 2 oranges. Corn tortillas, onion, cilantro, lime.' },
     { id: 'pozole', name: 'Slow Cooker Chicken Pozole Verde', method: 'Crockpot', hands: 10, time: 'About 8.5 hr on LOW or 4–4.5 hr on HIGH', cost: 19, ingredients: '1.5 lb boneless chicken thighs, 1 white onion, 1 poblano (seeded, chopped), chili powder, 16 oz jar salsa verde, 2 cups water, 2 cans hominy (drained, rinsed), cilantro, 1 lime. Shredded cabbage and tostadas on the side.' },
     { id: 'tacobeef', name: 'Shredded Taco Beef', method: 'Crockpot', hands: 10, time: 'About 6–8 hr on LOW', cost: 26, ingredients: '1.5 lb boneless beef chuck or shoulder roast (ask for it cut in chunks), chili powder, cumin, oregano, red pepper flakes, salt, 3 garlic cloves. Tortillas and toppings.' },
-    { id: 'bbq', name: 'Slow Cooker BBQ Pulled Chicken', method: 'Crockpot', hands: 5, time: '2.5 hr on HIGH or 4–5 hr on LOW', cost: 16, ingredients: '2 lb chicken breasts, smoked paprika, garlic powder, salt, pepper, one large bottle BBQ sauce. Hamburger buns (use 5 from a pack of 8) and bagged coleslaw mix.' },
+    { id: 'bbqbeef', name: 'One-Pot BBQ Beef Sandwiches', method: 'One pot', hands: 10, time: 'About 25 min', cost: 14, ingredients: '1.25 lb ground beef, smoked paprika, garlic powder, salt, pepper, one large bottle BBQ sauce. Hamburger buns (use 5 from a pack of 8) and bagged coleslaw mix.' },
     { id: 'whitechili', name: 'Crockpot White Chicken Chili', method: 'Crockpot', hands: 10, time: '4 hr on HIGH or 8 hr on LOW', cost: 15, ingredients: '1 onion, 2 garlic cloves, 1.5 lb chicken breast, 2 cans cannellini beans, 1 can pinto beans, cumin, oregano, pepper, 16 oz jar salsa verde, 2 cups chicken broth. Shredded cheese and tortilla chips on top.' },
-    { id: 'tortillasoup', name: 'Slow Cooker Chicken Tortilla Soup', method: 'Crockpot', hands: 10, time: '4 hr on HIGH or 8 hr on LOW', cost: 14, ingredients: '1 onion, 2 garlic cloves, about 1 lb chicken breast, chili powder, cumin, smoked paprika, 1 can fire-roasted tomatoes, 1 can diced tomatoes with green chiles, 1 can black beans, 1 cup frozen corn, 6 cups chicken broth. Tortilla chips, avocado, sour cream, lime.' },
+    { id: 'beeftacosoup', name: 'Crockpot Beef Taco Soup', method: 'Crockpot', hands: 10, time: '3–4 hr on HIGH or 6–8 hr on LOW', cost: 13, ingredients: '1 lb ground beef, 1 onion, 2 garlic cloves, chili powder, cumin, smoked paprika, 1 can fire-roasted tomatoes, 1 can diced tomatoes with green chiles, 1 can black beans, 1 cup frozen corn, 4 cups beef broth. Tortilla chips, avocado, sour cream, lime.' },
     { id: 'teriyaki', name: 'Slow Cooker Pineapple Teriyaki Chicken', method: 'Crockpot', hands: 10, time: '4 hr on HIGH or 8 hr on LOW', cost: 15, ingredients: '20 oz can pineapple chunks in juice, 1/4 cup soy sauce, 2 Tbsp brown sugar, 2 garlic cloves, 1 tsp grated ginger, 5–6 skinless chicken thighs, 1.5 Tbsp cornstarch, green onions, rice.' },
     { id: 'chili', name: 'Crockpot Chili', method: 'Crockpot', hands: 10, time: '3–4 hr on HIGH or 6–8 hr on LOW', cost: 19, ingredients: '1 lb ground beef, onion, green bell pepper, garlic, tomato paste, 2 cans diced tomatoes (one with green chiles), kidney and pinto beans, 1 cup beef broth, chili powder, cumin, garlic and onion powder, brown sugar, salt, pepper.' },
     { id: 'fajitas', name: 'Sheet Pan Chicken Fajitas', method: 'Sheet pan', hands: 15, time: 'About 55 min', cost: 18, ingredients: '1.5 lb chicken breast (pre-cut stir-fry strips skip knife work), 3–4 bell peppers, 2 onions (or pre-sliced fajita veggies), chili powder, paprika, onion and garlic powder, cumin, salt, sugar (or a fajita packet), oil, lime, tortillas, sour cream.' },
@@ -45,14 +45,14 @@
     { id: 'tortillacasserole', name: 'Cheesy Chicken Tortilla Casserole (enchilada bake)', method: 'Oven bake', hands: 15, time: 'About 50 min', cost: 17, ingredients: '3 cups shredded rotisserie chicken, 1 taco seasoning packet, 4 oz can green chiles, 2 cups frozen corn, 10 oz can red enchilada sauce, 8 corn tortillas cut in half, 2 cups shredded cheese.' },
     { id: 'burritocasserole', name: 'Beef Burrito Casserole', method: 'Oven bake', hands: 10, time: 'About 50 min', cost: 16, ingredients: '1/2–1 lb ground beef (browned on Sunday), 4 cups cooked rice, 1 can black beans, 16 oz salsa, green onions, chili powder, 4 oz cream cheese, 1 cup cheddar.' },
     { id: 'tacocasserole', name: 'Taco Casserole', method: 'Oven bake', hands: 15, time: 'About 45 min', cost: 19, ingredients: '1 lb ground beef, 1/2 onion, 1 green bell pepper, chili powder, cumin, paprika, oregano, salt, pepper, 16 oz salsa, 1 can black beans, 2 cups cheddar, 6 burrito-size flour tortillas.' },
-    { id: 'burritobowls', name: 'Instant Pot Chicken Burrito Bowls', method: 'Instant Pot / one pot', hands: 10, time: 'About 30 min with pressure-up time', cost: 17, ingredients: '1.5 lb chicken breast in chunks, 1 cup chicken broth, 1 taco seasoning packet, 1 can corn, 1 can black beans, 1 cup salsa, 4.5 oz can green chiles, 1 cup long-grain white rice, 1 cup shredded cheese.' },
+    { id: 'beefbowls', name: 'One-Pot Beef Burrito Bowls', method: 'One pot', hands: 10, time: 'About 30 min', cost: 15, ingredients: '1 lb ground beef, 1 cup beef broth, 1 taco seasoning packet, 1 can corn, 1 can black beans, 1 cup salsa, 4.5 oz can green chiles, 1 cup long-grain white rice, 1 cup shredded cheese.' },
     { id: 'onepotteriyaki', name: 'One Pot Teriyaki Chicken and Rice', method: 'Instant Pot / one pot', hands: 15, time: 'About 35 min', cost: 11, ingredients: '1.5 lb chicken breast in small pieces, oil, garlic, ginger, 1.5 cups jasmine rice, 2.5 cups water, 12–16 oz frozen stir-fry veggies, 1/4 cup soy sauce, 2 Tbsp brown sugar, 1 tsp sesame oil, green onions.' }
   ];
 
-  // Week 1: the Page's grocery list (6 dinners + breakfasts, lunches and snacks for 5), with dinner amounts scaled to feed 5 (about $270).
+  // Week 1: the Page's grocery list (6 dinners + breakfasts, lunches and snacks for 5), with dinner amounts scaled to feed 5 (about $266).
   function w1(id, section, name, qty, est) { return { id: id, section: section, name: name, qty: qty, est: est }; }
   var week1Items = [
-    w1('chicken-breast', 'meat', 'Boneless skinless chicken breasts', 'about 4 lb (salsa 2, tinga 2)', 14),
+    w1('ground-beef', 'meat', 'Ground beef', 'about 2 lb (salsa beef 1, beef tinga 1)', 10),
     w1('pork-shoulder', 'meat', 'Pork shoulder or butt', '2 lb (El Super or Food 4 Less)', 6),
     w1('kielbasa', 'meat', 'Kielbasa', '2 packs', 9),
     w1('drumsticks', 'meat', 'Chicken drumsticks', 'about 3.5 lb (10 pieces)', 6),
@@ -112,9 +112,9 @@
   // It covers dinners only, not breakfasts, lunches or snacks.
   function w2(id, section, name, qty, est, basis, forMeals) { return { id: id, section: section, name: name, qty: qty, est: est, basis: basis, for: forMeals, estimate: true }; }
   var week2Items = [
-    w2('chicken-breast', 'meat', 'Boneless skinless chicken breasts', 'about 5 lb (chili 1.5, fajitas 1.5, BBQ 2)', 17, 'week 1 price scaled from $21 for 6 lb', ['whitechili', 'fajitas', 'bbq']),
+    w2('chicken-breast', 'meat', 'Boneless skinless chicken breasts', 'about 3 lb (white chili 1.5, fajitas 1.5)', 11, 'week 1 price scaled from $21 for 6 lb ($3.50/lb; 3 lb rounds to $11)', ['whitechili', 'fajitas']),
     w2('chicken-thighs', 'meat', 'Boneless chicken thighs', '1.5 lb', 5, 'rough estimate', ['pozole']),
-    w2('ground-beef', 'meat', 'Ground beef', '1 lb (brown on Sunday)', 5, 'rough estimate', ['burritocasserole']),
+    w2('ground-beef', 'meat', 'Ground beef', 'about 2.25 lb (burrito casserole 1, BBQ beef 1.25)', 11, 'rough estimate, $5/lb; 2.25 lb rounds to $11', ['burritocasserole', 'bbqbeef']),
     w2('beef-chuck', 'meat', 'Boneless beef chuck or shoulder roast', '1.5 lb, cut in chunks', 10, 'rough estimate, scaled from a 3 lb roast', ['tacobeef']),
     w2('onions', 'produce', 'Onions', '3 lb bag (4 onions: chili 1, fajitas 2, 1 white for pozole)', 3, 'week 1 price', ['whitechili', 'fajitas', 'pozole']),
     w2('garlic', 'produce', 'Garlic', '1 head (about 5 cloves)', 1, 'week 1 price', ['whitechili', 'tacobeef']),
@@ -123,13 +123,13 @@
     w2('limes', 'produce', 'Limes', '2', 1, 'week 1 price (10 for $2)', ['fajitas', 'pozole']),
     w2('cilantro', 'produce', 'Cilantro', '1 bunch', 1, 'week 1 price', ['pozole']),
     w2('green-onions', 'produce', 'Green onions', '1 bunch', 1, 'rough estimate', ['burritocasserole']),
-    w2('coleslaw', 'produce', 'Bagged coleslaw mix / shredded cabbage', '2 bags (BBQ slaw + pozole topping)', 5, 'rough estimate', ['bbq', 'pozole']),
+    w2('coleslaw', 'produce', 'Bagged coleslaw mix / shredded cabbage', '2 bags (BBQ slaw + pozole topping)', 5, 'rough estimate', ['bbqbeef', 'pozole']),
     w2('cheese', 'dairy', 'Shredded cheese (Mexican blend or cheddar)', 'about 1 lb (chili topping + 1 cup cheddar)', 4, 'week 1 price ($10 for 2.5 lb)', ['whitechili', 'burritocasserole']),
     w2('sour-cream', 'dairy', 'Sour cream', '16 oz', 3, 'week 1 price (24 oz $4)', ['fajitas']),
     w2('cream-cheese', 'dairy', 'Cream cheese', '4 oz (one 8 oz block)', 2, 'rough estimate', ['burritocasserole']),
     w2('flour-tortillas', 'bakery', 'Flour tortillas', '20 count (fajitas + taco beef)', 4, 'week 1 price', ['fajitas', 'tacobeef']),
     w2('tostadas', 'bakery', 'Tostadas', '1 pack', 3, 'week 1 price', ['pozole']),
-    w2('buns', 'bakery', 'Hamburger buns', '1 pack (8)', 3, 'rough estimate', ['bbq']),
+    w2('buns', 'bakery', 'Hamburger buns', '1 pack (8)', 3, 'rough estimate', ['bbqbeef']),
     w2('salsa-verde', 'canned', 'Salsa verde', 'two 16 oz jars (chili + pozole)', 6, 'rough estimate', ['whitechili', 'pozole']),
     w2('salsa', 'canned', 'Salsa', '16 oz jar', 3, 'week 1 price ($7 for two 24 oz)', ['burritocasserole']),
     w2('cannellini', 'canned', 'Cannellini beans', '2 cans', 2, 'rough estimate', ['whitechili']),
@@ -137,11 +137,11 @@
     w2('black-beans', 'canned', 'Black beans', '1 can', 1, 'rough estimate', ['burritocasserole']),
     w2('hominy', 'canned', 'Hominy', '2 cans', 4, 'rough estimate', ['pozole']),
     w2('broth', 'canned', 'Chicken broth', '2 cups (one 32 oz carton)', 2, 'rough estimate', ['whitechili']),
-    w2('bbq-sauce', 'canned', 'BBQ sauce', '1 large bottle', 3, 'rough estimate', ['bbq']),
+    w2('bbq-sauce', 'canned', 'BBQ sauce', '1 large bottle', 3, 'rough estimate', ['bbqbeef']),
     w2('chips', 'snacks', 'Tortilla chips', '1 bag (chili topping)', 4, 'week 1 price', ['whitechili']),
     w2('rice', 'check', 'White rice', '4 cups cooked (left from week 1’s 10 lb bag)', null, 'on hand', ['burritocasserole']),
-    w2('spices', 'check', 'Spices: chili powder, cumin, oregano, paprika, smoked paprika, garlic & onion powder, red pepper flakes', 'check you have them', null, 'on hand', ['whitechili', 'fajitas', 'pozole', 'burritocasserole', 'bbq', 'tacobeef']),
-    w2('basics', 'check', 'Oil, sugar, salt, pepper', 'check you have them', null, 'on hand', ['fajitas', 'bbq', 'tacobeef'])
+    w2('spices', 'check', 'Spices: chili powder, cumin, oregano, paprika, smoked paprika, garlic & onion powder, red pepper flakes', 'check you have them', null, 'on hand', ['whitechili', 'fajitas', 'pozole', 'burritocasserole', 'bbqbeef', 'tacobeef']),
+    w2('basics', 'check', 'Oil, sugar, salt, pepper', 'check you have them', null, 'on hand', ['fajitas', 'bbqbeef', 'tacobeef'])
   ];
 
   var weeks = {
@@ -149,9 +149,9 @@
       label: 'Week 1',
       note: 'The Page’s week 1 list: 6 dinners plus breakfasts, lunches and snacks for 5. Prices are rough Downey-area estimates. Assumes salt, pepper, oil and chili powder are in the pantry. Pet food is budgeted separately.',
       dinners: [
-        { day: 'Mon', meal: 'salsa', title: 'Salsa Chicken tacos', detail: 'crockpot, HIGH after school' },
+        { day: 'Mon', meal: 'salsabeef', title: 'Salsa Beef tacos', detail: 'one pot, about 25 min' },
         { day: 'Tue', meal: 'kielbasa', title: 'Sheet Pan Kielbasa, Potatoes and Green Beans', detail: '' },
-        { day: 'Wed', meal: 'tinga', title: 'Chicken Tinga tostadas', detail: 'crockpot' },
+        { day: 'Wed', meal: 'tingabeef', title: 'Beef Tinga tostadas', detail: 'one pot' },
         { day: 'Thu', meal: 'tortillacasserole', title: 'Cheesy Chicken Tortilla Casserole', detail: 'rotisserie chicken' },
         { day: 'Fri', meal: 'drumsticks', title: 'Oven Baked Drumsticks with rice and green beans', detail: '' },
         { day: 'Sat', meal: 'carnitas', title: 'Slow Cooker Carnitas tacos', detail: '5 hr on HIGH' },
@@ -167,7 +167,7 @@
         { day: 'Tue', meal: 'fajitas', title: 'Sheet Pan Chicken Fajitas', detail: '' },
         { day: 'Wed', meal: 'pozole', title: 'Chicken Pozole Verde', detail: 'crockpot, parent loads on LOW' },
         { day: 'Thu', meal: 'burritocasserole', title: 'Beef Burrito Casserole', detail: 'Sunday beef and rice' },
-        { day: 'Fri', meal: 'bbq', title: 'BBQ Pulled Chicken sandwiches with coleslaw', detail: 'crockpot' },
+        { day: 'Fri', meal: 'bbqbeef', title: 'BBQ Beef sandwiches with coleslaw', detail: 'one pot' },
         { day: 'Sat', meal: 'tacobeef', title: 'Shredded Taco Beef', detail: '6–8 hr on LOW' },
         { day: 'Sun', meal: null, title: 'Sunday prep, then breakfast for dinner or quesadillas', detail: 'uses eggs, tortillas, cheese on hand' }
       ],
@@ -175,5 +175,5 @@
     }
   };
 
-  return { version: 1, source: 'Tamayo Weeknight Meals (Page)', defaultBudget: 325, sections: sections, meals: meals, weeks: weeks };
+  return { version: 2, source: 'Tamayo Weeknight Meals (Page)', defaultBudget: 325, sections: sections, meals: meals, weeks: weeks };
 });
