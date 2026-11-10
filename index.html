@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Tamayo Cart">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'unsafe-eval' blob:; worker-src 'self' blob:; img-src 'self' data: blob:; media-src 'self' blob: mediastream:; style-src 'self' 'unsafe-inline'; connect-src 'self' data: blob:; object-src 'none'; base-uri 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'unsafe-eval' blob:; worker-src 'self' blob:; img-src 'self' data: blob:; media-src 'self' blob: mediastream:; style-src 'self' 'unsafe-inline'; connect-src 'self' data: blob: https://tamayo-cart-sync.tamayofamily.workers.dev; object-src 'none'; base-uri 'self'">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -69,7 +69,11 @@
   </div>
   <section class="plan-card plan-stats" id="planStats" aria-live="polite"></section>
   <section class="plan-card">
-    <h2 class="plan-h">🍽️ Dinners</h2>
+    <div class="dinners-head">
+      <h2 class="plan-h">🍽️ Dinners</h2>
+      <p class="made-count" id="madeCount" aria-live="polite">0 of 0 made</p>
+      <button type="button" class="btn ghost made-reset" id="madeResetBtn">Reset week</button>
+    </div>
     <ul class="dinners" id="dinners"></ul>
   </section>
   <div id="planList"></div>
@@ -164,6 +168,7 @@
 <script src="meals.js"></script>
 <script src="recipes.js"></script>
 <script src="mealplan.js"></script>
+<script src="cooked.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

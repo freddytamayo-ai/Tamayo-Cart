@@ -1,7 +1,7 @@
 /* Tamayo Cart service worker: precache everything (incl. the OCR engine) so the app works offline. */
-var VERSION = 'tamayo-cart-v5'; // bump on every release so phones pick up new files
+var VERSION = 'tamayo-cart-v6'; // bump on every release so phones pick up new files
 var ASSETS = [
-  './', './index.html', './styles.css', './parser.js', './meals.js', './recipes.js', './mealplan.js', './app.js', './manifest.webmanifest',
+  './', './index.html', './styles.css', './parser.js', './meals.js', './recipes.js', './mealplan.js', './cooked.js', './app.js', './manifest.webmanifest',
   './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-512.png', './icons/apple-touch-icon.png',
   './vendor/tesseract/tesseract.min.js', './vendor/tesseract/worker.min.js',
   './vendor/tesseract/core/tesseract-core-simd-lstm.wasm.js', './vendor/tesseract/core/tesseract-core-lstm.wasm.js',
@@ -17,7 +17,10 @@ self.addEventListener('activate', function (e) {
 });
 self.addEventListener('fetch', function (e) {
   var req = e.request;
-  if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
+  var url = new URL(req.url);
+  // The shared "Made it" API is network-only. Never cache-first it (cross-origin already falls through).
+  if (url.pathname === '/api/made' || url.pathname === '/api/made/reset') return;
+  if (req.method !== 'GET' || url.origin !== location.origin) return;
   e.respondWith(
     caches.match(req, { ignoreSearch: true }).then(function (hit) {
       if (hit) return hit;

@@ -1,4 +1,4 @@
-/* Tamayo Cart — app logic. No network calls besides loading its own files. */
+/* Tamayo Cart — app logic. No network calls besides loading its own files and the shared "Made it" sync. */
 (function () {
   'use strict';
   var Core = window.TamayoCore, Plan = window.TamayoPlan, Meals = window.TamayoMeals, Recipes = window.TamayoRecipes;
@@ -14,6 +14,10 @@
   else state = Object.assign({}, defaults, state);
   var history = load(HKEY, []);
   var plan = Plan.normalizePlan(load(PKEY, {}), Meals);
+  var madeSync = window.TamayoMade.create({
+    storage: window.localStorage,
+    onChange: function () { renderPlan(); }
+  });
   var undoSnap = null;
 
   function load(k, d) { try { var v = JSON.parse(localStorage.getItem(k)); return v == null ? JSON.parse(JSON.stringify(d)) : v; } catch (e) { return JSON.parse(JSON.stringify(d)); } }
@@ -511,15 +515,26 @@
       '<div class="bar" role="progressbar" aria-label="List checked off" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '"><div class="fill" style="width:' + pct + '%"></div></div>' +
       '<div class="bar-caption" id="planCaption">' + s.checked + ' of ' + s.total + ' checked · list estimate ' + money(s.estTotal) +
       (state.budget ? '<br>Cart ' + money(t.total) + ' + est. remaining ' + money(s.remaining) + ' ≈ <b>' + money(projected) + '</b> of ' + money(state.budget) + ' budget' : '') + '</div>';
+    var madeCount = madeSync.count(plan.week, wk.dinners);
+    $('madeCount').textContent = madeCount.made + ' of ' + madeCount.total + ' made';
     $('dinners').innerHTML = wk.dinners.map(function (d, i) {
       var recipe = dinnerRecipe(d, plan.week);
       var open = !!expandedDinners[plan.week + ':' + i];
       var has = !!recipe;
-      return '<li class="dinner-wrap' + (open ? ' open' : '') + '">' +
+      var mealId = madeSync.dinnerMealId(d);
+      var made = madeSync.isMade(plan.week, mealId);
+      return '<li class="dinner-wrap' + (open ? ' open' : '') + (made ? ' is-made' : '') + '">' +
+        '<div class="dinner-row">' +
         '<button type="button" class="dinner" data-i="' + i + '"' + (has ? ' aria-expanded="' + open + '"' : ' data-nometa="1"') + '>' +
-        '<span class="day">' + esc(d.day) + '</span><span class="dn"><span class="dt">' + esc(d.title) + '</span>' +
+        '<span class="day">' + esc(d.day) + '</span><span class="dn"><span class="dt">' +
+        (made ? '<span class="made-flag" aria-hidden="true">✓</span> ' : '') + esc(d.title) + '</span>' +
         (d.detail ? '<span class="dd">' + esc(d.detail) + '</span>' : '') + '</span>' +
         (has ? '<span class="chev" aria-hidden="true">›</span>' : '') + '</button>' +
+        '<label class="made-check">' +
+        '<input type="checkbox" class="made-input" data-meal="' + esc(mealId) + '"' + (made ? ' checked' : '') + '>' +
+        '<span class="made-box" aria-hidden="true">✓</span>' +
+        '<span class="made-word">Made it</span>' +
+        '<span class="sr">: ' + esc(d.title) + '</span></label></div>' +
         (has ? '<div class="recipe-panel" data-recipe-i="' + i + '"' + (open ? '' : ' hidden') + '>' + renderRecipeHtml(recipe) + '</div>' : '') +
         '</li>';
     }).join('');
@@ -566,6 +581,7 @@
     return '<div class="recipe-h">How to make it</div>' + meta + ings + steps + done + tip;
   }
   $('dinners').addEventListener('click', function (e) {
+    if (e.target.closest('.made-check')) return;
     var b = e.target.closest('.dinner'); if (!b || b.hasAttribute('data-nometa')) return;
     var i = +b.dataset.i, key = plan.week + ':' + i;
     expandedDinners[key] = !expandedDinners[key];
@@ -574,6 +590,10 @@
       var panel = $('dinners').querySelector('[data-recipe-i="' + i + '"]');
       if (panel) try { panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch (err) {}
     }
+  });
+  $('dinners').addEventListener('change', function (e) {
+    var input = e.target.closest('.made-input'); if (!input) return;
+    madeSync.setMade(plan.week, input.getAttribute('data-meal'), input.checked);
   });
 
   $('planList').addEventListener('click', function (e) {
@@ -629,14 +649,25 @@
   };
   $('planResetBtn').onclick = function () {
     var label = Meals.weeks[plan.week].label;
-    if (!confirm('Reset ' + label + '? This unchecks everything, brings back removed items and deletes items you added. Your cart is not changed.')) return;
+    if (!confirm('Reset ' + label + '? This unchecks the shopping list, brings back removed items and deletes items you added. Your cart is not changed. “Made it” dinner checks are not changed.')) return;
     snapshot(); Plan.resetWeek(plan, plan.week); save(); render(); toast(label + ' reset', { label: 'Undo', fn: undo });
+  };
+  $('madeResetBtn').onclick = function () {
+    var label = Meals.weeks[plan.week].label;
+    if (!confirm('Reset ' + label + ' “Made it” checks? This clears them on every phone. The shopping list is not changed.')) return;
+    madeSync.resetWeek(plan.week);
   };
   $('planRestoreBtn').onclick = function () { plan.weeks[plan.week].removed = {}; save(); render(); };
 
   // ---------------- boot ----------------
   applyTheme(); setView(state.view); render();
-  document.addEventListener('visibilitychange', function () { if (document.hidden && stream) stopCamera(); });
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden && stream) stopCamera();
+    if (!document.hidden) madeSync.refresh();
+  });
+  window.addEventListener('focus', function () { madeSync.refresh(); });
+  window.addEventListener('online', function () { madeSync.refresh(); });
+  madeSync.refresh();
   if ('serviceWorker' in navigator && location.protocol !== 'file:') {
     var hadController = !!navigator.serviceWorker.controller;
     navigator.serviceWorker.register('sw.js').then(function (reg) {

@@ -145,6 +145,10 @@ main{padding:12px 12px 0;max-width:640px;margin:0 auto}
 .seg-btn.on{background:var(--card);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.12)}
 .plan-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;margin-top:10px}
 .plan-h{font-size:17px;margin:0 0 6px}
+.dinners-head{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin:0 0 4px}
+.dinners-head .plan-h{margin:0;flex:1 1 auto}
+.made-count{margin:0;font-size:13px;font-weight:750;color:var(--muted);font-variant-numeric:tabular-nums}
+.made-reset{min-height:48px;padding:0 12px;font-size:15px}
 .ps-row{display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
 .ps-big{font-size:34px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
 .ps-mid{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--ok)}
@@ -162,6 +166,18 @@ main{padding:12px 12px 0;max-width:640px;margin:0 auto}
 .dinner .dt{font-weight:650}
 .dinner .dd{font-size:13px;color:var(--muted)}
 .dinner .chev{font-size:24px;color:var(--muted)}
+.dinner-row{display:flex;align-items:stretch;gap:4px}
+.dinner-row>.dinner{width:auto;flex:1;min-width:0}
+.made-check{position:relative;flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:84px;min-height:64px;margin:4px 0;padding:6px 4px;border-radius:14px;cursor:pointer;touch-action:manipulation;user-select:none}
+.made-check input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.made-box{width:36px;height:36px;border-radius:10px;border:2.5px solid var(--muted);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:transparent}
+.made-check input:checked+.made-box{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.made-check input:focus-visible+.made-box{outline:3px solid var(--brand);outline-offset:2px}
+.made-word{font-size:13px;font-weight:800;letter-spacing:.01em;color:var(--text)}
+.made-flag{color:var(--brand);font-weight:900}
+.dinner-wrap.is-made .dinner-row{background:rgba(15,122,74,.1);border-radius:12px}
+.dinner-wrap.is-made .dinner .dn{opacity:.75}
+.dinner-wrap.is-made .dd{color:var(--muted)}
 .plan-sec{margin-top:14px}
 .sec-h{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:0 4px 6px}
 .sec-est{font-variant-numeric:tabular-nums;text-transform:none;letter-spacing:0}
