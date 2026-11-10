@@ -550,7 +550,7 @@
   }
   function renderRecipeHtml(r) {
     var meta = '<div class="recipe-meta">' +
-      '<div><b>Servings</b>' + esc(r.servings) + '</div>' +
+      '<div><b>Serves</b> ' + esc(r.servings) + '</div>' +
       '<div><b>Equipment</b>' + esc(r.equipment) + '</div>' +
       '<div><b>Prep</b>' + esc(r.prep) + '</div>' +
       '<div><b>Cook</b>' + esc(r.cook) + '</div></div>';
