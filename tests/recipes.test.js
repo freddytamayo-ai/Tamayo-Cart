@@ -35,21 +35,31 @@ test('every dinner recipe serves exactly 5', () => {
 
 test('oversized family-batch amounts were scaled to feed 5', () => {
   const by = Recipes.byMeal;
-  assert.ok(by.salsa.ingredients.some((i) => /2 lb boneless chicken/.test(i)));
-  assert.ok(by.tinga.ingredients.some((i) => /2 lb boneless chicken/.test(i)));
   assert.ok(by.carnitas.ingredients.some((i) => /2 lb pork/.test(i)));
   assert.ok(by.tacobeef.ingredients.some((i) => /1\.5 lb boneless beef/.test(i)));
-  assert.ok(by.bbq.ingredients.some((i) => /2 lb chicken/.test(i)));
   assert.ok(by.kielbasa.ingredients.some((i) => /2 lb small red potatoes/.test(i)));
   assert.ok(by.kielbasa.ingredients.some((i) => /1 lb frozen green beans/.test(i)));
   assert.ok(by.drumsticks.ingredients.some((i) => /10 chicken drumsticks/.test(i)));
   assert.ok(by.onepotteriyaki.ingredients.some((i) => /1\.5 lb chicken/.test(i)));
 
+  // Beef dinners that replaced chicken: budget ground beef, still a 5-serving batch.
+  for (const id of ['salsabeef', 'tingabeef', 'bbqbeef', 'beeftacosoup', 'beefbowls']) {
+    assert.equal(by[id].servings, '5', id);
+    assert.ok(by[id].ingredients.some((i) => /ground beef/.test(i)), id + ' uses ground beef');
+    assert.ok(by[id].steps.length >= 3, id + ' has step-by-step instructions');
+  }
+  assert.ok(by.salsabeef.ingredients.some((i) => /1 lb ground beef/.test(i)));
+  assert.ok(by.tingabeef.ingredients.some((i) => /1 lb ground beef/.test(i)));
+  assert.ok(by.bbqbeef.ingredients.some((i) => /1\.25 lb ground beef/.test(i)));
+  assert.ok(by.beeftacosoup.ingredients.some((i) => /1 lb ground beef/.test(i)));
+  assert.ok(by.beefbowls.ingredients.some((i) => /1 lb ground beef/.test(i)));
+
   const w1 = Object.fromEntries(Meals.weeks['1'].items.map((i) => [i.id, i.qty]));
   const w2 = Object.fromEntries(Meals.weeks['2'].items.map((i) => [i.id, i.qty]));
-  assert.match(w1['chicken-breast'], /4 lb/);
+  assert.match(w1['ground-beef'], /2 lb/);
   assert.match(w1['pork-shoulder'], /2 lb/);
   assert.match(w1['drumsticks'], /3\.5 lb/);
-  assert.match(w2['chicken-breast'], /5 lb/);
+  assert.match(w2['chicken-breast'], /3 lb/);
+  assert.match(w2['ground-beef'], /2\.25 lb/);
   assert.match(w2['beef-chuck'], /1\.5 lb/);
 });

@@ -16,18 +16,18 @@ test('data: 19 meals, 2 weeks of 7 dinners, every dinner points at a real meal',
     d.forEach((x) => assert.ok(x.meal === null || ids.has(x.meal), x.meal));
     assert.equal(d.filter((x) => x.meal).length, 6);
   }
-  assert.deepEqual(Meals.weeks['1'].dinners.map((d) => d.meal).slice(0, 6), ['salsa', 'kielbasa', 'tinga', 'tortillacasserole', 'drumsticks', 'carnitas']);
-  assert.deepEqual(Meals.weeks['2'].dinners.map((d) => d.meal).slice(0, 6), ['whitechili', 'fajitas', 'pozole', 'burritocasserole', 'bbq', 'tacobeef']);
+  assert.deepEqual(Meals.weeks['1'].dinners.map((d) => d.meal).slice(0, 6), ['salsabeef', 'kielbasa', 'tingabeef', 'tortillacasserole', 'drumsticks', 'carnitas']);
+  assert.deepEqual(Meals.weeks['2'].dinners.map((d) => d.meal).slice(0, 6), ['whitechili', 'fajitas', 'pozole', 'burritocasserole', 'bbqbeef', 'tacobeef']);
 });
 
-test('data: item ids unique, sections valid; week 1 = $270 after scaling dinners to 5; week 2 estimate $99, all marked estimates', () => {
+test('data: item ids unique, sections valid; week 1 = $266 after beef swaps; week 2 estimate $99, all marked estimates', () => {
   const secs = new Set(Meals.sections.map((s) => s.id));
   for (const w of ['1', '2']) {
     const it = Meals.weeks[w].items;
     assert.equal(new Set(it.map((i) => i.id)).size, it.length, 'unique ids week ' + w);
     it.forEach((i) => assert.ok(secs.has(i.section), i.section));
   }
-  assert.equal(sum(Meals.weeks['1'].items), 270);
+  assert.equal(sum(Meals.weeks['1'].items), 266);
   assert.equal(Meals.weeks['1'].items.length, 51);
   assert.equal(sum(Meals.weeks['2'].items), 99);
   Meals.weeks['2'].items.forEach((i) => { assert.equal(i.estimate, true); assert.ok(i.basis); assert.ok(i.for.length); });
@@ -41,9 +41,9 @@ test('data: item ids unique, sections valid; week 1 = $270 after scaling dinners
 test('groupBySection keeps store order and subtotals', () => {
   const g = P.groupBySection(Meals, P.weekItems(Meals, fresh(), '1', []));
   assert.equal(g[0].id, 'produce');
-  assert.equal(g.find((x) => x.id === 'meat').est, 55);
+  assert.equal(g.find((x) => x.id === 'meat').est, 51);
   assert.equal(g.find((x) => x.id === 'produce').est, 44);
-  assert.equal(g.reduce((s, x) => s + x.est, 0), 270);
+  assert.equal(g.reduce((s, x) => s + x.est, 0), 266);
 });
 
 test('summary: link a scanned cart item, manual check, remaining', () => {
@@ -56,7 +56,7 @@ test('summary: link a scanned cart item, manual check, remaining', () => {
   assert.equal(s.scanned, 13.49);
   assert.equal(s.scannedCount, 2);
   assert.equal(s.checked, 3);
-  assert.equal(s.remaining, 270 - 3 - 11 - 1);
+  assert.equal(s.remaining, 266 - 3 - 11 - 1);
   assert.equal(s.left, 48);
 });
 
@@ -89,7 +89,7 @@ test('custom items, remove, reset week; weeks are independent', () => {
   let items = P.weekItems(Meals, plan, '1', []);
   assert.equal(items.length, 51);
   assert.ok(items.find((i) => i.id === dog.id && i.custom));
-  assert.equal(P.summary(items).estTotal, 270 - 3 + 32.5);
+  assert.equal(P.summary(items).estTotal, 266 - 3 + 32.5);
   P.removeItem(plan, '1', dog.id);
   assert.equal(plan.weeks['1'].custom.length, 0);
   P.toggle(plan, '2', 'hominy');

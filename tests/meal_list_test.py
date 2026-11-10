@@ -34,8 +34,8 @@ try:
         def dinners(): return [t.strip() for t in page.eval_on_selector_all('#dinners .dinner', 'els => els.map(e => e.querySelector(".day").textContent + " " + e.querySelector(".dt").textContent)')]
         def est_total(): return page.evaluate("TamayoPlan.summary(TamayoPlan.weekItems(TamayoMeals, JSON.parse(localStorage.getItem('tamayoCart.plan.v1')||'{}').weeks ? TamayoPlan.normalizePlan(JSON.parse(localStorage.getItem('tamayoCart.plan.v1')), TamayoMeals) : TamayoPlan.normalizePlan({}, TamayoMeals), document.querySelector('#weekSeg .on').dataset.week, [])).estTotal")
         w1 = dinners(); cap1 = page.inner_text('#planCaption'); rem1 = page.inner_text('#planRemaining')
-        check(len(w1) == 7 and w1[0].startswith('Mon Salsa Chicken'), 'week 1 shows 7 days of dinners')
-        check('list estimate $270.00' in cap1 and rem1 == '$270.00', 'week 1 list estimate $270 and est. remaining $270 (%s / %s)' % (rem1, cap1.splitlines()[0]))
+        check(len(w1) == 7 and w1[0].startswith('Mon Salsa Beef'), 'week 1 shows 7 days of dinners')
+        check('list estimate $266.00' in cap1 and rem1 == '$266.00', 'week 1 list estimate $266 and est. remaining $266 (%s / %s)' % (rem1, cap1.splitlines()[0]))
         secs = page.eval_on_selector_all('.sec-h span:first-child', 'els => els.map(e => e.textContent)')
         check(secs[0].endswith('Produce') and any('Meat' in s for s in secs) and any('Frozen' in s for s in secs), 'grouped by store section: ' + ', '.join(secs))
         check(page.locator('.pitem').count() == 51, 'week 1 has 51 list items')
@@ -57,7 +57,7 @@ try:
         # manual check-off (already have it)
         page.click('.pitem[data-id="garlic"] .pcheck')
         check(page.get_attribute('.pitem[data-id="garlic"]', 'class').find('done') >= 0, 'tap checkbox checks item off')
-        check(page.inner_text('#planRemaining') == '$269.00', 'manual check removes its estimate from remaining -> $269.00')
+        check(page.inner_text('#planRemaining') == '$265.00', 'manual check removes its estimate from remaining -> $265.00')
 
         # type a price for a list item from its menu
         page.click('.pitem[data-id="onions"] .pinfo'); page.click('#mType')
@@ -87,9 +87,9 @@ try:
         page.click('.pitem[data-id="popcorn"] .pinfo'); page.click('#mDel')
         check(page.locator('.pitem[data-id="popcorn"]').count() == 0 and page.is_visible('#planRestoreBtn'), 'remove item from list; restore button shows')
         s = page.evaluate("TamayoPlan.summary(TamayoPlan.weekItems(TamayoMeals, TamayoPlan.normalizePlan(JSON.parse(localStorage.getItem('tamayoCart.plan.v1')), TamayoMeals), '1', JSON.parse(localStorage.getItem('tamayoCart.v1')).items))")
-        # remaining = 270 - garlic1 - onions3 - milk8 - bananas3 - popcorn3 + dog 32.5 = 284.5
-        check(abs(s['remaining'] - 284.5) < 0.001, 'estimated remaining after edits = $284.50 (got %s)' % s['remaining'])
-        check(page.inner_text('#planRemaining') == '$284.50', 'UI shows estimated remaining $284.50')
+        # remaining = 266 - garlic1 - onions3 - milk8 - bananas3 - popcorn3 + dog 32.5 = 280.5
+        check(abs(s['remaining'] - 280.5) < 0.001, 'estimated remaining after edits = $280.50 (got %s)' % s['remaining'])
+        check(page.inner_text('#planRemaining') == '$280.50', 'UI shows estimated remaining $280.50')
 
         # persistence
         page.reload(); page.wait_for_load_state('networkidle')
@@ -112,14 +112,14 @@ try:
 
         # reset week
         page.click('#planResetBtn')
-        check(page.locator('.pitem.done').count() == 0 and page.locator('.pitem').count() == 51 and page.inner_text('#planRemaining') == '$270.00', 'Reset week clears checks, custom & removed items')
+        check(page.locator('.pitem.done').count() == 0 and page.locator('.pitem').count() == 51 and page.inner_text('#planRemaining') == '$266.00', 'Reset week clears checks, custom & removed items')
 
         # offline: new data files come from the SW cache
         page.wait_for_function('navigator.serviceWorker && navigator.serviceWorker.ready.then(()=>true)', timeout=60000)
         page.reload(); page.wait_for_function('!!navigator.serviceWorker.controller', timeout=60000)
         keys = page.evaluate("caches.keys()")
-        check('tamayo-cart-v2' in keys, 'service worker cache bumped to tamayo-cart-v2 (%s)' % keys)
-        cached = page.evaluate("caches.open('tamayo-cart-v2').then(c => Promise.all(['meals.js','mealplan.js'].map(f => c.match(f).then(r => !!r))))")
+        check('tamayo-cart-v5' in keys, 'service worker cache bumped to tamayo-cart-v5 (%s)' % keys)
+        cached = page.evaluate("caches.open('tamayo-cart-v5').then(c => Promise.all(['meals.js','mealplan.js'].map(f => c.match(f).then(r => !!r))))")
         check(all(cached), 'meals.js and mealplan.js are precached')
         ctx.set_offline(True); page.reload(); page.wait_for_load_state('domcontentloaded'); page.wait_for_timeout(500)
         check(page.locator('#dinners .dinner').count() == 7, 'meal list works offline')
