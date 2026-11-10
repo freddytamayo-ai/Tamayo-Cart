@@ -35,7 +35,7 @@ try:
         def est_total(): return page.evaluate("TamayoPlan.summary(TamayoPlan.weekItems(TamayoMeals, JSON.parse(localStorage.getItem('tamayoCart.plan.v1')||'{}').weeks ? TamayoPlan.normalizePlan(JSON.parse(localStorage.getItem('tamayoCart.plan.v1')), TamayoMeals) : TamayoPlan.normalizePlan({}, TamayoMeals), document.querySelector('#weekSeg .on').dataset.week, [])).estTotal")
         w1 = dinners(); cap1 = page.inner_text('#planCaption'); rem1 = page.inner_text('#planRemaining')
         check(len(w1) == 7 and w1[0].startswith('Mon Salsa Chicken'), 'week 1 shows 7 days of dinners')
-        check('list estimate $280.00' in cap1 and rem1 == '$280.00', 'week 1 list estimate $280 and est. remaining $280 (%s / %s)' % (rem1, cap1.splitlines()[0]))
+        check('list estimate $270.00' in cap1 and rem1 == '$270.00', 'week 1 list estimate $270 and est. remaining $270 (%s / %s)' % (rem1, cap1.splitlines()[0]))
         secs = page.eval_on_selector_all('.sec-h span:first-child', 'els => els.map(e => e.textContent)')
         check(secs[0].endswith('Produce') and any('Meat' in s for s in secs) and any('Frozen' in s for s in secs), 'grouped by store section: ' + ', '.join(secs))
         check(page.locator('.pitem').count() == 51, 'week 1 has 51 list items')
@@ -48,7 +48,7 @@ try:
         page.click('#weekSeg [data-week="2"]')
         w2 = dinners(); cap2 = page.inner_text('#planCaption'); rem2 = page.inner_text('#planRemaining')
         check(len(w2) == 7 and w2[0].startswith('Mon White Chicken Chili'), 'week 2 shows its dinners')
-        check('list estimate $111.00' in cap2, 'week 2 list estimate $111 (%s)' % cap2.splitlines()[0])
+        check('list estimate $99.00' in cap2, 'week 2 list estimate $99 (%s)' % cap2.splitlines()[0])
         check('estimates' in page.inner_text('#planNote'), 'week 2 note says prices are estimates')
         report['week1'] = {'dinners': w1, 'caption': cap1, 'remaining': rem1}
         report['week2'] = {'dinners': w2, 'caption': cap2, 'remaining': rem2, 'items': page.locator('.pitem').count()}
@@ -57,7 +57,7 @@ try:
         # manual check-off (already have it)
         page.click('.pitem[data-id="garlic"] .pcheck')
         check(page.get_attribute('.pitem[data-id="garlic"]', 'class').find('done') >= 0, 'tap checkbox checks item off')
-        check(page.inner_text('#planRemaining') == '$279.00', 'manual check removes its estimate from remaining -> $279.00')
+        check(page.inner_text('#planRemaining') == '$269.00', 'manual check removes its estimate from remaining -> $269.00')
 
         # type a price for a list item from its menu
         page.click('.pitem[data-id="onions"] .pinfo'); page.click('#mType')
@@ -87,9 +87,9 @@ try:
         page.click('.pitem[data-id="popcorn"] .pinfo'); page.click('#mDel')
         check(page.locator('.pitem[data-id="popcorn"]').count() == 0 and page.is_visible('#planRestoreBtn'), 'remove item from list; restore button shows')
         s = page.evaluate("TamayoPlan.summary(TamayoPlan.weekItems(TamayoMeals, TamayoPlan.normalizePlan(JSON.parse(localStorage.getItem('tamayoCart.plan.v1')), TamayoMeals), '1', JSON.parse(localStorage.getItem('tamayoCart.v1')).items))")
-        # remaining = 280 - garlic1 - onions3 - milk8 - bananas3 - popcorn3 + dog 32.5 = 294.5
-        check(abs(s['remaining'] - 294.5) < 0.001, 'estimated remaining after edits = $294.50 (got %s)' % s['remaining'])
-        check(page.inner_text('#planRemaining') == '$294.50', 'UI shows estimated remaining $294.50')
+        # remaining = 270 - garlic1 - onions3 - milk8 - bananas3 - popcorn3 + dog 32.5 = 284.5
+        check(abs(s['remaining'] - 284.5) < 0.001, 'estimated remaining after edits = $284.50 (got %s)' % s['remaining'])
+        check(page.inner_text('#planRemaining') == '$284.50', 'UI shows estimated remaining $284.50')
 
         # persistence
         page.reload(); page.wait_for_load_state('networkidle')
@@ -112,7 +112,7 @@ try:
 
         # reset week
         page.click('#planResetBtn')
-        check(page.locator('.pitem.done').count() == 0 and page.locator('.pitem').count() == 51 and page.inner_text('#planRemaining') == '$280.00', 'Reset week clears checks, custom & removed items')
+        check(page.locator('.pitem.done').count() == 0 and page.locator('.pitem').count() == 51 and page.inner_text('#planRemaining') == '$270.00', 'Reset week clears checks, custom & removed items')
 
         # offline: new data files come from the SW cache
         page.wait_for_function('navigator.serviceWorker && navigator.serviceWorker.ready.then(()=>true)', timeout=60000)

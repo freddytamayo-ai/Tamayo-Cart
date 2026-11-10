@@ -17,8 +17,8 @@
       "cook": "2.5 hr on HIGH or 5 hr on LOW",
       "equipment": "Crockpot, 2 forks for shredding",
       "ingredients": [
-        "3 lb boneless chicken breasts",
-        "1 big jar salsa (16–24 oz)",
+        "2 lb boneless chicken breasts",
+        "1 jar salsa (16 oz)",
         "1 tsp chili powder",
         "1 tsp garlic powder",
         "1 tsp onion powder",
@@ -47,7 +47,7 @@
       "cook": "3–4 hr on HIGH or 6–8 hr on LOW",
       "equipment": "Crockpot, 2 forks for shredding",
       "ingredients": [
-        "2–2.5 lb boneless chicken breasts",
+        "2 lb boneless chicken breasts",
         "1 onion, diced",
         "4 garlic cloves (or 1 Tbsp jarred garlic)",
         "1 tsp cumin",
@@ -80,12 +80,12 @@
       "tip": "Chipotles are spicy — use 1 pepper the first time if the family likes milder food."
     },
     "carnitas": {
-      "servings": "5 (with leftovers for burritos)",
+      "servings": "5",
       "prep": "15 min",
-      "cook": "About 5 hr on HIGH (about 5.5 hr total)",
+      "cook": "About 4–5 hr on HIGH (about 4.5–5.5 hr total)",
       "equipment": "Crockpot, forks for shredding, optional broiler",
       "ingredients": [
-        "3 lb pork butt or shoulder, cut in chunks",
+        "2 lb pork butt or shoulder, cut in chunks",
         "1 onion, sliced",
         "4 garlic cloves, smashed",
         "2 cinnamon sticks",
@@ -104,7 +104,7 @@
         },
         {
           "title": "Cook",
-          "detail": "Cover and cook on HIGH about 5 hours (or LOW 8–9 hours) until pork shreds easily."
+          "detail": "Cover and cook on HIGH 4–5 hours (or LOW 7–8 hours) until pork shreds easily."
         },
         {
           "title": "Shred",
@@ -116,7 +116,7 @@
         },
         {
           "title": "Serve",
-          "detail": "Warm corn tortillas. Fill with carnitas, diced onion, cilantro, and a squeeze of lime. Save leftovers for burritos."
+          "detail": "Warm corn tortillas. Fill with carnitas, diced onion, cilantro, and a squeeze of lime."
         }
       ],
       "doneness": "Pork is done when it shreds easily. Keep leftovers in the fridge within 2 hours.",
@@ -128,7 +128,7 @@
       "cook": "About 8.5 hr on LOW or 4–4.5 hr on HIGH",
       "equipment": "Crockpot",
       "ingredients": [
-        "1–1.5 lb boneless chicken thighs",
+        "1.5 lb boneless chicken thighs",
         "1 white onion, chopped",
         "1 poblano pepper, seeded and chopped",
         "1 tsp chili powder",
@@ -160,18 +160,18 @@
       "tip": "A parent can load this on LOW in the morning so it is ready after school."
     },
     "tacobeef": {
-      "servings": "5 (freeze half for later)",
+      "servings": "5",
       "prep": "10 min",
-      "cook": "About 8 hr on LOW",
+      "cook": "About 6–8 hr on LOW",
       "equipment": "Crockpot",
       "ingredients": [
-        "3 lb boneless beef chuck or shoulder roast, cut in chunks",
-        "2 Tbsp chili powder",
-        "1 Tbsp cumin",
+        "1.5 lb boneless beef chuck or shoulder roast, cut in chunks",
+        "1 Tbsp chili powder",
+        "2 tsp cumin",
         "1 tsp oregano",
-        "1/2 tsp red pepper flakes",
+        "1/4 tsp red pepper flakes",
         "1 tsp salt",
-        "4–5 garlic cloves, minced",
+        "3 garlic cloves, minced",
         "Flour or corn tortillas and toppings (cheese, lettuce, salsa, sour cream)"
       ],
       "steps": [
@@ -181,19 +181,19 @@
         },
         {
           "title": "Cook low and slow",
-          "detail": "Cook on LOW about 8 hours until beef shreds easily."
+          "detail": "Cook on LOW 6–8 hours until beef shreds easily. Start checking at 6 hours."
         },
         {
           "title": "Shred",
           "detail": "Shred beef in the juices. Taste and add salt if needed."
         },
         {
-          "title": "Serve half, freeze half",
-          "detail": "Serve with warm tortillas and toppings. Cool the other half, pack in a freezer bag, label, and freeze for a future taco night."
+          "title": "Serve",
+          "detail": "Serve with warm tortillas and toppings."
         }
       ],
-      "doneness": "Beef chuck is done when it shreds with little effort. Fridge leftovers within 2 hours; freeze within 2–3 days.",
-      "tip": "Ask the butcher to cut the roast into chunks. Freezing half is part of the plan — do not skip it."
+      "doneness": "Beef chuck is done when it shreds with little effort. Fridge any leftover meat within 2 hours.",
+      "tip": "Ask the butcher to cut the roast into chunks — less knife work at home."
     },
     "bbq": {
       "servings": "5",
@@ -201,13 +201,13 @@
       "cook": "2.5 hr on HIGH or 4–5 hr on LOW",
       "equipment": "Crockpot",
       "ingredients": [
-        "2.5 lb chicken breasts",
+        "2 lb chicken breasts",
         "1 tsp smoked paprika",
         "1 tsp garlic powder",
         "1 tsp salt",
         "1/2 tsp black pepper",
         "1 large bottle BBQ sauce",
-        "Hamburger buns (pack of 8)",
+        "Hamburger buns (1 pack of 8; use 5)",
         "1 bag coleslaw mix (dress per bag or use a bottled slaw dressing)"
       ],
       "steps": [
@@ -239,7 +239,7 @@
       "ingredients": [
         "1 onion, diced",
         "2 garlic cloves, minced",
-        "1–1.5 lb chicken breast",
+        "1.5 lb chicken breast",
         "2 cans cannellini beans, drained and rinsed",
         "1 can pinto beans, drained and rinsed",
         "1 tsp cumin",
@@ -321,7 +321,7 @@
         "2 Tbsp brown sugar",
         "2 garlic cloves, minced",
         "1 tsp grated ginger (or 1/2 tsp ground)",
-        "5–7 skinless chicken thighs",
+        "5–6 skinless chicken thighs",
         "1.5 Tbsp cornstarch mixed with 2 Tbsp cold water",
         "Green onions and cooked rice"
       ],
@@ -359,9 +359,8 @@
         "1 Tbsp tomato paste",
         "2 cans diced tomatoes (one with green chiles)",
         "1 can kidney beans, drained",
-        "1 can black beans, drained",
         "1 can pinto beans, drained",
-        "1.5 cups beef broth",
+        "1 cup beef broth",
         "2 Tbsp chili powder",
         "1 tsp cumin",
         "1 tsp garlic powder",
@@ -437,10 +436,10 @@
       "cook": "About 45 min",
       "equipment": "Sheet pan, oven",
       "ingredients": [
-        "3 lb small red potatoes, halved",
+        "2 lb small red potatoes, halved",
         "2 packs kielbasa, sliced into coins",
         "1 onion, sliced",
-        "1.5–2 lb frozen green beans",
+        "1 lb frozen green beans",
         "2–3 Tbsp olive oil",
         "Steak seasoning (or salt, pepper, garlic powder)"
       ],
@@ -480,9 +479,9 @@
         "1/2 tsp paprika",
         "Salt and pepper",
         "2 lb boneless chicken thighs",
-        "Red potatoes, halved",
+        "1.5 lb red potatoes, halved",
         "1 red onion, wedges",
-        "Green beans and baby carrots",
+        "About 12 oz green beans and 8 oz baby carrots",
         "Oil"
       ],
       "steps": [
@@ -507,12 +506,12 @@
       "tip": "If veggies brown too fast, tent the pan with foil for the last 10 minutes."
     },
     "drumsticks": {
-      "servings": "5 (10–12 drumsticks)",
+      "servings": "5",
       "prep": "5–10 min",
       "cook": "About 45 min",
       "equipment": "Sheet pan, oven, pot for rice",
       "ingredients": [
-        "10–12 chicken drumsticks (about 3.5–4 lb)",
+        "10 chicken drumsticks (about 3.5 lb, 2 per person)",
         "1 tsp smoked paprika",
         "1 tsp garlic powder",
         "1 tsp onion powder",
@@ -669,7 +668,7 @@
       "cook": "About 30 min with pressure-up time",
       "equipment": "Instant Pot (or large pot with lid)",
       "ingredients": [
-        "1–1.5 lb chicken breast in chunks",
+        "1.5 lb chicken breast in chunks",
         "1 cup chicken broth",
         "1 taco seasoning packet",
         "1 can corn, drained",
@@ -706,7 +705,7 @@
       "cook": "About 35 min",
       "equipment": "Large pot or deep skillet with lid (or Instant Pot)",
       "ingredients": [
-        "About 1 lb chicken breast in small pieces",
+        "1.5 lb chicken breast in small pieces",
         "1 Tbsp oil",
         "2 garlic cloves, minced",
         "1 tsp grated ginger",
@@ -747,32 +746,26 @@
       "cook": "About 20–25 min",
       "equipment": "Big pot, colander, skillet",
       "ingredients": [
-        "1 box spaghetti",
+        "1 box spaghetti (use about 12 oz of a 16 oz box, or the whole box if everyone is hungry)",
         "1 jar pasta sauce",
-        "Optional: leftover carnitas or browned beef",
-        "Cheese if you have it",
-        "OR leftover carnitas, flour tortillas, cheese, salsa for burritos"
+        "Grated cheese if you have it"
       ],
       "steps": [
         {
-          "title": "Option A — Spaghetti",
-          "detail": "Boil salted water. Cook spaghetti per box time. Drain."
+          "title": "Boil the pasta",
+          "detail": "Bring a big pot of salted water to a boil. Cook about 12 oz spaghetti (three-quarters of a 16 oz box) per the box time, or the whole box for bigger appetites. Drain."
         },
         {
           "title": "Warm the sauce",
-          "detail": "Warm jarred sauce in a skillet. Stir in leftover meat if using. Toss with pasta."
+          "detail": "Warm the jarred sauce in a skillet. Toss with the pasta."
         },
         {
-          "title": "Option B — Carnitas burritos",
-          "detail": "Warm leftover carnitas and flour tortillas. Fill with carnitas, cheese, and salsa."
-        },
-        {
-          "title": "Sunday prep bonus",
-          "detail": "If you have energy: brown 1 lb ground beef for Thursday’s burrito casserole and cook a pot of rice. Cool and fridge both."
+          "title": "Serve",
+          "detail": "Plate and top with grated cheese if you have it."
         }
       ],
-      "doneness": "Reheat leftovers to 165°F. Pasta ready when soft enough to chew easily.",
-      "tip": "Pick spaghetti or carnitas burritos based on what you already have ready."
+      "doneness": "Pasta is ready when it is soft enough to chew easily, with a little bite in the middle.",
+      "tip": "A 16 oz box and a jar of sauce are the usual grocery packages — cook 12 oz for 5 plates, and save the rest of the dry pasta."
     },
     "2": {
       "servings": "5",
@@ -781,7 +774,7 @@
       "equipment": "Skillet or griddle",
       "ingredients": [
         "10 flour or corn tortillas",
-        "Eggs (about 8–10)",
+        "10 eggs (2 per person)",
         "Shredded cheese (about 2 cups)",
         "Butter or oil",
         "Optional: leftover salsa, beans, or veggies",
