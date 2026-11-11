@@ -11,7 +11,7 @@ confirm it, and watch the running total against your budget — so there are no 
 ## 📋 Meal plan shopping list
 The **Meal plan list** tab turns the 2-week dinner plan from the *Tamayo Weeknight Meals* page into a store-ready list.
 
-* Pick **Week 1** or **Week 2** to see that week's dinners (tap a dinner for its core ingredients) and one combined,
+* **One combined 2-week shopping list** (since Nov 10, 2026): week 1 and week 2 are merged into a single list with one total, so the family can shop both weeks in one trip. Items used in both weeks become one line showing each week's amount ("Wk 1: … · Wk 2: …"), and their estimates are added together (never lowered). **Week 1 / Week 2** only switches the dinners shown. The list is built in `meals.js` (`lists.both`, from `combineWeeks`). Estimates were raised to the real El Super (South Gate) prices paid on Nov 10, 2026 where those were higher (`elSuperPaid`; never lowered), so the 2-week list estimate is about $451.
   de-duplicated grocery list grouped by store section (produce, meat, dairy, tortillas, canned, pantry, frozen, snacks).
 * **Check off** an item with the big box (e.g. you already have it), or tap the item → **Scan price** / **Type price**:
   the cart line is linked to that list item, so it's checked off with its real price. When you add any item from the
@@ -20,7 +20,7 @@ The **Meal plan list** tab turns the 2-week dinner plan from the *Tamayo Weeknig
   and cart total + estimated remaining vs. the budget. Linked prices follow edits; deleting the cart line unchecks it;
   after **Finish trip** the checked items keep their prices for the rest of the week.
 * **＋ Add item** for your own things (household, pet food…), remove items from the item menu (with Undo / Restore),
-  and **↺ Reset week** to start the week over (your cart is not touched). Everything is saved in localStorage
+  and **↺ Reset list** to start the list over (your cart is not touched). Everything is saved in localStorage
   (`tamayoCart.plan.v1`).
 * Week 1 is the page's own list (~$280; includes breakfasts, lunches, snacks). The page has no week 2 list, so week 2
   (~$111) is built from week 2's recipes and covers **dinners only**; all its prices are estimates (week 1 prices where

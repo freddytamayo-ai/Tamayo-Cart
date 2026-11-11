@@ -32,13 +32,15 @@ try:
         page.click('#tabPlan')
         check(page.is_visible('#planView') and not page.is_visible('#cartView'), 'Meal plan tab shows the list view')
         def dinners(): return [t.strip() for t in page.eval_on_selector_all('#dinners .dinner', 'els => els.map(e => e.querySelector(".day").textContent + " " + e.querySelector(".dt").textContent)')]
-        def est_total(): return page.evaluate("TamayoPlan.summary(TamayoPlan.weekItems(TamayoMeals, JSON.parse(localStorage.getItem('tamayoCart.plan.v1')||'{}').weeks ? TamayoPlan.normalizePlan(JSON.parse(localStorage.getItem('tamayoCart.plan.v1')), TamayoMeals) : TamayoPlan.normalizePlan({}, TamayoMeals), document.querySelector('#weekSeg .on').dataset.week, [])).estTotal")
+        def est_total(): return page.evaluate("TamayoPlan.summary(TamayoPlan.weekItems(TamayoMeals, JSON.parse(localStorage.getItem('tamayoCart.plan.v1')||'{}').weeks ? TamayoPlan.normalizePlan(JSON.parse(localStorage.getItem('tamayoCart.plan.v1')), TamayoMeals) : TamayoPlan.normalizePlan({}, TamayoMeals), 'both', [])).estTotal")
         w1 = dinners(); cap1 = page.inner_text('#planCaption'); rem1 = page.inner_text('#planRemaining')
         check(len(w1) == 7 and w1[0].startswith('Mon Salsa Beef'), 'week 1 shows 7 days of dinners')
-        check('list estimate $266.00' in cap1 and rem1 == '$266.00', 'week 1 list estimate $266 and est. remaining $266 (%s / %s)' % (rem1, cap1.splitlines()[0]))
+        check('list estimate $451.00' in cap1 and rem1 == '$451.00', 'combined 2-week list estimate $451 and est. remaining $451 (%s / %s)' % (rem1, cap1.splitlines()[0]))
+        check('both weeks' in page.inner_text('#listHead'), 'one shopping list for both weeks')
         secs = page.eval_on_selector_all('.sec-h span:first-child', 'els => els.map(e => e.textContent)')
         check(secs[0].endswith('Produce') and any('Meat' in s for s in secs) and any('Frozen' in s for s in secs), 'grouped by store section: ' + ', '.join(secs))
-        check(page.locator('.pitem').count() == 51, 'week 1 has 51 list items')
+        check(page.locator('.pitem').count() == 69, 'combined list has 69 items (51 + 30, 12 merged)')
+        check('Wk 1:' in page.inner_text('.pitem[data-id="ground-beef"]') and 'Wk 2:' in page.inner_text('.pitem[data-id="ground-beef"]'), 'merged item shows both weeks\' amounts')
         page.wait_for_selector('#toast:not(.show)', state='attached', timeout=10000); page.wait_for_timeout(400)
         page.set_viewport_size({'width': 390, 'height': 1500})  # tall phone capture: picker, totals, dinners and the start of the list
         page.wait_for_timeout(300)
@@ -48,8 +50,8 @@ try:
         page.click('#weekSeg [data-week="2"]')
         w2 = dinners(); cap2 = page.inner_text('#planCaption'); rem2 = page.inner_text('#planRemaining')
         check(len(w2) == 7 and w2[0].startswith('Mon White Chicken Chili'), 'week 2 shows its dinners')
-        check('list estimate $99.00' in cap2, 'week 2 list estimate $99 (%s)' % cap2.splitlines()[0])
-        check('estimates' in page.inner_text('#planNote'), 'week 2 note says prices are estimates')
+        check('list estimate $451.00' in cap2 and page.locator('.pitem').count() == 69, 'switching dinners to week 2 keeps the same combined list (%s)' % cap2.splitlines()[0])
+        check('estimates' in page.inner_text('#planNote'), 'list note says prices are estimates')
         report['week1'] = {'dinners': w1, 'caption': cap1, 'remaining': rem1}
         report['week2'] = {'dinners': w2, 'caption': cap2, 'remaining': rem2, 'items': page.locator('.pitem').count()}
         page.click('#weekSeg [data-week="1"]')
@@ -57,7 +59,7 @@ try:
         # manual check-off (already have it)
         page.click('.pitem[data-id="garlic"] .pcheck')
         check(page.get_attribute('.pitem[data-id="garlic"]', 'class').find('done') >= 0, 'tap checkbox checks item off')
-        check(page.inner_text('#planRemaining') == '$265.00', 'manual check removes its estimate from remaining -> $265.00')
+        check(page.inner_text('#planRemaining') == '$449.00', 'manual check removes its estimate from remaining -> $449.00')
 
         # type a price for a list item from its menu
         page.click('.pitem[data-id="onions"] .pinfo'); page.click('#mType')
@@ -86,10 +88,10 @@ try:
         # remove + restore
         page.click('.pitem[data-id="popcorn"] .pinfo'); page.click('#mDel')
         check(page.locator('.pitem[data-id="popcorn"]').count() == 0 and page.is_visible('#planRestoreBtn'), 'remove item from list; restore button shows')
-        s = page.evaluate("TamayoPlan.summary(TamayoPlan.weekItems(TamayoMeals, TamayoPlan.normalizePlan(JSON.parse(localStorage.getItem('tamayoCart.plan.v1')), TamayoMeals), '1', JSON.parse(localStorage.getItem('tamayoCart.v1')).items))")
-        # remaining = 266 - garlic1 - onions3 - milk8 - bananas3 - popcorn3 + dog 32.5 = 280.5
-        check(abs(s['remaining'] - 280.5) < 0.001, 'estimated remaining after edits = $280.50 (got %s)' % s['remaining'])
-        check(page.inner_text('#planRemaining') == '$280.50', 'UI shows estimated remaining $280.50')
+        s = page.evaluate("TamayoPlan.summary(TamayoPlan.weekItems(TamayoMeals, TamayoPlan.normalizePlan(JSON.parse(localStorage.getItem('tamayoCart.plan.v1')), TamayoMeals), 'both', JSON.parse(localStorage.getItem('tamayoCart.v1')).items))")
+        # remaining = 451 - garlic2 - onions6 - milk8 - bananas3 - popcorn3 + dog 32.5 = 461.5
+        check(abs(s['remaining'] - 461.5) < 0.001, 'estimated remaining after edits = $461.50 (got %s)' % s['remaining'])
+        check(page.inner_text('#planRemaining') == '$461.50', 'UI shows estimated remaining $461.50')
 
         # persistence
         page.reload(); page.wait_for_load_state('networkidle')
@@ -112,14 +114,14 @@ try:
 
         # reset week
         page.click('#planResetBtn')
-        check(page.locator('.pitem.done').count() == 0 and page.locator('.pitem').count() == 51 and page.inner_text('#planRemaining') == '$266.00', 'Reset week clears checks, custom & removed items')
+        check(page.locator('.pitem.done').count() == 0 and page.locator('.pitem').count() == 69 and page.inner_text('#planRemaining') == '$451.00', 'Reset list clears checks, custom & removed items')
 
         # offline: new data files come from the SW cache
         page.wait_for_function('navigator.serviceWorker && navigator.serviceWorker.ready.then(()=>true)', timeout=60000)
         page.reload(); page.wait_for_function('!!navigator.serviceWorker.controller', timeout=60000)
         keys = page.evaluate("caches.keys()")
-        check('tamayo-cart-v5' in keys, 'service worker cache bumped to tamayo-cart-v5 (%s)' % keys)
-        cached = page.evaluate("caches.open('tamayo-cart-v5').then(c => Promise.all(['meals.js','mealplan.js'].map(f => c.match(f).then(r => !!r))))")
+        check('tamayo-cart-v7' in keys, 'service worker cache bumped to tamayo-cart-v7 (%s)' % keys)
+        cached = page.evaluate("caches.open('tamayo-cart-v7').then(c => Promise.all(['meals.js','mealplan.js'].map(f => c.match(f).then(r => !!r))))")
         check(all(cached), 'meals.js and mealplan.js are precached')
         ctx.set_offline(True); page.reload(); page.wait_for_load_state('domcontentloaded'); page.wait_for_timeout(500)
         check(page.locator('#dinners .dinner').count() == 7, 'meal list works offline')

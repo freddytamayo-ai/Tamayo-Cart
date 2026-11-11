@@ -63,10 +63,6 @@
  </div>
 
  <div id="planView" hidden>
-  <div class="seg" role="radiogroup" aria-label="Week" id="weekSeg">
-    <button class="seg-btn on" role="radio" aria-checked="true" data-week="1">Week 1</button>
-    <button class="seg-btn" role="radio" aria-checked="false" data-week="2">Week 2</button>
-  </div>
   <section class="plan-card plan-stats" id="planStats" aria-live="polite"></section>
   <section class="plan-card">
     <div class="dinners-head">
@@ -74,13 +70,18 @@
       <p class="made-count" id="madeCount" aria-live="polite">0 of 0 made</p>
       <button type="button" class="btn ghost made-reset" id="madeResetBtn">Reset week</button>
     </div>
+    <div class="seg" role="radiogroup" aria-label="Dinners week" id="weekSeg">
+      <button class="seg-btn on" role="radio" aria-checked="true" data-week="1">Week 1</button>
+      <button class="seg-btn" role="radio" aria-checked="false" data-week="2">Week 2</button>
+    </div>
     <ul class="dinners" id="dinners"></ul>
   </section>
+  <h2 class="plan-h list-h" id="listHead">🛒 Shopping list: both weeks</h2>
   <div id="planList"></div>
   <p class="muted plan-note" id="planNote"></p>
   <section class="actions-secondary">
     <button class="btn ghost" id="planAddBtn">＋ Add item</button>
-    <button class="btn ghost danger" id="planResetBtn">↺ Reset week</button>
+    <button class="btn ghost danger" id="planResetBtn">↺ Reset list</button>
   </section>
   <button class="btn ghost restore" id="planRestoreBtn" hidden></button>
  </div>

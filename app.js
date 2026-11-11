@@ -147,9 +147,11 @@
   }
   function closeSheet() { $('sheetWrap').hidden = true; sheetCtx = null; pendingListId = null; }
   // ---- link a cart item to the meal-plan shopping list ----
-  function curItems() { return Plan.weekItems(Meals, plan, plan.week, state.items); }
+  function listKey() { return Meals.listKey && Meals.lists && Meals.lists[Meals.listKey] ? Meals.listKey : plan.week; }
+  function listLabel() { return Plan.source(Meals, listKey()).label; }
+  function curItems() { return Plan.weekItems(Meals, plan, listKey(), state.items); }
   function linkedListId(cartId) {
-    var d = plan.weeks[plan.week].done;
+    var d = plan.weeks[listKey()].done;
     return Object.keys(d).find(function (k) { return d[k].cartId === cartId; }) || '';
   }
   function fillListSelect(ctx) {
@@ -163,7 +165,7 @@
       }).join('') + '</optgroup>';
     }).join('');
     $('fList').value = cur;
-    $('listLinkLabel').textContent = 'Check off on ' + Meals.weeks[plan.week].label + ' shopping list';
+    $('listLinkLabel').textContent = 'Check off on ' + listLabel() + ' shopping list';
     updateSuggest();
   }
   function updateSuggest() {
@@ -212,8 +214,8 @@
     var target;
     if (sheetCtx.mode === 'edit') target = Object.assign(sheetCtx.item, data);
     else { data.id = state.nextId++; data.added = Date.now(); state.items.push(data); target = data; }
-    if (lid) { Plan.link(plan, plan.week, lid, target); listName = (curItems().find(function (x) { return x.id === lid; }) || {}).name || ''; }
-    else if (sheetCtx.prevListId) delete plan.weeks[plan.week].done[sheetCtx.prevListId];
+    if (lid) { Plan.link(plan, listKey(), lid, target); listName = (curItems().find(function (x) { return x.id === lid; }) || {}).name || ''; }
+    else if (sheetCtx.prevListId) delete plan.weeks[listKey()].done[sheetCtx.prevListId];
     var wasAdd = sheetCtx.mode !== 'edit';
     save(); render(); closeSheet(); buzz(25);
     if (wasAdd) {
@@ -551,8 +553,8 @@
             '<button class="pprice" data-act="menu" aria-label="Options">' + price + '</button></li>';
         }).join('') + '</ul></section>';
     }).join('') || '<div class="empty"><p class="big">List is empty</p><p>Tap <b>Add item</b> or <b>Reset week</b>.</p></div>';
-    $('planNote').textContent = wk.note;
-    var nRemoved = Object.keys(plan.weeks[plan.week].removed).length;
+    $('planNote').textContent = Plan.source(Meals, listKey()).note;
+    var nRemoved = Object.keys(plan.weeks[listKey()].removed).length;
     $('planRestoreBtn').hidden = !nRemoved;
     $('planRestoreBtn').textContent = '↩︎ Restore ' + nRemoved + ' removed item' + (nRemoved === 1 ? '' : 's');
   }
@@ -604,7 +606,7 @@
     else itemMenu(it);
   });
   function toggleItem(it) {
-    var r = Plan.toggle(plan, plan.week, it.id); buzz();
+    var r = Plan.toggle(plan, listKey(), it.id); buzz();
     save(); render();
     if (!r.checked && r.was && r.was.cartId != null && state.items.some(function (c) { return c.id === r.was.cartId; })) {
       var cid = r.was.cartId;
@@ -627,13 +629,13 @@
       var mc = root.querySelector('#mCart'); if (mc) mc.onclick = function () { closeDlg(); openSheet({ mode: 'edit', item: state.items.find(function (c) { return c.id === it.cartId; }) }); };
       root.querySelector('#mCheck').onclick = function () { closeDlg(); toggleItem(it); };
       root.querySelector('#mDel').onclick = function () {
-        closeDlg(); snapshot(); Plan.removeItem(plan, plan.week, it.id); save(); render();
+        closeDlg(); snapshot(); Plan.removeItem(plan, listKey(), it.id); save(); render();
         toast('Removed ' + it.name, { label: 'Undo', fn: undo });
       };
     });
   }
   $('planAddBtn').onclick = function () {
-    openDlg('Add to ' + Meals.weeks[plan.week].label + ' list',
+    openDlg('Add to ' + listLabel(),
       '<div class="stack"><label class="field"><span>Item</span><input id="aName" maxlength="60" placeholder="e.g. Dog food, paper towels" enterkeyhint="next"></label>' +
       '<label class="field"><span>Quantity (optional)</span><input id="aQty" maxlength="40" placeholder="e.g. 30 lb bag"></label>' +
       '<label class="field"><span>Aisle / section</span><select id="aSec" class="select">' + Meals.sections.filter(function (x) { return x.id !== 'check'; }).map(function (x) { return '<option value="' + x.id + '"' + (x.id === 'household' ? ' selected' : '') + '>' + x.icon + ' ' + esc(x.label) + '</option>'; }).join('') + '</select></label>' +
@@ -641,23 +643,23 @@
       '<button class="btn primary xl" id="aSave">Add to list</button></div>', function (root) {
       setTimeout(function () { root.querySelector('#aName').focus(); }, 60);
       root.querySelector('#aSave').onclick = function () {
-        var item = Plan.addCustom(plan, plan.week, { name: root.querySelector('#aName').value, qty: root.querySelector('#aQty').value, section: root.querySelector('#aSec').value, est: num(root.querySelector('#aEst').value) });
+        var item = Plan.addCustom(plan, listKey(), { name: root.querySelector('#aName').value, qty: root.querySelector('#aQty').value, section: root.querySelector('#aSec').value, est: num(root.querySelector('#aEst').value) });
         if (!item) { toast('Type an item name'); return; }
         save(); render(); closeDlg(); toast('Added ' + item.name + ' to the list');
       };
     });
   };
   $('planResetBtn').onclick = function () {
-    var label = Meals.weeks[plan.week].label;
-    if (!confirm('Reset ' + label + '? This unchecks the shopping list, brings back removed items and deletes items you added. Your cart is not changed. “Made it” dinner checks are not changed.')) return;
-    snapshot(); Plan.resetWeek(plan, plan.week); save(); render(); toast(label + ' reset', { label: 'Undo', fn: undo });
+    var label = listLabel();
+    if (!confirm('Reset the ' + label + '? This unchecks the shopping list, brings back removed items and deletes items you added. Your cart is not changed. “Made it” dinner checks are not changed.')) return;
+    snapshot(); Plan.resetWeek(plan, listKey()); save(); render(); toast(label + ' reset', { label: 'Undo', fn: undo });
   };
   $('madeResetBtn').onclick = function () {
     var label = Meals.weeks[plan.week].label;
     if (!confirm('Reset ' + label + ' “Made it” checks? This clears them on every phone. The shopping list is not changed.')) return;
     madeSync.resetWeek(plan.week);
   };
-  $('planRestoreBtn').onclick = function () { plan.weeks[plan.week].removed = {}; save(); render(); };
+  $('planRestoreBtn').onclick = function () { plan.weeks[listKey()].removed = {}; save(); render(); };
 
   // ---------------- boot ----------------
   applyTheme(); setView(state.view); render();
