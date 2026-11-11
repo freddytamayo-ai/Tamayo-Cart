@@ -32,3 +32,38 @@ test('combined list: plan state, summary and custom-item carry-over', () => {
   assert.equal(s.checked, 1);
   assert.equal(P.normalizePlan(plan, Meals).weeks.both.custom.length, 1, 'no duplicate carry-over on reload');
 });
+
+test('trip spend is the combined list, and a single week does not have its own total', () => {
+  const plan = P.normalizePlan({}, Meals);
+  const both = () => P.weekItems(Meals, plan, 'both', []);
+  const open = P.tripSpend(both(), [], 0);
+  assert.equal(open.listTotal, 451);
+  assert.equal(open.spent, 0);
+  assert.equal(open.remaining, 451);
+  assert.equal(open.projected, 451);
+  assert.equal(open.total, 69);
+  assert.notEqual(open.listTotal, 313);
+  assert.notEqual(open.listTotal, 138);
+  P.toggle(plan, '1', 'garlic');
+  assert.equal(P.tripSpend(both(), [], 0).projected, 451, 'week 1 check-off is not a separate spend');
+  assert.equal(P.tripSpend(both(), [], 0).checked, 0);
+  const garlic = both().find((i) => i.id === 'garlic');
+  P.toggle(plan, 'both', 'garlic');
+  const home = P.tripSpend(both(), [], 0);
+  assert.equal(home.listTotal, 451, 'list total stays the full estimate');
+  assert.equal(home.spent, 0);
+  assert.equal(home.remaining, 451 - garlic.est);
+  const onions = Meals.lists.both.items.find((i) => i.id === 'onions');
+  const cart = [{ id: 1, price: 2.99, qty: 1 }, { id: 2, price: 4, qty: 1 }];
+  P.link(plan, 'both', 'onions', cart[0]);
+  const shop = P.tripSpend(P.weekItems(Meals, plan, 'both', cart), cart, 6.99);
+  assert.equal(shop.spent, 6.99, 'check-off price plus the unlinked cart line, tax included once');
+  assert.equal(shop.remaining, 451 - garlic.est - onions.est);
+  assert.equal(shop.projected, Math.round((shop.spent + shop.remaining) * 100) / 100);
+  assert.equal(shop.listTotal, 451);
+  const grouped = P.groupBySection(Meals, P.weekItems(Meals, P.normalizePlan({}, Meals), 'both', []));
+  const week1 = P.groupBySection(Meals, P.weekItems(Meals, P.normalizePlan({}, Meals), '1', []));
+  assert.equal(Math.round(grouped.reduce((s, g) => s + g.est, 0) * 100) / 100, 451);
+  assert.notEqual(grouped.find((g) => g.id === 'produce').est, week1.find((g) => g.id === 'produce').est);
+  assert.equal(Meals.defaultBudget, 325);
+});

@@ -27,7 +27,11 @@ try:
             return ctx, pg
         ctx, page = mk('light')
         page.goto(URL); page.wait_for_load_state('networkidle')
-        check(page.inner_text('#remaining') == '$325.00', 'fresh install: default budget $325 (got %s)' % page.inner_text('#remaining'))
+        check('2-week' in page.inner_text('#budgetBtn').lower(), 'budget pill is labeled as a 2-week amount')
+        check(page.inner_text('#remaining') == '$126.00 over', 'header counts the full $451 trip against the $325 2-week budget (got %s)' % page.inner_text('#remaining'))
+        page.click('#budgetBtn')
+        check('both weeks' in page.inner_text('#dlgBody').lower() and page.input_value('#bIn') == '325.00', 'budget dialog is the 2-week amount and still shows 325.00')
+        page.click('#dlgClose')
 
         page.click('#tabPlan')
         check(page.is_visible('#planView') and not page.is_visible('#cartView'), 'Meal plan tab shows the list view')
@@ -36,6 +40,8 @@ try:
         w1 = dinners(); cap1 = page.inner_text('#planCaption'); rem1 = page.inner_text('#planRemaining')
         check(len(w1) == 7 and w1[0].startswith('Mon Salsa Beef'), 'week 1 shows 7 days of dinners')
         check('list estimate $451.00' in cap1 and rem1 == '$451.00', 'combined 2-week list estimate $451 and est. remaining $451 (%s / %s)' % (rem1, cap1.splitlines()[0]))
+        check('Spent $0.00 + est. remaining $451.00' in cap1 and 'of $325.00 2-week budget' in cap1, 'spend line is the full trip against the 2-week budget (%s)' % cap1.replace('\\n', ' | '))
+        check(page.inner_text('#planSpent') == '$0.00', 'spent so far starts at $0 on the combined list')
         check('both weeks' in page.inner_text('#listHead'), 'one shopping list for both weeks')
         secs = page.eval_on_selector_all('.sec-h span:first-child', 'els => els.map(e => e.textContent)')
         check(secs[0].endswith('Produce') and any('Meat' in s for s in secs) and any('Frozen' in s for s in secs), 'grouped by store section: ' + ', '.join(secs))
@@ -50,7 +56,7 @@ try:
         page.click('#weekSeg [data-week="2"]')
         w2 = dinners(); cap2 = page.inner_text('#planCaption'); rem2 = page.inner_text('#planRemaining')
         check(len(w2) == 7 and w2[0].startswith('Mon White Chicken Chili'), 'week 2 shows its dinners')
-        check('list estimate $451.00' in cap2 and page.locator('.pitem').count() == 69, 'switching dinners to week 2 keeps the same combined list (%s)' % cap2.splitlines()[0])
+        check('list estimate $451.00' in cap2 and 'of $325.00 2-week budget' in cap2 and page.locator('.pitem').count() == 69 and page.inner_text('#planSpent') == '$0.00', 'switching dinners to week 2 keeps the same combined spend (%s)' % cap2.splitlines()[0])
         check('estimates' in page.inner_text('#planNote'), 'list note says prices are estimates')
         report['week1'] = {'dinners': w1, 'caption': cap1, 'remaining': rem1}
         report['week2'] = {'dinners': w2, 'caption': cap2, 'remaining': rem2, 'items': page.locator('.pitem').count()}
@@ -67,6 +73,7 @@ try:
         page.fill('#fPrice', '2.99'); page.click('#sheetSave')
         check('$2.99' in page.inner_text('.pitem[data-id="onions"] .pprice'), 'linked item shows real scanned price')
         check(page.inner_text('#total') == '$2.99', 'linked item counts toward running cart total')
+        check(page.inner_text('#planSpent') == '$2.99', 'spent so far is that price on the combined list, not one week')
 
         # add from the dock, with name suggestion -> check off
         page.click('#addBtn'); page.fill('#fPrice', '4.19'); page.fill('#fName', 'Whole milk 1 gal'); page.fill('#fQty', '2')
@@ -120,22 +127,26 @@ try:
         page.wait_for_function('navigator.serviceWorker && navigator.serviceWorker.ready.then(()=>true)', timeout=60000)
         page.reload(); page.wait_for_function('!!navigator.serviceWorker.controller', timeout=60000)
         keys = page.evaluate("caches.keys()")
-        check('tamayo-cart-v7' in keys, 'service worker cache bumped to tamayo-cart-v7 (%s)' % keys)
-        cached = page.evaluate("caches.open('tamayo-cart-v7').then(c => Promise.all(['meals.js','mealplan.js'].map(f => c.match(f).then(r => !!r))))")
+        check('tamayo-cart-v8' in keys, 'service worker cache bumped to tamayo-cart-v8 (%s)' % keys)
+        cached = page.evaluate("caches.open('tamayo-cart-v8').then(c => Promise.all(['meals.js','mealplan.js'].map(f => c.match(f).then(r => !!r))))")
         check(all(cached), 'meals.js and mealplan.js are precached')
         ctx.set_offline(True); page.reload(); page.wait_for_load_state('domcontentloaded'); page.wait_for_timeout(500)
         check(page.locator('#dinners .dinner').count() == 7, 'meal list works offline')
         ctx.set_offline(False); ctx.close()
 
-        # budget migration: saved old default (0) -> 325; a custom budget is kept
-        for saved, want in [(0, '$325.00'), (60, '$60.00')]:
+        # budget migration: saved old default (0) -> 325; a custom budget is kept. The number is not doubled for two weeks.
+        for saved, shown, pill in [(0, '325.00', '$126.00 over'), (60, '60.00', '$391.00 over')]:
             c2, p2 = mk('light'); p2.goto(URL); p2.wait_for_load_state('networkidle')
             p2.evaluate("b => localStorage.setItem('tamayoCart.v1', JSON.stringify({items:[], budget:b, store:'', taxOn:true, taxRate:10.25, theme:'auto', nextId:1}))", saved)
             p2.reload(); p2.wait_for_load_state('networkidle')
-            check(p2.inner_text('#remaining') == want, 'migration: saved budget %s -> %s (got %s)' % (saved, want, p2.inner_text('#remaining')))
+            check(p2.inner_text('#remaining') == pill, 'migration: saved budget %s uses the full trip (%s)' % (saved, p2.inner_text('#remaining')))
+            p2.click('#budgetBtn')
+            check(p2.input_value('#bIn') == shown, 'migration: saved budget %s shows %s (got %s)' % (saved, shown, p2.input_value('#bIn')))
             if saved == 0:
-                p2.click('#budgetBtn'); p2.click('#bClear'); p2.reload(); p2.wait_for_load_state('networkidle')
+                p2.click('#bClear'); p2.reload(); p2.wait_for_load_state('networkidle')
                 check(p2.inner_text('#remaining') == 'Set budget', 'choosing "No budget" after upgrade sticks')
+            else:
+                p2.click('#dlgClose')
             c2.close()
 
         # dark mode render

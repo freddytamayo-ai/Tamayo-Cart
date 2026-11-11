@@ -76,6 +76,36 @@
       total: items.length, checked: nChecked, scannedCount: nScanned, left: nLeft, leftNoPrice: nLeftNoPrice };
   }
 
+  /**
+   * One spend for the whole trip. listItems must be the combined both-weeks list (not one week).
+   * Spent = real prices on that list's check-offs, plus cart lines that are not already one of those check-offs
+   * (cartTotal is the tax-inclusive cart, so tax is counted once). Remaining = unchecked estimates on that same list.
+   * Projected = spent + remaining. The list total is every estimate, checked or not.
+   */
+  function tripSpend(listItems, cartItems, cartTotal) {
+    var s = summary(listItems);
+    var linked = {};
+    listItems.forEach(function (it) {
+      if (it.checked && it.cartId != null) linked[it.cartId] = true;
+    });
+    var linkedCents = 0, pretax = 0;
+    (cartItems || []).forEach(function (c) {
+      var lt = cents(lineTotal(c));
+      pretax += lt;
+      if (linked[c.id]) linkedCents += lt;
+    });
+    var cartCents = cartTotal == null ? pretax : cents(cartTotal);
+    var extraCents = cartCents - linkedCents;
+    if (extraCents < 0) extraCents = 0;
+    var spentCents = cents(s.scanned) + extraCents;
+    var remainingCents = cents(s.remaining);
+    return {
+      listTotal: s.estTotal, spent: spentCents / 100, remaining: s.remaining,
+      projected: (spentCents + remainingCents) / 100, scanned: s.scanned, scannedCount: s.scannedCount,
+      checked: s.checked, total: s.total, left: s.left, leftNoPrice: s.leftNoPrice
+    };
+  }
+
   /** Link a cart item to a list item (checks it off). Moves the link if the cart item was linked elsewhere. */
   function link(plan, week, itemId, cartItem) {
     unlinkCart(plan, cartItem.id);
@@ -151,7 +181,7 @@
     return state;
   }
 
-  return { source: source, weekItems: weekItems, groupBySection: groupBySection, summary: summary, link: link, unlinkCart: unlinkCart, toggle: toggle,
+  return { source: source, weekItems: weekItems, groupBySection: groupBySection, summary: summary, tripSpend: tripSpend, link: link, unlinkCart: unlinkCart, toggle: toggle,
     sync: sync, markBought: markBought, resetWeek: resetWeek, addCustom: addCustom, removeItem: removeItem, bestMatch: bestMatch,
     normalizePlan: normalizePlan, migrateBudget: migrateBudget, NEW_DEFAULT_BUDGET: NEW_DEFAULT_BUDGET, OLD_DEFAULT_BUDGET: OLD_DEFAULT_BUDGET, BUDGET_V: BUDGET_V };
 });

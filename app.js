@@ -34,23 +34,26 @@
 
   // ---------------- render ----------------
   function totals() { return Core.computeTotals(state.items, { taxOn: state.taxOn, rate: state.taxRate, budget: state.budget }); }
+  /** Cart register total, plus the combined 2-week list (check-offs and what is still to buy). */
+  function trip() { var t = totals(); return { cart: t, spend: Plan.tripSpend(curItems(), state.items, t.total) }; }
 
   function render() {
-    var t = totals();
+    var now = trip(), t = now.cart, spend = now.spend;
     $('total').textContent = money(t.total);
     var parts = [fmtQty(t.count) + (t.count === 1 ? ' item' : ' items')];
     if (state.taxOn && t.taxableSubtotal > 0) parts.push('incl. ' + money(t.tax) + ' tax');
     else if (state.taxOn) parts.push('tax on taxable items: ' + state.taxRate + '%');
     $('subline').textContent = parts.join(' · ');
+    var against = Core.computeTotals([{ price: spend.projected, qty: 1 }], { taxOn: false, budget: state.budget });
     var sum = $('summary');
-    sum.dataset.level = t.level;
-    if (t.budget > 0) {
-      $('remaining').textContent = t.remaining < 0 ? money(-t.remaining) + ' over' : money(t.remaining);
-      var pct = Math.min(100, Math.round(t.pct * 100));
+    sum.dataset.level = against.level;
+    if (against.budget > 0) {
+      $('remaining').textContent = against.remaining < 0 ? money(-against.remaining) + ' over' : money(against.remaining);
+      var pct = Math.min(100, Math.round(against.pct * 100));
       $('barFill').style.width = pct + '%';
       $('bar').setAttribute('aria-valuenow', pct);
-      $('barCaption').textContent = t.level === 'over' ? 'Over budget by ' + money(-t.remaining) + ' — budget ' + money(t.budget)
-        : Math.round(t.pct * 100) + '% of ' + money(t.budget) + ' budget';
+      $('barCaption').textContent = against.level === 'over' ? 'Over the 2-week budget by ' + money(-against.remaining) + ' — budget ' + money(against.budget)
+        : Math.round(against.pct * 100) + '% of ' + money(against.budget) + ' 2-week budget';
     } else {
       $('remaining').textContent = 'Set budget';
       $('barFill').style.width = '0%';
@@ -220,7 +223,7 @@
     save(); render(); closeSheet(); buzz(25);
     if (wasAdd) {
       var t = totals();
-      toast('Added ' + money(Math.round(Math.round(price * 100) * qty) / 100) + (listName ? ' · ✓ ' + listName : '') + ' · total ' + money(t.total) + (t.level === 'over' ? ' — over budget!' : ''));
+      toast('Added ' + money(Math.round(Math.round(price * 100) * qty) / 100) + (listName ? ' · ✓ ' + listName : '') + ' · cart ' + money(t.total) + (trip().spend.projected > state.budget && state.budget > 0 ? ' — over the 2-week budget' : ''));
     }
   });
 
@@ -234,11 +237,11 @@
   $('dlgWrap').addEventListener('click', function (e) { if (e.target === this) closeDlg(); });
 
   $('budgetBtn').onclick = function () {
-    openDlg('Grocery budget',
-      '<div class="stack"><label class="field"><span>Budget for this week’s groceries</span><div class="price-input"><span>$</span><input id="bIn" inputmode="decimal" placeholder="0.00" value="' + (state.budget ? state.budget.toFixed(2) : '') + '"></div></label>' +
+    openDlg('2-week grocery budget',
+      '<div class="stack"><label class="field"><span>Budget for both weeks together</span><div class="price-input"><span>$</span><input id="bIn" inputmode="decimal" placeholder="0.00" value="' + (state.budget ? state.budget.toFixed(2) : '') + '"></div></label>' +
       '<div class="chips">' + [100, 150, 200, 250, 325, 400].map(function (v) { return '<button type="button" class="chip" data-b="' + v + '">$' + v + '</button>'; }).join('') + '</div>' +
       '<button class="btn primary xl" id="bSave">Save budget</button><button class="btn ghost" id="bClear">No budget</button>' +
-      '<p class="muted">The bar turns amber at 80% and red when you go over. Budget includes tax on taxable items.</p></div>',
+      '<p class="muted">This is the amount for the whole 2-week trip. Saving keeps whatever number is here — it is not recalculated. The bar turns amber at 80% and red when the trip goes over. Tax on taxable cart items is included.</p></div>',
       function (root) {
         var inp = root.querySelector('#bIn'); setTimeout(function () { inp.focus(); inp.select(); }, 60);
         root.querySelector('.chips').onclick = function (e) { var c = e.target.closest('.chip'); if (c) { inp.value = (+c.dataset.b).toFixed(2); } };
@@ -504,19 +507,20 @@
 
   var expandedDinners = {};
   function renderPlan() {
-    var wk = Meals.weeks[plan.week], items = curItems(), s = Plan.summary(items), t = totals();
+    var wk = Meals.weeks[plan.week], items = curItems(), t = totals();
+    var spend = Plan.tripSpend(items, state.items, t.total);
     Array.prototype.forEach.call($('weekSeg').children, function (b) { var on = b.dataset.week === plan.week; b.classList.toggle('on', on); b.setAttribute('aria-checked', on); });
-    var projected = Core.round2(t.total + s.remaining);
+    var projected = spend.projected;
     var level = !state.budget ? 'none' : projected > state.budget ? 'over' : projected >= 0.9 * state.budget ? 'warn' : 'ok';
-    var pct = s.total ? Math.round(s.checked / s.total * 100) : 0;
+    var pct = spend.total ? Math.round(spend.checked / spend.total * 100) : 0;
     $('planStats').dataset.level = level;
     $('planStats').innerHTML =
-      '<div class="ps-row"><div><div class="label">Estimated remaining</div><div class="ps-big" id="planRemaining">' + money(s.remaining) + '</div>' +
-      '<div class="sub">' + s.left + ' item' + (s.left === 1 ? '' : 's') + ' left' + (s.leftNoPrice ? ' (' + s.leftNoPrice + ' to check at home)' : '') + '</div></div>' +
-      '<div class="ps-right"><div class="label">Scanned</div><div class="ps-mid" id="planScanned">' + money(s.scanned) + '</div><div class="sub">' + s.scannedCount + ' list item' + (s.scannedCount === 1 ? '' : 's') + '</div></div></div>' +
+      '<div class="ps-row"><div><div class="label">Estimated remaining</div><div class="ps-big" id="planRemaining">' + money(spend.remaining) + '</div>' +
+      '<div class="sub">' + spend.left + ' item' + (spend.left === 1 ? '' : 's') + ' left' + (spend.leftNoPrice ? ' (' + spend.leftNoPrice + ' to check at home)' : '') + '</div></div>' +
+      '<div class="ps-right"><div class="label">Spent so far</div><div class="ps-mid" id="planSpent">' + money(spend.spent) + '</div><div class="sub">' + spend.scannedCount + ' list price' + (spend.scannedCount === 1 ? '' : 's') + '</div></div></div>' +
       '<div class="bar" role="progressbar" aria-label="List checked off" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '"><div class="fill" style="width:' + pct + '%"></div></div>' +
-      '<div class="bar-caption" id="planCaption">' + s.checked + ' of ' + s.total + ' checked · list estimate ' + money(s.estTotal) +
-      (state.budget ? '<br>Cart ' + money(t.total) + ' + est. remaining ' + money(s.remaining) + ' ≈ <b>' + money(projected) + '</b> of ' + money(state.budget) + ' budget' : '') + '</div>';
+      '<div class="bar-caption" id="planCaption">' + spend.checked + ' of ' + spend.total + ' checked · list estimate ' + money(spend.listTotal) +
+      (state.budget ? '<br>Spent ' + money(spend.spent) + ' + est. remaining ' + money(spend.remaining) + ' ≈ <b>' + money(projected) + '</b> of ' + money(state.budget) + ' 2-week budget' : '') + '</div>';
     var madeCount = madeSync.count(plan.week, wk.dinners);
     $('madeCount').textContent = madeCount.made + ' of ' + madeCount.total + ' made';
     $('dinners').innerHTML = wk.dinners.map(function (d, i) {
@@ -552,7 +556,7 @@
             '<span class="pmeta">' + esc(it.qty || '') + '</span></button>' +
             '<button class="pprice" data-act="menu" aria-label="Options">' + price + '</button></li>';
         }).join('') + '</ul></section>';
-    }).join('') || '<div class="empty"><p class="big">List is empty</p><p>Tap <b>Add item</b> or <b>Reset week</b>.</p></div>';
+    }).join('') || '<div class="empty"><p class="big">List is empty</p><p>Tap <b>Add item</b> or <b>Reset list</b>.</p></div>';
     $('planNote').textContent = Plan.source(Meals, listKey()).note;
     var nRemoved = Object.keys(plan.weeks[listKey()].removed).length;
     $('planRestoreBtn').hidden = !nRemoved;
