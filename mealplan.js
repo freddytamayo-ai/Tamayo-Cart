@@ -14,19 +14,33 @@
   function lineTotal(it) { return Math.round(cents(it.price) * (Number(it.qty) || 0)) / 100; }
 
   function emptyWeek() { return { done: {}, removed: {}, custom: [], nextCustom: 1 }; }
+  /** A list source: the combined 2-week list (data.lists[key]) or a single week (data.weeks[key]). */
+  function source(data, key) { return (data.lists && data.lists[key]) || data.weeks[key]; }
   function normalizePlan(p, data) {
     p = p && typeof p === 'object' ? p : {};
     var out = { week: p.week && data.weeks[p.week] ? String(p.week) : '1', weeks: {} };
-    Object.keys(data.weeks).forEach(function (w) {
+    var keys = Object.keys(data.weeks).concat(Object.keys(data.lists || {}));
+    keys.forEach(function (w) {
       var s = (p.weeks && p.weeks[w]) || {};
       out.weeks[w] = { done: s.done || {}, removed: s.removed || {}, custom: Array.isArray(s.custom) ? s.custom : [], nextCustom: s.nextCustom || 1 };
+    });
+    // First load of the combined list: carry over items the family added to the week 1 / week 2 lists.
+    Object.keys(data.lists || {}).forEach(function (k) {
+      if (p.weeks && p.weeks[k]) return;
+      var st = out.weeks[k];
+      Object.keys(data.weeks).forEach(function (w) {
+        out.weeks[w].custom.forEach(function (c) {
+          if (st.custom.some(function (x) { return x.name.toLowerCase() === String(c.name || '').toLowerCase(); })) return;
+          st.custom.push(Object.assign({}, c, { id: 'c' + (st.nextCustom++) }));
+        });
+      });
     });
     return out;
   }
 
-  /** All visible list items for a week (base minus removed, plus custom), with their status. */
+  /** All visible list items for a list key (base minus removed, plus custom), with their status. */
   function weekItems(data, plan, week, cartItems) {
-    var w = data.weeks[week], st = plan.weeks[week];
+    var w = source(data, week), st = plan.weeks[week];
     var byCart = {}; (cartItems || []).forEach(function (c) { byCart[c.id] = c; });
     var base = w.items.filter(function (it) { return !st.removed[it.id]; });
     var all = base.concat(st.custom.map(function (c) { return Object.assign({ custom: true }, c); }));
@@ -137,7 +151,7 @@
     return state;
   }
 
-  return { weekItems: weekItems, groupBySection: groupBySection, summary: summary, link: link, unlinkCart: unlinkCart, toggle: toggle,
+  return { source: source, weekItems: weekItems, groupBySection: groupBySection, summary: summary, link: link, unlinkCart: unlinkCart, toggle: toggle,
     sync: sync, markBought: markBought, resetWeek: resetWeek, addCustom: addCustom, removeItem: removeItem, bestMatch: bestMatch,
     normalizePlan: normalizePlan, migrateBudget: migrateBudget, NEW_DEFAULT_BUDGET: NEW_DEFAULT_BUDGET, OLD_DEFAULT_BUDGET: OLD_DEFAULT_BUDGET, BUDGET_V: BUDGET_V };
 });

@@ -223,3 +223,5 @@ main{padding:12px 12px 0;max-width:640px;margin:0 auto}
 .recipe-note{font-size:14.5px;margin:6px 0;line-height:1.4}
 .recipe-tip{font-size:14.5px;margin:8px 0 0;padding:10px 12px;background:var(--bg);border-radius:12px;border:1px solid var(--line);line-height:1.4}
 .recipe-tip b{color:var(--brand)}
+.list-h{margin:18px 4px 8px}
+#planView .plan-card .seg{margin:6px 0 10px}

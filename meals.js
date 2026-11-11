@@ -144,6 +144,105 @@
     w2('basics', 'check', 'Oil, sugar, salt, pepper', 'check you have them', null, 'on hand', ['fajitas', 'bbqbeef', 'tacobeef'])
   ];
 
+  // Real prices paid at El Super (South Gate) on Nov 10, 2026, when both weeks were bought in one trip, per list item
+  // (several receipt lines can add up to one item). An estimate is raised to at least what was paid, rounded up to whole
+  // dollars, and never lowered (if the paid amount was lower, e.g. a smaller pack, the old estimate stays).
+  var elSuperPaid = {
+    'apples': 4.75,
+    'avocados': 5.90,
+    'backup-frozen': 7.99,
+    'bananas': 2.68,
+    'bbq-sauce': 2.99,
+    'beef-chuck': 13.87,
+    'bell-peppers': 3.43,
+    'berries': 8.33,
+    'black-beans': 2.49,
+    'bread': 3.09,
+    'butter': 5.99,
+    'cheese': 5.19,
+    'chicken-breast': 7.29,
+    'chicken-thighs': 8.13,
+    'chipotle': 2.47,
+    'cilantro': 0.99,
+    'coleslaw': 1.39,
+    'cream-cheese': 3.99,
+    'cuke-tomato': 4.19,
+    'deli': 9.16,
+    'drumsticks': 7.85,
+    'eggs': 3.98,
+    'enchilada': 2.99,
+    'frozen-corn': 3.79,
+    'frozen-green-beans': 3.79,
+    'garlic': 1.49,
+    'green-onions': 1.48,
+    'ground-beef': 55.55,
+    'hominy': 7.94,
+    'kielbasa': 12.58,
+    'lettuce': 4.36,
+    'limes': 2.26,
+    'milk': 5.97,
+    'onions': 1.73,
+    'oranges': 6.59,
+    'pinto': 4.98,
+    'red-potatoes': 3.20,
+    'salsa': 4.40,
+    'salsa-verde': 3.49,
+    'sour-cream': 5.49,
+    'spaghetti': 9.93,
+    'taco-cinnamon': 2.98,
+    'tostadas': 1.99,
+    'yogurt': 7.18
+  };
+  (function applyPaid() {
+    Object.keys(elSuperPaid).forEach(function (id) {
+      var hits = week1Items.concat(week2Items).filter(function (it) { return it.id === id && it.est != null; });
+      if (!hits.length) return;
+      var cur = hits.reduce(function (a, it) { return a + it.est; }, 0), paid = elSuperPaid[id], target = Math.ceil(paid);
+      if (paid <= cur) return;
+      var left = target;
+      hits.forEach(function (it, i) {
+        var share = i === hits.length - 1 ? left : Math.round(target * it.est / cur);
+        left -= share; it.est = share;
+        it.basis = 'raised to El Super Nov 10, 2026 price: paid $' + paid.toFixed(2) + (hits.length > 1 ? ' for both weeks' : '');
+      });
+    });
+  })();
+
+  // ONE combined 2-week shopping list (Freddy, Nov 10, 2026: shop both weeks in one trip). Items that appear in both
+  // weeks are merged into one line: quantities are listed per week and the estimates are added (never lowered).
+  function combineWeeks(a, b) {
+    var out = [], byId = {};
+    function add(it, wk) {
+      var cur = byId[it.id];
+      if (!cur) {
+        cur = byId[it.id] = { id: it.id, section: it.section, name: it.name, qty: it.qty, est: it.est, basis: it.basis, for: (it.for || []).slice(), weeks: [wk], qtyBy: {} };
+        cur.qtyBy[wk] = it.qty; out.push(cur); return;
+      }
+      cur.weeks.push(wk); cur.qtyBy[wk] = it.qty;
+      if (cur.section === 'check' && it.section !== 'check') cur.section = it.section;
+      if (it.est != null) cur.est = (cur.est || 0) + it.est;
+      (it.for || []).forEach(function (m) { if (cur.for.indexOf(m) < 0) cur.for.push(m); });
+      cur.basis = /El Super/.test(cur.basis || '') ? cur.basis : /El Super/.test(it.basis || '') ? it.basis : 'week 1 + week 2 added together';
+    }
+    a.forEach(function (it) { add(it, '1'); });
+    b.forEach(function (it) { add(it, '2'); });
+    return out.map(function (it) {
+      var o = { id: it.id, section: it.section, name: it.name, est: it.est, weeks: it.weeks };
+      o.qty = it.weeks.length > 1 ? 'Wk 1: ' + it.qtyBy['1'] + ' · Wk 2: ' + it.qtyBy['2'] : 'Wk ' + it.weeks[0] + ': ' + it.qty;
+      if (it.basis) o.basis = it.basis;
+      if (it.for.length) o.for = it.for;
+      return o;
+    });
+  }
+  var bothItems = combineWeeks(week1Items, week2Items);
+  var lists = {
+    both: {
+      label: '2-week list',
+      note: 'One list for both weeks, so you can shop once. Items used in both weeks are merged into one line (each week’s amount is shown) and their estimates are added together. Week 1 includes breakfasts, lunches and snacks; week 2 is dinners only. Prices are estimates, raised to what was actually paid at El Super on Nov 10, 2026 where that was more (never lowered).',
+      items: bothItems
+    }
+  };
+
   var weeks = {
     '1': {
       label: 'Week 1',
@@ -175,5 +274,5 @@
     }
   };
 
-  return { version: 2, source: 'Tamayo Weeknight Meals (Page)', defaultBudget: 325, sections: sections, meals: meals, weeks: weeks };
+  return { version: 3, source: 'Tamayo Weeknight Meals (Page)', defaultBudget: 325, sections: sections, meals: meals, weeks: weeks, lists: lists, listKey: 'both' };
 });
