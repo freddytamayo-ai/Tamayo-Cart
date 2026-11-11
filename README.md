@@ -6,25 +6,21 @@ confirm it, and watch the running total against your budget — so there are no 
 * 100% static + offline PWA. No accounts, no server, no tracking, no ads. Data lives in the phone's localStorage.
 * OCR: Tesseract.js 5.1.1 (LSTM, `eng` 4.0.0_best_int), vendored in `vendor/tesseract/` — no CDN.
 * Hosting how-to: see `HOSTING.md` (not deployed).
-* Default weekly budget: **$325** (tap the budget pill to change it; "No budget" turns it off).
+* Default **2-week** budget: **$325** (the saved number is not changed by the list; tap the budget pill to edit it; "No budget" turns it off).
 
 ## 📋 Meal plan shopping list
 The **Meal plan list** tab turns the 2-week dinner plan from the *Tamayo Weeknight Meals* page into a store-ready list.
 
-* **One combined 2-week shopping list** (since Nov 10, 2026): week 1 and week 2 are merged into a single list with one total, so the family can shop both weeks in one trip. Items used in both weeks become one line showing each week's amount ("Wk 1: … · Wk 2: …"), and their estimates are added together (never lowered). **Week 1 / Week 2** only switches the dinners shown. The list is built in `meals.js` (`lists.both`, from `combineWeeks`). Estimates were raised to the real El Super (South Gate) prices paid on Nov 10, 2026 where those were higher (`elSuperPaid`; never lowered), so the 2-week list estimate is about $451.
-  de-duplicated grocery list grouped by store section (produce, meat, dairy, tortillas, canned, pantry, frozen, snacks).
+* **One combined 2-week shopping list** (since Nov 10, 2026): week 1 and week 2 are merged into a single list with one total, so the family can shop both weeks in one trip. Items used in both weeks become one line showing each week's amount ("Wk 1: … · Wk 2: …"), and their estimates are added together (never lowered). **Week 1 / Week 2** only switches the dinners shown. The list is built in `meals.js` (`lists.both`, from `combineWeeks`). Estimates were raised to the real El Super (South Gate) prices paid on Nov 10, 2026 where those were higher (`elSuperPaid`; never lowered), so the 2-week list estimate is about $451. The list is de-duplicated and grouped by store section (produce, meat, dairy, tortillas, canned, pantry, frozen, snacks).
 * **Check off** an item with the big box (e.g. you already have it), or tap the item → **Scan price** / **Type price**:
   the cart line is linked to that list item, so it's checked off with its real price. When you add any item from the
   dock, the sheet suggests a matching list item ("✓ Check off “Milk”?") or you can pick one from the dropdown.
-* The top card shows **Estimated remaining** (estimates of unchecked items), what you've **scanned** for list items,
-  and cart total + estimated remaining vs. the budget. Linked prices follow edits; deleting the cart line unchecks it;
-  after **Finish trip** the checked items keep their prices for the rest of the week.
+* The top card shows **Estimated remaining** (unchecked items on the combined list), **Spent so far** (real prices of those check-offs, plus anything in the cart that is not already a check-off), and **Spent + est. remaining ≈ one total** against the **2-week budget**. The cart pill uses that same 2-week total, not a single week. Linked prices follow edits; deleting the cart line unchecks it;
+  after **Finish trip** the checked items keep their prices.
 * **＋ Add item** for your own things (household, pet food…), remove items from the item menu (with Undo / Restore),
   and **↺ Reset list** to start the list over (your cart is not touched). Everything is saved in localStorage
   (`tamayoCart.plan.v1`).
-* Week 1 is the page's own list (~$280; includes breakfasts, lunches, snacks). The page has no week 2 list, so week 2
-  (~$111) is built from week 2's recipes and covers **dinners only**; all its prices are estimates (week 1 prices where
-  the item repeats, otherwise rough guesses). Spices, oil and rice are listed under "Check the pantry first".
+* The app does not show a week 1 total or a week 2 total. Week 1's source list includes breakfasts, lunches, and snacks; week 2's source list is dinners only, built from that week's recipes. Spices, oil and rice are listed under "Check the pantry first".
 
 ### Updating the meals
 Edit **`meals.js`** only: `meals` (the 19 dinners), `weeks['1'|'2'].dinners` and `.items`
