@@ -10,7 +10,7 @@
   var defaults = { items: [], budget: Meals.defaultBudget, budgetV: Plan.BUDGET_V, store: '', taxOn: true, taxRate: 10.25, theme: 'auto', nextId: 1, view: 'cart' };
   var hadSaved = (function () { try { return localStorage.getItem(KEY) != null; } catch (e) { return false; } })();
   var state = load(KEY, defaults);
-  if (hadSaved) { delete defaults.budgetV; state = Plan.migrateBudget(Object.assign({}, defaults, state)); defaults.budgetV = Plan.BUDGET_V; } // old default budget (none or $325) -> $650 2-week budget
+  if (hadSaved) { delete defaults.budgetV; state = Plan.migrateBudget(Object.assign({}, defaults, state)); defaults.budgetV = Plan.BUDGET_V; } // old default budget (none) -> $325
   else state = Object.assign({}, defaults, state);
   var history = load(HKEY, []);
   var plan = Plan.normalizePlan(load(PKEY, {}), Meals);
@@ -239,7 +239,7 @@
   $('budgetBtn').onclick = function () {
     openDlg('2-week grocery budget',
       '<div class="stack"><label class="field"><span>Budget for both weeks together</span><div class="price-input"><span>$</span><input id="bIn" inputmode="decimal" placeholder="0.00" value="' + (state.budget ? state.budget.toFixed(2) : '') + '"></div></label>' +
-      '<div class="chips">' + [325, 450, 550, 650, 750].map(function (v) { return '<button type="button" class="chip" data-b="' + v + '">$' + v + '</button>'; }).join('') + '</div>' +
+      '<div class="chips">' + [100, 150, 200, 250, 325, 400].map(function (v) { return '<button type="button" class="chip" data-b="' + v + '">$' + v + '</button>'; }).join('') + '</div>' +
       '<button class="btn primary xl" id="bSave">Save budget</button><button class="btn ghost" id="bClear">No budget</button>' +
       '<p class="muted">This is the amount for the whole 2-week trip. Saving keeps whatever number is here — it is not recalculated. The bar turns amber at 80% and red when the trip goes over. Tax on taxable cart items is included.</p></div>',
       function (root) {

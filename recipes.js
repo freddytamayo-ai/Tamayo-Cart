@@ -11,96 +11,100 @@
   return {
   "version": 3,
   "byMeal": {
-    "carneasada": {
+    "beeftacos": {
       "servings": "5",
-      "prep": "15 min + 1 hr or more marinating",
-      "cook": "About 12 min",
-      "equipment": "Sheet pan, foil, oven broiler",
+      "prep": "15 min",
+      "cook": "About 20 min in the oven",
+      "equipment": "Big skillet, 2 rimmed sheet pans",
       "ingredients": [
-        "2.5 lb thin carne asada steak (flap meat / ranchera or skirt)",
-        "Juice of 2 oranges and 2 limes",
-        "3 garlic cloves, minced",
-        "2 Tbsp oil",
-        "1 tsp cumin, 1 tsp chili powder, 1.5 tsp salt",
+        "1.5 lb ground beef (from the fridge)",
+        "1 can (16 oz) refried beans",
+        "1 packet taco seasoning + 2/3 cup water",
         "20 corn tortillas",
-        "1 white onion and 1 bunch cilantro, chopped",
-        "2 avocados, sliced",
-        "Salsa and lime wedges"
+        "3 Tbsp oil",
+        "2 cups shredded Mexican-blend cheese",
+        "Shredded cabbage and salsa"
       ],
       "steps": [
         {
-          "title": "Marinate",
-          "detail": "In the morning (or at least 1 hour before), put the steak in a zip bag with the orange and lime juice, garlic, oil, cumin, chili powder and salt. Squeeze out the air and keep it in the fridge."
+          "title": "Brown the beef",
+          "detail": "Heat the oven to 425°F. Brown the beef in a big skillet until no pink remains. Drain the fat. Stir in the taco seasoning and water and simmer 5 minutes. Stir in the refried beans until hot."
         },
         {
-          "title": "Heat the broiler",
-          "detail": "Move an oven rack to the top (about 5 inches below the heat). Turn the broiler to HIGH. Line a sheet pan with foil."
+          "title": "Soften the tortillas",
+          "detail": "Wrap 10 tortillas in a damp paper towel and microwave 45 seconds so they bend without cracking. Do the other 10 the same way."
         },
         {
-          "title": "Broil",
-          "detail": "Lay the steak flat on the pan (throw away the marinade). Broil 4–5 minutes, flip, and broil 3–4 minutes more."
+          "title": "Fill",
+          "detail": "Brush the sheet pans with the oil. Put 2 spoonfuls of filling and a little cheese on half of each tortilla, fold it over and lay it on the pan."
         },
         {
-          "title": "Rest and chop",
-          "detail": "Let the steak rest 5 minutes, then chop it into small pieces."
+          "title": "Bake",
+          "detail": "Bake 10 minutes, flip each taco, and bake 5–8 minutes more until crisp."
         },
         {
           "title": "Serve",
-          "detail": "Warm the tortillas in a dry pan. Fill with meat and top with onion, cilantro, avocado, salsa and a squeeze of lime."
+          "detail": "Serve 4 tacos each with cabbage and salsa."
         }
       ],
-      "doneness": "Steak is done at 145°F. Throw away the used marinade. Never pour it on cooked meat.",
-      "tip": "El Super and most Mexican markets sell carne asada already marinated. If you buy that, skip step 1."
+      "doneness": "Ground beef is done at 160°F with no pink. Refrigerate leftovers within 2 hours.",
+      "tip": "The beans stretch the beef so 1.5 lb feeds all 5."
     },
-    "steakbites": {
+    "meatloaf": {
       "servings": "5",
-      "prep": "15 min",
-      "cook": "About 40 min",
-      "equipment": "2 rimmed sheet pans, foil",
+      "prep": "20 min",
+      "cook": "About 30 min",
+      "equipment": "2 rimmed sheet pans, foil, big bowl",
       "ingredients": [
-        "2.5 lb top sirloin steak, cut in 1-inch cubes",
-        "2 lb small red potatoes, cut in quarters",
-        "1 lb fresh green beans, ends snapped off",
-        "3 Tbsp oil",
-        "2 tsp steak seasoning (or 1 tsp salt, 1 tsp pepper, 1 tsp garlic powder)",
-        "1 tsp salt for the vegetables",
-        "3 garlic cloves, minced",
-        "2 Tbsp butter"
+        "2.5 lb ground beef",
+        "2 eggs",
+        "3/4 cup quick or old-fashioned oats (from the oatmeal)",
+        "1/2 cup milk",
+        "1 Tbsp onion powder, 1 tsp garlic powder, 1.5 tsp salt, 1/2 tsp pepper",
+        "1 Tbsp Worcestershire sauce (optional)",
+        "Glaze: 3/4 cup ketchup, 2 Tbsp sugar, 1 Tbsp mustard",
+        "2 lb potatoes, cut in 1-inch cubes",
+        "1 lb carrots, peeled and cut in sticks",
+        "2 Tbsp oil"
       ],
       "steps": [
         {
-          "title": "Heat the oven",
-          "detail": "Heat the oven to 425°F. Line 2 sheet pans with foil."
+          "title": "Thaw the meat Monday night",
+          "detail": "Move the ground beef from the freezer to the fridge Monday night. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
         },
         {
-          "title": "Roast the potatoes",
-          "detail": "Toss the potatoes with 1 Tbsp oil and 1/2 tsp salt on one pan. Roast 20 minutes."
+          "title": "Start the vegetables",
+          "detail": "Heat the oven to 425°F. Toss the potatoes and carrots with the oil and 1 tsp salt on a foil-lined pan. Roast 15 minutes."
         },
         {
-          "title": "Season the steak",
-          "detail": "While the potatoes roast, toss the steak cubes with 1 Tbsp oil, the steak seasoning and the garlic. Toss the green beans with the last 1 Tbsp oil and 1/2 tsp salt."
+          "title": "Mix the meat",
+          "detail": "In a big bowl, mix the beef, eggs, oats, milk, spices and Worcestershire with your hands until just combined."
         },
         {
-          "title": "Add steak and beans",
-          "detail": "Take out the potatoes. Put the green beans next to them. Spread the steak in one layer on the second pan. Roast both pans 10–12 minutes."
+          "title": "Shape",
+          "detail": "Shape 10 small loaves (about the size of your hand) on the second foil-lined pan. Stir the glaze together and spoon it over the tops."
         },
         {
-          "title": "Finish",
-          "detail": "Put small pieces of butter over the hot steak and stir. Serve right away."
+          "title": "Bake",
+          "detail": "Put the meatloaf pan in the oven with the vegetables. Bake both 25 minutes more."
+        },
+        {
+          "title": "Serve",
+          "detail": "Let the meatloaves rest 5 minutes. Serve 2 per person with the potatoes and carrots."
         }
       ],
-      "doneness": "Steak is medium at 145°F (cut one cube: pink in the middle is fine). Potatoes are done when a fork slides in easily.",
-      "tip": "Cut the steak while it is cold from the fridge. It is much easier."
+      "doneness": "Meatloaf is done at 160°F in the middle, with no pink.",
+      "tip": "Wash your hands well after mixing raw beef, before you touch anything else."
     },
     "potroast": {
       "servings": "5",
       "prep": "20 min",
-      "cook": "9–10 hr LOW or 6 hr HIGH",
+      "cook": "8–9 hr LOW or 5–6 hr HIGH",
       "equipment": "7-quart or bigger crockpot (or a 6-quart plus a 9x13 pan and foil)",
       "ingredients": [
-        "6 lb boneless beef chuck roast (2 roasts, about 3 lb each) — double batch, save half for Thursday",
-        "4 lb potatoes, cut in big chunks",
-        "2 lb baby carrots",
+        "4 lb boneless beef chuck roast (2 roasts, about 2 lb each, from the fridge) — double batch, save half for Thursday",
+        "5 lb potatoes, cut in big chunks",
+        "2 lb carrots, peeled and cut in big pieces",
         "2 onions, cut in wedges",
         "2 packets dry onion soup mix",
         "2 cups water + 2 tsp beef bouillon",
@@ -119,7 +123,7 @@
         },
         {
           "title": "Cook",
-          "detail": "Cover and cook 9–10 hours on LOW or 6 hours on HIGH, until the beef falls apart."
+          "detail": "Cover and cook 8–9 hours on LOW or 5–6 hours on HIGH, until the beef falls apart."
         },
         {
           "title": "Extra vegetables (6-quart crockpot only)",
@@ -139,7 +143,7 @@
         }
       ],
       "doneness": "Beef is done when it pulls apart easily with a fork (it is safe well before that, at 145°F). Refrigerate leftovers within 2 hours.",
-      "tip": "Double batch: this one dinner feeds 5 tonight and 5 again on Thursday. Do not lift the lid while it cooks."
+      "tip": "Double batch: this one dinner feeds 5 tonight and 5 again on Thursday. Lots of potatoes and carrots stretch 4 lb of beef over 2 nights. Do not lift the lid while it cooks."
     },
     "lo-potroast": {
       "servings": "5",
@@ -165,54 +169,53 @@
         }
       ],
       "doneness": "Reheat leftovers until steaming hot all the way through (165°F). Reheat only once; throw away anything older than 4 days.",
-      "tip": "Pot roast also makes great sandwiches on bread from the pantry."
+      "tip": "Pot roast also makes great sandwiches."
     },
-    "guisada": {
+    "picadillo": {
       "servings": "5",
       "prep": "15 min",
-      "cook": "8 hr LOW or 4–5 hr HIGH",
-      "equipment": "6-quart crockpot, pot for rice",
+      "cook": "4–5 hr LOW or 2.5–3 hr HIGH",
+      "equipment": "Skillet, 6-quart crockpot, pot for rice",
       "ingredients": [
-        "2.5 lb beef stew meat (carne para guisar)",
-        "2 Tbsp flour",
+        "1.5 lb ground beef",
         "1 onion, diced",
-        "1 green bell pepper, diced",
-        "4 garlic cloves, minced",
-        "1 can (8 oz) tomato sauce",
+        "3 garlic cloves, minced",
+        "2 lb potatoes, cut in 1/2-inch cubes",
+        "1 bag (12–16 oz) frozen mixed vegetables",
+        "2 cans (8 oz each) tomato sauce",
         "1 cup water + 1 tsp beef bouillon",
-        "2 tsp cumin, 1 tsp chili powder, 1 tsp oregano",
-        "1 tsp salt, 1/2 tsp pepper",
-        "2 cups white rice (makes rice for 5)",
-        "10 flour tortillas"
+        "2 tsp cumin, 1 tsp chili powder, 1.5 tsp salt",
+        "2 cups white rice",
+        "20 flour tortillas"
       ],
       "steps": [
         {
-          "title": "Thaw the meat the night before",
-          "detail": "Move the stew meat from the freezer to the fridge the night before. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
+          "title": "Thaw the meat Thursday night",
+          "detail": "Move the ground beef from the freezer to the fridge Thursday night. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
         },
         {
-          "title": "Season the beef",
-          "detail": "Put the stew meat in the crockpot. Sprinkle on the flour, cumin, chili powder, oregano, salt and pepper. Stir so every piece is coated."
+          "title": "Brown the beef",
+          "detail": "Brown the beef, onion and garlic in a skillet until no pink remains. Drain the fat."
         },
         {
-          "title": "Add the rest",
-          "detail": "Add the onion, bell pepper and garlic. Pour in the tomato sauce and the water mixed with bouillon. Stir."
+          "title": "Load the crockpot",
+          "detail": "Put the potatoes in the crockpot. Add the beef, tomato sauce, water with bouillon, cumin, chili powder and salt. Stir."
         },
         {
           "title": "Cook",
-          "detail": "Cover and cook 8 hours on LOW or 4–5 hours on HIGH, until a piece of beef breaks apart with a fork."
+          "detail": "Cover and cook 4–5 hours on LOW or 2.5–3 hours on HIGH, until the potatoes are soft."
         },
         {
-          "title": "Make the rice",
-          "detail": "30 minutes before dinner: bring 4 cups water and 1 tsp salt to a boil, add 2 cups rice, cover, turn to low and cook 18 minutes. Turn off and leave covered 5 minutes."
+          "title": "Add the vegetables",
+          "detail": "30 minutes before dinner, stir in the frozen vegetables, cover and keep cooking."
         },
         {
-          "title": "Serve",
-          "detail": "Warm the tortillas in a dry pan. Serve the guisada over rice or in tortillas."
+          "title": "Rice and serve",
+          "detail": "Make the rice: 4 cups water, 1 tsp salt, 2 cups rice, covered on low, 18 minutes. Serve the picadillo over rice or in warm tortillas."
         }
       ],
-      "doneness": "Beef is done when it pulls apart easily with a fork (it is safe well before that, at 145°F). Refrigerate leftovers within 2 hours.",
-      "tip": "Load it in the morning before school or work and dinner is ready when you get home."
+      "doneness": "Ground beef is done at 160°F with no pink. Refrigerate leftovers within 2 hours.",
+      "tip": "Potatoes and vegetables stretch 1.5 lb of beef to feed 5. Always brown ground beef before it goes in the crockpot."
     },
     "bakedziti": {
       "servings": "5",
@@ -220,18 +223,17 @@
       "cook": "About 25 min in the oven",
       "equipment": "Biggest pot, big skillet, 2 baking dishes (9x13), foil",
       "ingredients": [
-        "4 lb ground beef — double batch, save one pan for Sunday",
+        "2.5 lb ground beef — double batch, save one pan for Sunday",
         "2 lb ziti or penne pasta",
-        "4 jars (24 oz each) marinara sauce",
+        "3 jars (24 oz each) store-brand marinara + 1 can (15 oz) tomato sauce",
         "2 tsp garlic powder, 2 tsp Italian seasoning or oregano, 1 tsp salt",
-        "4 cups shredded mozzarella",
-        "1 cup grated parmesan",
-        "1 bag salad and 1 loaf French bread tonight (another of each for Sunday)"
+        "4 cups (1 lb) shredded mozzarella",
+        "1 bag frozen mixed vegetables tonight (another for Sunday)"
       ],
       "steps": [
         {
-          "title": "Thaw the meat the night before",
-          "detail": "Move the ground beef (both bags) from the freezer to the fridge the night before. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
+          "title": "Thaw the meat Friday night",
+          "detail": "Move the ground beef (both bags) from the freezer to the fridge Friday night. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
         },
         {
           "title": "Boil the pasta",
@@ -239,15 +241,15 @@
         },
         {
           "title": "Brown the beef",
-          "detail": "Brown the beef in 2 batches in a big skillet until no pink remains. Drain the fat. Return it all to the pasta pot with the marinara, garlic powder, seasoning and salt."
+          "detail": "Brown the beef in 2 batches in a big skillet until no pink remains. Drain the fat. Return it all to the pasta pot with the marinara, tomato sauce, garlic powder, seasoning and salt."
         },
         {
           "title": "Fill 2 pans",
-          "detail": "Stir the pasta into the sauce. Split it between the 2 dishes. Cover each top with half the mozzarella and parmesan."
+          "detail": "Stir the pasta into the sauce. Split it between the 2 dishes. Cover each top with half the mozzarella."
         },
         {
           "title": "Bake one pan",
-          "detail": "Bake one pan 20–25 minutes until the cheese melts and bubbles. Serve with salad and French bread."
+          "detail": "Bake one pan 20–25 minutes until the cheese melts and bubbles. Microwave or boil one bag of frozen vegetables to serve on the side."
         },
         {
           "title": "Save the second pan for Sunday",
@@ -255,7 +257,7 @@
         }
       ],
       "doneness": "Ground beef is done at 160°F with no pink. Refrigerate leftovers within 2 hours.",
-      "tip": "Double batch: the second pan is Sunday’s dinner, already made. Undercooking the pasta a little keeps it from getting mushy."
+      "tip": "Double batch: the second pan is Sunday’s dinner, already made. 2.5 lb of beef and 2 lb of pasta make 2 full pans. Undercooking the pasta a little keeps it from getting mushy."
     },
     "lo-bakedziti": {
       "servings": "5",
@@ -264,7 +266,7 @@
       "equipment": "Covered baking dish or pot, or microwave",
       "ingredients": [
         "The second (unbaked) pan of ziti saved Saturday",
-        "1 bag salad and 1 loaf French bread"
+        "1 bag frozen mixed vegetables"
       ],
       "steps": [
         {
@@ -277,88 +279,89 @@
         },
         {
           "title": "Serve",
-          "detail": "Serve with the salad and sliced French bread."
+          "detail": "Microwave or boil the frozen vegetables and serve them on the side."
         }
       ],
       "doneness": "Reheat leftovers until steaming hot all the way through (165°F). Reheat only once; throw away anything older than 4 days.",
       "tip": "The pan goes into the oven cold, so give it the full time."
     },
-    "barbacoa": {
+    "chili": {
       "servings": "5",
       "prep": "20 min",
-      "cook": "9–10 hr LOW or 6 hr HIGH",
-      "equipment": "6-quart or bigger crockpot",
+      "cook": "6–8 hr LOW or 4 hr HIGH",
+      "equipment": "Big skillet, 6-quart crockpot, pot for rice",
       "ingredients": [
-        "6 lb boneless beef chuck roast, cut in 8 big pieces — double batch, save half for Tuesday",
-        "2 onions, chopped",
-        "8 garlic cloves",
-        "5 chipotle peppers in adobo + 3 Tbsp of the sauce",
-        "Juice of 4 limes",
+        "3 lb ground beef — double batch, save half for Tuesday",
+        "2 onions, diced",
+        "4 garlic cloves, minced",
+        "4 cans (15 oz each) pinto or kidney beans, drained and rinsed",
+        "2 cans (15 oz each) diced tomatoes",
+        "1 can (15 oz) tomato sauce",
         "1 cup water + 1 tsp beef bouillon",
-        "2 Tbsp cumin, 2 Tbsp oregano, 1 Tbsp salt",
-        "3 bay leaves",
-        "20 corn tortillas for tonight",
-        "Chopped onion, cilantro, salsa and lime wedges"
+        "2 packets chili seasoning (or 3 Tbsp chili powder, 1 Tbsp cumin, 2 tsp salt)",
+        "2 cups white rice (tonight)",
+        "1 cup shredded cheese (tonight)"
       ],
       "steps": [
         {
-          "title": "Thaw the meat 2 days ahead",
-          "detail": "Saturday morning, move both bags of chuck roast (6 lb) from the freezer to the fridge on a plate. That much meat needs about 2 days. Never thaw it on the counter, and never put frozen meat in the crockpot."
+          "title": "Thaw the meat Sunday night",
+          "detail": "Move the ground beef (both bags) from the freezer to the fridge Sunday night. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
         },
         {
-          "title": "Season",
-          "detail": "Rub the beef pieces with cumin, oregano and salt. Put them in the crockpot."
+          "title": "Brown the beef",
+          "detail": "Brown the beef in 2 batches with the onions and garlic until no pink remains. Drain the fat."
         },
         {
-          "title": "Add the sauce",
-          "detail": "Add the onions, garlic, chipotles, adobo sauce, lime juice, water with bouillon and bay leaves."
+          "title": "Load the crockpot",
+          "detail": "Put the beef, beans, diced tomatoes, tomato sauce, water with bouillon and chili seasoning in the crockpot. Stir."
         },
         {
           "title": "Cook",
-          "detail": "Cover and cook 9–10 hours on LOW or 6 hours on HIGH, until it shreds easily."
+          "detail": "Cover and cook 6–8 hours on LOW or 4 hours on HIGH."
         },
         {
-          "title": "Shred",
-          "detail": "Take out the bay leaves. Shred the beef with 2 forks and stir it back into the juices."
+          "title": "Rice",
+          "detail": "Make the rice: 4 cups water, 1 tsp salt, 2 cups rice, covered on low, 18 minutes."
         },
         {
           "title": "Serve half tonight",
-          "detail": "Warm the tortillas. Fill with barbacoa and top with onion, cilantro, salsa and lime."
+          "detail": "Serve half of the chili over rice with a little cheese."
         },
         {
           "title": "Save half for Tuesday",
           "detail": "Within 2 hours of cooking, put the saved half in containers with lids, label them “Tuesday leftovers” and put them in the fridge. Eat within 3–4 days."
         }
       ],
-      "doneness": "Beef is done when it pulls apart easily with a fork (it is safe well before that, at 145°F). Refrigerate leftovers within 2 hours.",
-      "tip": "Double batch: save half with plenty of the juices so it stays moist when you reheat it."
+      "doneness": "Ground beef is done at 160°F with no pink. Refrigerate leftovers within 2 hours.",
+      "tip": "Double batch: beans stretch 3 lb of beef over 2 dinners. Tuesday it goes over baked potatoes."
     },
-    "lo-barbacoa": {
+    "lo-chili": {
       "servings": "5",
-      "prep": "5 min",
-      "cook": "About 15–30 min",
-      "equipment": "Covered baking dish or pot, or microwave",
+      "prep": "10 min",
+      "cook": "About 1 hr (potatoes bake 50–60 min; 15 min in the microwave)",
+      "equipment": "Rimmed sheet pan, pot with a lid (or microwave)",
       "ingredients": [
-        "Saved half of Monday’s barbacoa with its juices",
-        "20 corn tortillas",
-        "Chopped onion, cilantro, salsa and lime wedges"
+        "Saved half of Monday’s chili",
+        "10 russet potatoes (about 5 lb)",
+        "1 Tbsp oil and 1 tsp salt",
+        "1 cup shredded cheese and sour cream"
       ],
       "steps": [
         {
-          "title": "Reheat",
-          "detail": "Put the barbacoa and its juices in a pot. Cover and heat on medium-low 10–15 minutes, stirring often, until steaming."
+          "title": "Bake the potatoes",
+          "detail": "Heat the oven to 425°F. Scrub the potatoes, poke each one 4 times with a fork, rub with oil and salt and bake right on a sheet pan 50–60 minutes until soft. (Faster: microwave 5 at a time for 10–12 minutes, turning once.)"
         },
         {
-          "title": "Warm tortillas",
-          "detail": "Warm the tortillas in a dry pan."
+          "title": "Reheat the chili",
+          "detail": "Put the chili in a pot. Cover and heat on medium-low 10–15 minutes, stirring often, until steaming."
         },
         {
           "title": "Serve",
-          "detail": "Fill with barbacoa and top with onion, cilantro, salsa and lime."
+          "detail": "Split each potato open and spoon chili over it. Top with cheese and sour cream. 2 potatoes each."
         }
       ],
       "doneness": "Reheat leftovers until steaming hot all the way through (165°F). Reheat only once; throw away anything older than 4 days.",
-      "tip": "Add a splash of water if it looks dry."
+      "tip": "Add a splash of water if the chili got thick in the fridge."
     },
     "chickenfajitas": {
       "servings": "5",
@@ -373,12 +376,12 @@
         "2 tsp chili powder, 1 tsp cumin, 1 tsp paprika, 1 tsp garlic powder, 1.5 tsp salt",
         "2 limes",
         "20 flour tortillas",
-        "Shredded cheese, sour cream and salsa"
+        "Shredded cheese, sour cream and salsa (from the fridge)"
       ],
       "steps": [
         {
-          "title": "Thaw the meat the night before",
-          "detail": "Move the chicken breasts from the freezer to the fridge the night before. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
+          "title": "Thaw the meat Tuesday night",
+          "detail": "Move the chicken breasts from the freezer to the fridge Tuesday night. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
         },
         {
           "title": "Heat the oven",
@@ -410,19 +413,19 @@
       "cook": "About 25 min in the oven",
       "equipment": "Skillet, 9x13 baking dish",
       "ingredients": [
-        "2 lb ground beef",
+        "1.5 lb ground beef",
         "1 onion, diced",
         "1 packet taco seasoning + 2/3 cup water",
-        "1 can (16 oz) refried beans",
-        "8 burrito-size flour tortillas",
+        "2 cans (16 oz each) refried beans",
+        "10 burrito-size flour tortillas",
         "1 large can (19 oz) red enchilada sauce",
-        "3 cups shredded Mexican-blend cheese",
-        "Shredded lettuce and sour cream"
+        "2.5 cups shredded Mexican-blend cheese",
+        "Shredded cabbage and sour cream"
       ],
       "steps": [
         {
-          "title": "Thaw the meat the night before",
-          "detail": "Move the ground beef from the freezer to the fridge the night before. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
+          "title": "Thaw the meat Wednesday night",
+          "detail": "Move the ground beef from the freezer to the fridge Wednesday night. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
         },
         {
           "title": "Brown the beef",
@@ -442,57 +445,57 @@
         },
         {
           "title": "Serve",
-          "detail": "Top with lettuce and sour cream."
+          "detail": "Top with shredded cabbage and sour cream."
         }
       ],
       "doneness": "Ground beef is done at 160°F with no pink. Refrigerate leftovers within 2 hours.",
-      "tip": "Make it the night before, cover and refrigerate. Add 10 minutes to the bake time."
+      "tip": "Two cans of beans stretch 1.5 lb of beef to 10 burritos. You can make it the night before, cover and refrigerate; add 10 minutes to the bake time."
     },
-    "meatloaf": {
+    "shepherdspie": {
       "servings": "5",
-      "prep": "20 min",
-      "cook": "About 30 min",
-      "equipment": "2 rimmed sheet pans, foil, big bowl",
+      "prep": "25 min",
+      "cook": "About 25 min in the oven",
+      "equipment": "Big pot, skillet, 9x13 baking dish, potato masher",
       "ingredients": [
-        "2.5 lb ground beef",
-        "2 eggs",
-        "3/4 cup breadcrumbs",
-        "1/2 cup milk",
-        "1 Tbsp onion powder, 1 tsp garlic powder, 1.5 tsp salt, 1/2 tsp pepper",
+        "1.5 lb ground beef",
+        "3 lb potatoes, peeled and cut in chunks",
+        "1/2 cup milk + 3 Tbsp butter",
+        "1 onion, diced",
+        "2 Tbsp flour",
+        "1 cup water + 1 tsp beef bouillon",
         "1 Tbsp Worcestershire sauce (optional)",
-        "Glaze: 3/4 cup ketchup, 2 Tbsp brown sugar, 1 Tbsp mustard",
-        "2 lb potatoes, cut in 1-inch cubes",
-        "1 lb baby carrots",
-        "2 Tbsp oil"
+        "1 bag (12–16 oz) frozen mixed vegetables",
+        "1 cup shredded cheese",
+        "Salt and pepper"
       ],
       "steps": [
         {
-          "title": "Thaw the meat the night before",
-          "detail": "Move the ground beef from the freezer to the fridge the night before. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
+          "title": "Thaw the meat Thursday night",
+          "detail": "Move the ground beef from the freezer to the fridge Thursday night. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
         },
         {
-          "title": "Start the vegetables",
-          "detail": "Heat the oven to 425°F. Toss the potatoes and carrots with the oil and 1 tsp salt on a foil-lined pan. Roast 15 minutes."
+          "title": "Boil the potatoes",
+          "detail": "Cover the potatoes with salted water in a big pot. Boil 15–20 minutes until a fork slides in. Drain and mash with the milk, butter, 1 tsp salt and some pepper."
         },
         {
-          "title": "Mix the meat",
-          "detail": "In a big bowl, mix the beef, eggs, breadcrumbs, milk, spices and Worcestershire with your hands until just combined."
+          "title": "Brown the beef",
+          "detail": "Heat the oven to 400°F. Brown the beef and onion in a skillet until no pink remains. Drain the fat."
         },
         {
-          "title": "Shape",
-          "detail": "Shape 10 small loaves (about the size of your hand) on the second foil-lined pan. Stir the glaze together and spoon it over the tops."
+          "title": "Make the gravy",
+          "detail": "Sprinkle the flour over the beef and stir 1 minute. Stir in the water with bouillon and the Worcestershire. Simmer 3 minutes until thick. Stir in the frozen vegetables."
+        },
+        {
+          "title": "Layer",
+          "detail": "Spread the beef mixture in the 9x13 dish. Spread the mashed potatoes over the top and sprinkle on the cheese."
         },
         {
           "title": "Bake",
-          "detail": "Put the meatloaf pan in the oven with the vegetables. Bake both 25 minutes more."
-        },
-        {
-          "title": "Serve",
-          "detail": "Let the meatloaves rest 5 minutes. Serve 2 per person with the potatoes and carrots."
+          "detail": "Bake 20–25 minutes until bubbling at the edges. Let it sit 5 minutes, then serve."
         }
       ],
-      "doneness": "Meatloaf is done at 160°F in the middle, with no pink.",
-      "tip": "Wash your hands well after mixing raw beef, before you touch anything else."
+      "doneness": "Ground beef is done at 160°F with no pink. Refrigerate leftovers within 2 hours.",
+      "tip": "Mashed potatoes and vegetables stretch 1.5 lb of beef into a full dinner for 5."
     },
     "chilecolorado": {
       "servings": "5",
@@ -500,28 +503,29 @@
       "cook": "8–9 hr LOW or 5 hr HIGH",
       "equipment": "6-quart crockpot, pot for rice",
       "ingredients": [
-        "5 lb beef stew meat — double batch, save half for Sunday",
+        "3 lb beef stew meat — double batch, save half for Sunday",
+        "2 lb potatoes, cut in 1-inch cubes (con papas)",
         "1/4 cup flour",
         "2 tsp cumin, 2 tsp oregano, 2 tsp salt",
-        "2 onions, diced",
-        "6 garlic cloves, minced",
+        "1 onion, diced",
+        "4 garlic cloves, minced",
         "2 cans (28 oz each) red chile sauce (like Las Palmas)",
         "2 cups white rice (tonight)",
-        "2 cans refried beans, warmed (tonight)",
+        "1 can refried beans, warmed (tonight)",
         "10 flour tortillas (tonight)"
       ],
       "steps": [
         {
           "title": "Thaw the meat 2 nights ahead",
-          "detail": "Thursday night, move both bags of stew meat (5 lb) from the freezer to the fridge on a plate so they are fully thawed by Saturday morning. Never thaw meat on the counter, and never put frozen meat in the crockpot."
+          "detail": "Thursday night, move both bags of stew meat (3 lb) from the freezer to the fridge on a plate so they are fully thawed by Saturday morning. Never thaw meat on the counter, and never put frozen meat in the crockpot."
         },
         {
           "title": "Season",
-          "detail": "Put the beef in the crockpot and toss it with the flour, cumin, oregano and salt."
+          "detail": "Put the potatoes in the bottom of the crockpot. Add the beef and toss it with the flour, cumin, oregano and salt."
         },
         {
           "title": "Add the sauce",
-          "detail": "Add the onions and garlic. Pour both cans of red chile sauce over the top and stir."
+          "detail": "Add the onion and garlic. Pour both cans of red chile sauce over the top and stir."
         },
         {
           "title": "Cook",
@@ -541,7 +545,7 @@
         }
       ],
       "doneness": "Beef is done when it pulls apart easily with a fork (it is safe well before that, at 145°F). Refrigerate leftovers within 2 hours.",
-      "tip": "Double batch: it tastes even better the second day."
+      "tip": "Double batch: potatoes stretch 3 lb of beef over 2 dinners. It tastes even better the second day."
     },
     "lo-chilecolorado": {
       "servings": "5",
@@ -551,7 +555,7 @@
       "ingredients": [
         "Saved half of Saturday’s chile colorado",
         "2 cups white rice",
-        "2 cans refried beans",
+        "1 can refried beans",
         "10 flour tortillas"
       ],
       "steps": [
