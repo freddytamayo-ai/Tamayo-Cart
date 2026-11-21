@@ -36,7 +36,7 @@
   "inAlternatives": true,
   "note": "",
   "name": "Ground Beef",
-  "secs": 0.2,
+  "secs": 0.1,
   "text": "GROUND BEEF 80/20\n\n$4.49\n\nper lb"
  },
  "05_photo_glare_blur": {
@@ -66,7 +66,7 @@
   "inAlternatives": true,
   "note": "",
   "name": "Tide Pods",
-  "secs": 0.2,
+  "secs": 0.1,
   "text": "Tide Pods 42 ct\n\n$11.99\n\nReg $14.99 You Save $3.00"
  },
  "08_lowres": {

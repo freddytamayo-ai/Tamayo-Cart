@@ -1,6 +1,6 @@
-/* Tamayo Cart — step-by-step recipes for every dinner.
+/* Tamayo Cart — step-by-step recipes for every dinner (2-week beef-forward plan, Nov 21, 2026).
  * Plain cooking instructions only. No prices, budgets, or account data.
- * Shape: { version, byMeal: { mealId: recipe }, sundayByWeek: { '1'| '2': recipe } }
+ * Shape: { version, byMeal: { mealId: recipe }, sundayByWeek: {} }  (every night is a catalog meal now)
  * recipe: { servings, prep, cook, equipment, ingredients[], steps[{title,detail}], doneness, tip }
  */
 (function (root, factory) {
@@ -9,798 +9,573 @@
 })(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
   return {
-  "version": 2,
+  "version": 3,
   "byMeal": {
-    "salsabeef": {
-      "servings": "5",
-      "prep": "10 min",
-      "cook": "About 25 min",
-      "equipment": "Large pot or deep skillet",
-      "ingredients": [
-        "1 lb ground beef",
-        "1 jar salsa (16 oz)",
-        "1 tsp chili powder",
-        "1 tsp garlic powder",
-        "1 tsp onion powder",
-        "Tortillas or rice, beans, cheese, lettuce"
-      ],
-      "steps": [
-        {
-          "title": "Brown the beef",
-          "detail": "Put ground beef in a large pot over medium heat. Break it up with a spoon and cook until no pink remains. Drain extra fat."
-        },
-        {
-          "title": "Simmer in salsa",
-          "detail": "Stir in the salsa, chili powder, garlic powder, and onion powder. Simmer 10 minutes, stirring once or twice. Add a splash of water if it looks dry."
-        },
-        {
-          "title": "Serve",
-          "detail": "Spoon into tortillas or over rice. Add beans, cheese, and lettuce."
-        }
-      ],
-      "doneness": "Ground beef is done when no pink remains (160°F). Fridge leftovers within 2 hours.",
-      "tip": "One pot and about 25 minutes — start it when you get home and dinner is ready without a long wait."
-    },
-    "tingabeef": {
-      "servings": "5",
-      "prep": "10 min",
-      "cook": "About 30 min",
-      "equipment": "Large pot or deep skillet",
-      "ingredients": [
-        "1 lb ground beef",
-        "1 onion, diced",
-        "4 garlic cloves (or 1 Tbsp jarred garlic)",
-        "1 tsp cumin",
-        "1 tsp oregano",
-        "1/2 tsp salt",
-        "1/4 tsp black pepper",
-        "1 can fire-roasted diced tomatoes",
-        "2 chipotle peppers in adobo + 1 Tbsp of the sauce",
-        "Tostadas, shredded lettuce, crema or sour cream, avocado"
-      ],
-      "steps": [
-        {
-          "title": "Brown the beef",
-          "detail": "Cook ground beef with the diced onion and garlic over medium heat until the beef has no pink left. Drain extra fat."
-        },
-        {
-          "title": "Simmer the sauce",
-          "detail": "Stir in cumin, oregano, salt, pepper, the can of tomatoes (with juice), the 2 chipotle peppers (chopped), and 1 Tbsp of the adobo sauce. Simmer 15 minutes, stirring a few times."
-        },
-        {
-          "title": "Taste",
-          "detail": "Taste and add a pinch more salt if needed."
-        },
-        {
-          "title": "Serve",
-          "detail": "Warm tostadas in a dry pan or oven for 1–2 minutes. Spoon tinga on each tostada. Top with lettuce, crema, and sliced avocado."
-        }
-      ],
-      "doneness": "Ground beef is done when no pink remains (160°F). Do not leave cooked beef sitting out more than 2 hours.",
-      "tip": "Chipotles are spicy — use 1 pepper the first time if the family likes milder food."
-    },
-    "carnitas": {
+    "beeftacos": {
       "servings": "5",
       "prep": "15 min",
-      "cook": "About 4–5 hr on HIGH (about 4.5–5.5 hr total)",
-      "equipment": "Crockpot, forks for shredding, optional broiler",
+      "cook": "About 20 min in the oven",
+      "equipment": "Big skillet, 2 rimmed sheet pans",
       "ingredients": [
-        "2 lb pork butt or shoulder, cut in chunks",
-        "1 onion, sliced",
-        "4 garlic cloves, smashed",
-        "2 cinnamon sticks",
-        "1 tsp oregano",
-        "1 tsp cumin",
-        "1 tsp salt",
-        "1/2 tsp black pepper",
-        "1/2 tsp chipotle powder (or chili powder)",
-        "Juice of 2 oranges (or 1/2 cup orange juice)",
-        "Corn tortillas, diced onion, cilantro, lime wedges"
+        "1.5 lb ground beef (from the fridge)",
+        "1 can (16 oz) refried beans",
+        "1 packet taco seasoning + 2/3 cup water",
+        "20 corn tortillas",
+        "3 Tbsp oil",
+        "2 cups shredded Mexican-blend cheese",
+        "Shredded cabbage and salsa"
       ],
       "steps": [
         {
-          "title": "Load the crockpot",
-          "detail": "Add pork chunks, onion, garlic, cinnamon sticks, oregano, cumin, salt, pepper, chipotle powder, and orange juice. Stir to coat."
+          "title": "Brown the beef",
+          "detail": "Heat the oven to 425°F. Brown the beef in a big skillet until no pink remains. Drain the fat. Stir in the taco seasoning and water and simmer 5 minutes. Stir in the refried beans until hot."
         },
         {
-          "title": "Cook",
-          "detail": "Cover and cook on HIGH 4–5 hours (or LOW 7–8 hours) until pork shreds easily."
+          "title": "Soften the tortillas",
+          "detail": "Wrap 10 tortillas in a damp paper towel and microwave 45 seconds so they bend without cracking. Do the other 10 the same way."
         },
         {
-          "title": "Shred",
-          "detail": "Remove cinnamon sticks. Shred pork with two forks in the juices. Taste and salt if needed."
+          "title": "Fill",
+          "detail": "Brush the sheet pans with the oil. Put 2 spoonfuls of filling and a little cheese on half of each tortilla, fold it over and lay it on the pan."
         },
         {
-          "title": "Optional crisp",
-          "detail": "For crispy edges: spread some shredded pork on a sheet pan and broil 3–5 minutes, watching closely so it does not burn."
+          "title": "Bake",
+          "detail": "Bake 10 minutes, flip each taco, and bake 5–8 minutes more until crisp."
         },
         {
           "title": "Serve",
-          "detail": "Warm corn tortillas. Fill with carnitas, diced onion, cilantro, and a squeeze of lime."
+          "detail": "Serve 4 tacos each with cabbage and salsa."
         }
       ],
-      "doneness": "Pork is done when it shreds easily. Keep leftovers in the fridge within 2 hours.",
-      "tip": "Ask the meat counter to cut the pork into chunks — less knife work at home."
+      "doneness": "Ground beef is done at 160°F with no pink. Refrigerate leftovers within 2 hours.",
+      "tip": "The beans stretch the beef so 1.5 lb feeds all 5."
     },
-    "pozole": {
+    "meatloaf": {
       "servings": "5",
-      "prep": "10 min",
-      "cook": "About 8.5 hr on LOW or 4–4.5 hr on HIGH",
-      "equipment": "Crockpot",
+      "prep": "20 min",
+      "cook": "About 30 min",
+      "equipment": "2 rimmed sheet pans, foil, big bowl",
       "ingredients": [
-        "1.5 lb boneless chicken thighs",
-        "1 white onion, chopped",
-        "1 poblano pepper, seeded and chopped",
-        "1 tsp chili powder",
-        "1 jar (16 oz) salsa verde",
-        "2 cups water",
-        "2 cans hominy, drained and rinsed",
-        "Cilantro and 1 lime",
-        "Shredded cabbage and tostadas on the side"
+        "2.5 lb ground beef",
+        "2 eggs",
+        "3/4 cup quick or old-fashioned oats (from the oatmeal)",
+        "1/2 cup milk",
+        "1 Tbsp onion powder, 1 tsp garlic powder, 1.5 tsp salt, 1/2 tsp pepper",
+        "1 Tbsp Worcestershire sauce (optional)",
+        "Glaze: 3/4 cup ketchup, 2 Tbsp sugar, 1 Tbsp mustard",
+        "2 lb potatoes, cut in 1-inch cubes",
+        "1 lb carrots, peeled and cut in sticks",
+        "2 Tbsp oil"
       ],
       "steps": [
         {
-          "title": "Load in the morning",
-          "detail": "Add chicken thighs, onion, poblano, chili powder, salsa verde, and water to the crockpot. Stir."
+          "title": "Thaw the meat Monday night",
+          "detail": "Move the ground beef from the freezer to the fridge Monday night. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
         },
         {
-          "title": "Cook",
-          "detail": "Cook on LOW about 8–8.5 hours or HIGH 4–4.5 hours until chicken shreds easily."
+          "title": "Start the vegetables",
+          "detail": "Heat the oven to 425°F. Toss the potatoes and carrots with the oil and 1 tsp salt on a foil-lined pan. Roast 15 minutes."
         },
         {
-          "title": "Finish the soup",
-          "detail": "Shred chicken in the pot. Stir in drained hominy and warm 15–20 more minutes. Add chopped cilantro and lime juice."
+          "title": "Mix the meat",
+          "detail": "In a big bowl, mix the beef, eggs, oats, milk, spices and Worcestershire with your hands until just combined."
+        },
+        {
+          "title": "Shape",
+          "detail": "Shape 10 small loaves (about the size of your hand) on the second foil-lined pan. Stir the glaze together and spoon it over the tops."
+        },
+        {
+          "title": "Bake",
+          "detail": "Put the meatloaf pan in the oven with the vegetables. Bake both 25 minutes more."
         },
         {
           "title": "Serve",
-          "detail": "Ladle into bowls. Top with shredded cabbage. Serve tostadas on the side for scooping."
+          "detail": "Let the meatloaves rest 5 minutes. Serve 2 per person with the potatoes and carrots."
         }
       ],
-      "doneness": "Chicken thighs should reach 165°F and shred easily. Soup must be piping hot.",
-      "tip": "A parent can load this on LOW in the morning so it is ready after school."
+      "doneness": "Meatloaf is done at 160°F in the middle, with no pink.",
+      "tip": "Wash your hands well after mixing raw beef, before you touch anything else."
     },
-    "tacobeef": {
+    "potroast": {
       "servings": "5",
-      "prep": "10 min",
-      "cook": "About 6–8 hr on LOW",
-      "equipment": "Crockpot",
+      "prep": "20 min",
+      "cook": "8–9 hr LOW or 5–6 hr HIGH",
+      "equipment": "7-quart or bigger crockpot (or a 6-quart plus a 9x13 pan and foil)",
       "ingredients": [
-        "1.5 lb boneless beef chuck or shoulder roast, cut in chunks",
-        "1 Tbsp chili powder",
-        "2 tsp cumin",
-        "1 tsp oregano",
-        "1/4 tsp red pepper flakes",
-        "1 tsp salt",
+        "4 lb boneless beef chuck roast (2 roasts, about 2 lb each, from the fridge) — double batch, save half for Thursday",
+        "5 lb potatoes, cut in big chunks",
+        "2 lb carrots, peeled and cut in big pieces",
+        "2 onions, cut in wedges",
+        "2 packets dry onion soup mix",
+        "2 cups water + 2 tsp beef bouillon",
+        "2 Tbsp Worcestershire sauce (optional)",
+        "1 tsp pepper",
+        "3 Tbsp cornstarch + 3 Tbsp cold water (for gravy)"
+      ],
+      "steps": [
+        {
+          "title": "Vegetables first",
+          "detail": "Put the potatoes, carrots and onions in the bottom of the crockpot. If your crockpot is only 6 quarts, use half the vegetables now and see step 4."
+        },
+        {
+          "title": "Add the roasts",
+          "detail": "Set both roasts on top. Sprinkle the onion soup mix and pepper over them. Pour the water with bouillon and the Worcestershire around them."
+        },
+        {
+          "title": "Cook",
+          "detail": "Cover and cook 8–9 hours on LOW or 5–6 hours on HIGH, until the beef falls apart."
+        },
+        {
+          "title": "Extra vegetables (6-quart crockpot only)",
+          "detail": "An hour before dinner, put the rest of the potatoes and carrots in a 9x13 pan with 1 cup of liquid from the crockpot. Cover with foil and bake at 400°F for 50 minutes."
+        },
+        {
+          "title": "Make gravy",
+          "detail": "Move the meat and vegetables to a platter. Stir the cornstarch and cold water together, stir it into the liquid in the crockpot, turn to HIGH and cook 10 minutes until thick."
+        },
+        {
+          "title": "Serve half tonight",
+          "detail": "Pull the beef into chunks and serve half of the meat, vegetables and gravy."
+        },
+        {
+          "title": "Save half for Thursday",
+          "detail": "Within 2 hours of cooking, put the saved half in containers with lids, label them “Thursday leftovers” and put them in the fridge. Eat within 3–4 days."
+        }
+      ],
+      "doneness": "Beef is done when it pulls apart easily with a fork (it is safe well before that, at 145°F). Refrigerate leftovers within 2 hours.",
+      "tip": "Double batch: this one dinner feeds 5 tonight and 5 again on Thursday. Lots of potatoes and carrots stretch 4 lb of beef over 2 nights. Do not lift the lid while it cooks."
+    },
+    "lo-potroast": {
+      "servings": "5",
+      "prep": "5 min",
+      "cook": "About 15–30 min",
+      "equipment": "Covered baking dish or pot, or microwave",
+      "ingredients": [
+        "Saved half of Wednesday’s pot roast, vegetables and gravy",
+        "1/2 cup water"
+      ],
+      "steps": [
+        {
+          "title": "Reheat in the oven",
+          "detail": "Heat the oven to 350°F. Put the meat, vegetables and gravy in a baking dish, add the water, cover with foil and heat 25–30 minutes, stirring once."
+        },
+        {
+          "title": "Or the microwave",
+          "detail": "Heat each plate covered for 2–3 minutes, stir, then 1–2 minutes more until steaming."
+        },
+        {
+          "title": "Serve",
+          "detail": "Serve hot with the gravy."
+        }
+      ],
+      "doneness": "Reheat leftovers until steaming hot all the way through (165°F). Reheat only once; throw away anything older than 4 days.",
+      "tip": "Pot roast also makes great sandwiches."
+    },
+    "picadillo": {
+      "servings": "5",
+      "prep": "15 min",
+      "cook": "4–5 hr LOW or 2.5–3 hr HIGH",
+      "equipment": "Skillet, 6-quart crockpot, pot for rice",
+      "ingredients": [
+        "1.5 lb ground beef",
+        "1 onion, diced",
         "3 garlic cloves, minced",
-        "Flour or corn tortillas and toppings (cheese, lettuce, salsa, sour cream)"
+        "2 lb potatoes, cut in 1/2-inch cubes",
+        "1 bag (12–16 oz) frozen mixed vegetables",
+        "2 cans (8 oz each) tomato sauce",
+        "1 cup water + 1 tsp beef bouillon",
+        "2 tsp cumin, 1 tsp chili powder, 1.5 tsp salt",
+        "2 cups white rice",
+        "20 flour tortillas"
       ],
       "steps": [
         {
-          "title": "Load the crockpot",
-          "detail": "Add beef chunks, chili powder, cumin, oregano, red pepper flakes, salt, and garlic. Toss to coat. No broth needed — the beef makes its own juices."
+          "title": "Thaw the meat Thursday night",
+          "detail": "Move the ground beef from the freezer to the fridge Thursday night. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
         },
-        {
-          "title": "Cook low and slow",
-          "detail": "Cook on LOW 6–8 hours until beef shreds easily. Start checking at 6 hours."
-        },
-        {
-          "title": "Shred",
-          "detail": "Shred beef in the juices. Taste and add salt if needed."
-        },
-        {
-          "title": "Serve",
-          "detail": "Serve with warm tortillas and toppings."
-        }
-      ],
-      "doneness": "Beef chuck is done when it shreds with little effort. Fridge any leftover meat within 2 hours.",
-      "tip": "Ask the butcher to cut the roast into chunks — less knife work at home."
-    },
-    "bbqbeef": {
-      "servings": "5",
-      "prep": "10 min",
-      "cook": "About 25 min",
-      "equipment": "Large skillet",
-      "ingredients": [
-        "1.25 lb ground beef",
-        "1 tsp smoked paprika",
-        "1 tsp garlic powder",
-        "1 tsp salt",
-        "1/2 tsp black pepper",
-        "1 large bottle BBQ sauce",
-        "Hamburger buns (1 pack of 8; use 5)",
-        "1 bag coleslaw mix (dress per bag or use a bottled slaw dressing)"
-      ],
-      "steps": [
         {
           "title": "Brown the beef",
-          "detail": "Cook ground beef in a skillet over medium heat, breaking it up, until no pink remains. Drain extra fat."
+          "detail": "Brown the beef, onion and garlic in a skillet until no pink remains. Drain the fat."
         },
-        {
-          "title": "Season and sauce",
-          "detail": "Stir in paprika, garlic powder, salt, and pepper. Add enough BBQ sauce to coat (save some for serving). Simmer 8–10 minutes, stirring once or twice."
-        },
-        {
-          "title": "Slaw",
-          "detail": "Toss coleslaw mix with dressing while the beef simmers."
-        },
-        {
-          "title": "Serve",
-          "detail": "Pile beef on buns and add a scoop of slaw (or serve slaw on the side)."
-        }
-      ],
-      "doneness": "Ground beef is done when no pink remains (160°F). Sauce should look thick enough to stay on the bun.",
-      "tip": "This is one of the easiest nights — almost no chopping."
-    },
-    "whitechili": {
-      "servings": "5",
-      "prep": "10 min",
-      "cook": "4 hr on HIGH or 8 hr on LOW",
-      "equipment": "Crockpot, forks for shredding",
-      "ingredients": [
-        "1 onion, diced",
-        "2 garlic cloves, minced",
-        "1.5 lb chicken breast",
-        "2 cans cannellini beans, drained and rinsed",
-        "1 can pinto beans, drained and rinsed",
-        "1 tsp cumin",
-        "1 tsp oregano",
-        "1/2 tsp black pepper",
-        "1 jar (16 oz) salsa verde",
-        "2 cups chicken broth",
-        "Shredded cheese and tortilla chips for topping"
-      ],
-      "steps": [
         {
           "title": "Load the crockpot",
-          "detail": "Add onion, garlic, chicken, both kinds of beans, cumin, oregano, pepper, salsa verde, and chicken broth. Stir gently."
+          "detail": "Put the potatoes in the crockpot. Add the beef, tomato sauce, water with bouillon, cumin, chili powder and salt. Stir."
         },
         {
           "title": "Cook",
-          "detail": "Cover and cook on HIGH 4 hours or LOW 8 hours."
+          "detail": "Cover and cook 4–5 hours on LOW or 2.5–3 hours on HIGH, until the potatoes are soft."
         },
         {
-          "title": "Shred chicken",
-          "detail": "Remove chicken, shred with two forks, return to the pot, and stir. If it is too thick, splash in a little more broth or water."
+          "title": "Add the vegetables",
+          "detail": "30 minutes before dinner, stir in the frozen vegetables, cover and keep cooking."
         },
         {
-          "title": "Serve",
-          "detail": "Ladle into bowls. Top with shredded cheese and crushed tortilla chips."
+          "title": "Rice and serve",
+          "detail": "Make the rice: 4 cups water, 1 tsp salt, 2 cups rice, covered on low, 18 minutes. Serve the picadillo over rice or in warm tortillas."
         }
       ],
-      "doneness": "Chicken must reach 165°F before shredding. Chili should be steaming hot.",
-      "tip": "Rinse the canned beans — it cuts the salty canned taste."
+      "doneness": "Ground beef is done at 160°F with no pink. Refrigerate leftovers within 2 hours.",
+      "tip": "Potatoes and vegetables stretch 1.5 lb of beef to feed 5. Always brown ground beef before it goes in the crockpot."
     },
-    "beeftacosoup": {
+    "bakedziti": {
       "servings": "5",
-      "prep": "10 min",
-      "cook": "3–4 hr on HIGH or 6–8 hr on LOW",
-      "equipment": "Skillet (to brown beef), crockpot",
+      "prep": "30 min",
+      "cook": "About 25 min in the oven",
+      "equipment": "Biggest pot, big skillet, 2 baking dishes (9x13), foil",
       "ingredients": [
-        "1 lb ground beef",
-        "1 onion, diced",
-        "2 garlic cloves, minced",
-        "1 tsp chili powder",
-        "1 tsp cumin",
-        "1/2 tsp smoked paprika",
-        "1 can fire-roasted tomatoes",
-        "1 can diced tomatoes with green chiles",
-        "1 can black beans, drained and rinsed",
-        "1 cup frozen corn",
-        "4 cups beef broth (one 32 oz carton)",
-        "Tortilla chips, avocado, sour cream, lime"
+        "2.5 lb ground beef — double batch, save one pan for Sunday",
+        "2 lb ziti or penne pasta",
+        "3 jars (24 oz each) store-brand marinara + 1 can (15 oz) tomato sauce",
+        "2 tsp garlic powder, 2 tsp Italian seasoning or oregano, 1 tsp salt",
+        "4 cups (1 lb) shredded mozzarella",
+        "1 bag frozen mixed vegetables tonight (another for Sunday)"
       ],
       "steps": [
+        {
+          "title": "Thaw the meat Friday night",
+          "detail": "Move the ground beef (both bags) from the freezer to the fridge Friday night. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
+        },
+        {
+          "title": "Boil the pasta",
+          "detail": "Heat the oven to 375°F. Boil the pasta in your biggest pot of salted water (or in 2 batches) 2 minutes less than the box says. Drain."
+        },
         {
           "title": "Brown the beef",
-          "detail": "Brown ground beef with onion and garlic in a skillet until no pink remains. Drain extra fat."
+          "detail": "Brown the beef in 2 batches in a big skillet until no pink remains. Drain the fat. Return it all to the pasta pot with the marinara, tomato sauce, garlic powder, seasoning and salt."
         },
         {
-          "title": "Load the crockpot",
-          "detail": "Add the beef mix, spices, both tomato cans, black beans, corn, and beef broth to the crockpot. Stir."
+          "title": "Fill 2 pans",
+          "detail": "Stir the pasta into the sauce. Split it between the 2 dishes. Cover each top with half the mozzarella."
         },
         {
-          "title": "Cook",
-          "detail": "Cover and cook on HIGH 3–4 hours or LOW 6–8 hours."
+          "title": "Bake one pan",
+          "detail": "Bake one pan 20–25 minutes until the cheese melts and bubbles. Microwave or boil one bag of frozen vegetables to serve on the side."
         },
         {
-          "title": "Serve",
-          "detail": "Taste for salt. Ladle into bowls. Top with crushed tortilla chips, avocado, sour cream, and a squeeze of lime."
+          "title": "Save the second pan for Sunday",
+          "detail": "Cover the second (unbaked) pan tightly with foil, label it “Sunday” and put it in the fridge right away. Eat within 3 days."
         }
       ],
-      "doneness": "Ground beef must be fully browned (no pink, 160°F) before it goes in the crockpot. Soup should be steaming hot.",
-      "tip": "Keep toppings on the side so leftovers stay crisp-friendly."
+      "doneness": "Ground beef is done at 160°F with no pink. Refrigerate leftovers within 2 hours.",
+      "tip": "Double batch: the second pan is Sunday’s dinner, already made. 2.5 lb of beef and 2 lb of pasta make 2 full pans. Undercooking the pasta a little keeps it from getting mushy."
     },
-    "teriyaki": {
+    "lo-bakedziti": {
       "servings": "5",
-      "prep": "10 min",
-      "cook": "4 hr on HIGH or 8 hr on LOW",
-      "equipment": "Crockpot, small bowl for cornstarch slurry, pot for rice",
+      "prep": "5 min",
+      "cook": "About 15–30 min",
+      "equipment": "Covered baking dish or pot, or microwave",
       "ingredients": [
-        "20 oz can pineapple chunks in juice",
-        "1/4 cup soy sauce",
-        "2 Tbsp brown sugar",
-        "2 garlic cloves, minced",
-        "1 tsp grated ginger (or 1/2 tsp ground)",
-        "5–6 skinless chicken thighs",
-        "1.5 Tbsp cornstarch mixed with 2 Tbsp cold water",
-        "Green onions and cooked rice"
+        "The second (unbaked) pan of ziti saved Saturday",
+        "1 bag frozen mixed vegetables"
       ],
       "steps": [
         {
-          "title": "Load",
-          "detail": "Add pineapple with its juice, soy sauce, brown sugar, garlic, ginger, and chicken thighs to the crockpot. Stir to coat."
+          "title": "Bake from the fridge",
+          "detail": "Heat the oven to 375°F. Keep the foil on and bake 30 minutes."
         },
         {
-          "title": "Cook",
-          "detail": "Cook on HIGH 4 hours or LOW 8 hours until chicken is tender."
-        },
-        {
-          "title": "Thicken",
-          "detail": "Stir in the cornstarch slurry. Cook on HIGH 10–15 more minutes until the sauce thickens a bit."
+          "title": "Brown the top",
+          "detail": "Take off the foil and bake 15 minutes more, until the cheese bubbles and the middle is hot."
         },
         {
           "title": "Serve",
-          "detail": "Serve over rice. Top with sliced green onions."
+          "detail": "Microwave or boil the frozen vegetables and serve them on the side."
         }
       ],
-      "doneness": "Chicken thighs to 165°F. Sauce should look glossy, not watery.",
-      "tip": "Start the rice when you add the cornstarch so everything finishes together."
+      "doneness": "Reheat leftovers until steaming hot all the way through (165°F). Reheat only once; throw away anything older than 4 days.",
+      "tip": "The pan goes into the oven cold, so give it the full time."
     },
     "chili": {
       "servings": "5",
-      "prep": "10 min",
-      "cook": "3–4 hr on HIGH or 6–8 hr on LOW",
-      "equipment": "Skillet (to brown beef), crockpot",
+      "prep": "20 min",
+      "cook": "6–8 hr LOW or 4 hr HIGH",
+      "equipment": "Big skillet, 6-quart crockpot, pot for rice",
       "ingredients": [
-        "1 lb ground beef",
-        "1 onion, diced",
-        "1 green bell pepper, diced",
-        "2 garlic cloves, minced",
-        "1 Tbsp tomato paste",
-        "2 cans diced tomatoes (one with green chiles)",
-        "1 can kidney beans, drained",
-        "1 can pinto beans, drained",
-        "1 cup beef broth",
-        "2 Tbsp chili powder",
-        "1 tsp cumin",
-        "1 tsp garlic powder",
-        "1 tsp onion powder",
-        "1 tsp brown sugar",
-        "Salt and pepper"
+        "3 lb ground beef — double batch, save half for Tuesday",
+        "2 onions, diced",
+        "4 garlic cloves, minced",
+        "4 cans (15 oz each) pinto or kidney beans, drained and rinsed",
+        "2 cans (15 oz each) diced tomatoes",
+        "1 can (15 oz) tomato sauce",
+        "1 cup water + 1 tsp beef bouillon",
+        "2 packets chili seasoning (or 3 Tbsp chili powder, 1 Tbsp cumin, 2 tsp salt)",
+        "2 cups white rice (tonight)",
+        "1 cup shredded cheese (tonight)"
       ],
       "steps": [
         {
+          "title": "Thaw the meat Sunday night",
+          "detail": "Move the ground beef (both bags) from the freezer to the fridge Sunday night. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
+        },
+        {
           "title": "Brown the beef",
-          "detail": "In a skillet, brown ground beef with onion, bell pepper, and garlic. Drain extra fat. Stir in tomato paste for 1 minute."
+          "detail": "Brown the beef in 2 batches with the onions and garlic until no pink remains. Drain the fat."
         },
         {
           "title": "Load the crockpot",
-          "detail": "Dump the beef mix into the crockpot. Add tomatoes, beans, broth, and all spices. Stir."
+          "detail": "Put the beef, beans, diced tomatoes, tomato sauce, water with bouillon and chili seasoning in the crockpot. Stir."
         },
         {
           "title": "Cook",
-          "detail": "Cook on HIGH 3–4 hours or LOW 6–8 hours."
+          "detail": "Cover and cook 6–8 hours on LOW or 4 hours on HIGH."
         },
         {
-          "title": "Serve",
-          "detail": "Taste for salt. Serve with cheese, chips, or rice if you like."
+          "title": "Rice",
+          "detail": "Make the rice: 4 cups water, 1 tsp salt, 2 cups rice, covered on low, 18 minutes."
+        },
+        {
+          "title": "Serve half tonight",
+          "detail": "Serve half of the chili over rice with a little cheese."
+        },
+        {
+          "title": "Save half for Tuesday",
+          "detail": "Within 2 hours of cooking, put the saved half in containers with lids, label them “Tuesday leftovers” and put them in the fridge. Eat within 3–4 days."
         }
       ],
-      "doneness": "Ground beef must be fully browned (no pink) before it goes in. Chili should be steaming hot when served.",
-      "tip": "Brown the beef the night before and fridge it to make morning load faster."
+      "doneness": "Ground beef is done at 160°F with no pink. Refrigerate leftovers within 2 hours.",
+      "tip": "Double batch: beans stretch 3 lb of beef over 2 dinners. Tuesday it goes over baked potatoes."
     },
-    "fajitas": {
+    "lo-chili": {
       "servings": "5",
-      "prep": "15 min",
-      "cook": "About 25–30 min (about 55 min total with prep)",
-      "equipment": "Sheet pan, oven",
+      "prep": "10 min",
+      "cook": "About 1 hr (potatoes bake 50–60 min; 15 min in the microwave)",
+      "equipment": "Rimmed sheet pan, pot with a lid (or microwave)",
       "ingredients": [
-        "1.5 lb chicken breast, cut in strips (or pre-cut stir-fry strips)",
-        "3–4 bell peppers, sliced",
-        "2 onions, sliced (or pre-sliced fajita veggies)",
-        "1 Tbsp chili powder",
-        "1 tsp paprika",
-        "1 tsp onion powder",
-        "1 tsp garlic powder",
-        "1 tsp cumin",
-        "1 tsp salt",
-        "1/2 tsp sugar",
-        "2 Tbsp oil",
-        "1 lime",
-        "Flour tortillas and sour cream"
+        "Saved half of Monday’s chili",
+        "10 russet potatoes (about 5 lb)",
+        "1 Tbsp oil and 1 tsp salt",
+        "1 cup shredded cheese and sour cream"
       ],
       "steps": [
         {
+          "title": "Bake the potatoes",
+          "detail": "Heat the oven to 425°F. Scrub the potatoes, poke each one 4 times with a fork, rub with oil and salt and bake right on a sheet pan 50–60 minutes until soft. (Faster: microwave 5 at a time for 10–12 minutes, turning once.)"
+        },
+        {
+          "title": "Reheat the chili",
+          "detail": "Put the chili in a pot. Cover and heat on medium-low 10–15 minutes, stirring often, until steaming."
+        },
+        {
+          "title": "Serve",
+          "detail": "Split each potato open and spoon chili over it. Top with cheese and sour cream. 2 potatoes each."
+        }
+      ],
+      "doneness": "Reheat leftovers until steaming hot all the way through (165°F). Reheat only once; throw away anything older than 4 days.",
+      "tip": "Add a splash of water if the chili got thick in the fridge."
+    },
+    "chickenfajitas": {
+      "servings": "5",
+      "prep": "15 min",
+      "cook": "About 25 min",
+      "equipment": "2 rimmed sheet pans, foil",
+      "ingredients": [
+        "2.5 lb boneless skinless chicken breasts, cut in thin strips",
+        "3 bell peppers, sliced",
+        "2 onions, sliced",
+        "3 Tbsp oil",
+        "2 tsp chili powder, 1 tsp cumin, 1 tsp paprika, 1 tsp garlic powder, 1.5 tsp salt",
+        "2 limes",
+        "20 flour tortillas",
+        "Shredded cheese, sour cream and salsa (from the fridge)"
+      ],
+      "steps": [
+        {
+          "title": "Thaw the meat Tuesday night",
+          "detail": "Move the chicken breasts from the freezer to the fridge Tuesday night. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
+        },
+        {
           "title": "Heat the oven",
-          "detail": "Heat oven to 425°F. Line a big sheet pan with foil."
+          "detail": "Heat the oven to 425°F. Line 2 sheet pans with foil."
         },
         {
-          "title": "Season everything",
-          "detail": "On the pan, toss chicken strips, peppers, and onions with oil and all the spices (or one fajita packet). Spread in a single layer — use two pans if crowded."
+          "title": "Season",
+          "detail": "In a big bowl, toss the chicken, peppers and onions with the oil and all the spices."
         },
         {
-          "title": "Roast",
-          "detail": "Roast 20–25 minutes, stirring once, until chicken hits 165°F and peppers are soft with browned edges."
+          "title": "Bake",
+          "detail": "Spread everything in one layer across both pans. Bake 20–25 minutes, stirring once halfway."
         },
         {
           "title": "Finish",
-          "detail": "Squeeze lime over the pan. Warm tortillas. Serve with sour cream."
-        }
-      ],
-      "doneness": "Chicken strips must reach 165°F. No pink in the middle.",
-      "tip": "Pre-cut fajita veggies and chicken strips cut the prep almost in half."
-    },
-    "kielbasa": {
-      "servings": "5",
-      "prep": "10 min",
-      "cook": "About 45 min",
-      "equipment": "Sheet pan, oven",
-      "ingredients": [
-        "2 lb small red potatoes, halved",
-        "2 packs kielbasa, sliced into coins",
-        "1 onion, sliced",
-        "1 lb frozen green beans",
-        "2–3 Tbsp olive oil",
-        "Steak seasoning (or salt, pepper, garlic powder)"
-      ],
-      "steps": [
-        {
-          "title": "Heat oven",
-          "detail": "Heat oven to 400°F. Line a sheet pan with foil."
-        },
-        {
-          "title": "Season potatoes first",
-          "detail": "Toss potatoes and onion with oil and steak seasoning. Spread on the pan. Roast 20 minutes."
-        },
-        {
-          "title": "Add kielbasa and beans",
-          "detail": "Add kielbasa coins and frozen green beans. Toss everything. Roast 20–25 more minutes until potatoes are tender and kielbasa is browned."
+          "detail": "Squeeze the limes over the pans."
         },
         {
           "title": "Serve",
-          "detail": "Taste for salt. Serve straight from the pan."
+          "detail": "Warm the tortillas. Fill with chicken and vegetables and top with cheese, sour cream and salsa."
         }
       ],
-      "doneness": "Potatoes should pierce easily with a fork. Kielbasa is pre-cooked — heat until hot and browned.",
-      "tip": "Frozen green beans go on in the second half so they do not get mushy."
+      "doneness": "Chicken is done at 165°F, white all the way through.",
+      "tip": "Chicken cuts into strips more easily while it is still a little frozen."
     },
-    "honeymustard": {
+    "burritobake": {
       "servings": "5",
-      "prep": "15 min",
-      "cook": "About 45 min",
-      "equipment": "Sheet pan, oven, small bowl",
+      "prep": "20 min",
+      "cook": "About 25 min in the oven",
+      "equipment": "Skillet, 9x13 baking dish",
       "ingredients": [
-        "2 Tbsp mayo",
-        "2 Tbsp Dijon mustard",
-        "1 Tbsp yellow mustard",
-        "2 Tbsp honey",
-        "1 tsp cider vinegar",
-        "1 tsp garlic powder",
-        "1/2 tsp paprika",
-        "Salt and pepper",
-        "2 lb boneless chicken thighs",
-        "1.5 lb red potatoes, halved",
-        "1 red onion, wedges",
-        "About 12 oz green beans and 8 oz baby carrots",
-        "Oil"
+        "1.5 lb ground beef",
+        "1 onion, diced",
+        "1 packet taco seasoning + 2/3 cup water",
+        "2 cans (16 oz each) refried beans",
+        "10 burrito-size flour tortillas",
+        "1 large can (19 oz) red enchilada sauce",
+        "2.5 cups shredded Mexican-blend cheese",
+        "Shredded cabbage and sour cream"
       ],
       "steps": [
         {
-          "title": "Heat oven",
-          "detail": "Heat oven to 400°F. Line a sheet pan with foil and oil it lightly."
+          "title": "Thaw the meat Wednesday night",
+          "detail": "Move the ground beef from the freezer to the fridge Wednesday night. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
         },
-        {
-          "title": "Mix the sauce",
-          "detail": "Stir mayo, both mustards, honey, vinegar, garlic powder, paprika, salt, and pepper in a bowl."
-        },
-        {
-          "title": "Arrange and coat",
-          "detail": "Spread potatoes, onion, green beans, and carrots on the pan. Nestle chicken thighs among the veggies. Brush chicken with the honey mustard. Drizzle veggies with a little oil and salt."
-        },
-        {
-          "title": "Bake",
-          "detail": "Bake about 40–45 minutes until chicken hits 165°F and potatoes are tender."
-        }
-      ],
-      "doneness": "Chicken thighs to 165°F. Potatoes fork-tender.",
-      "tip": "If veggies brown too fast, tent the pan with foil for the last 10 minutes."
-    },
-    "drumsticks": {
-      "servings": "5",
-      "prep": "5–10 min",
-      "cook": "About 45 min",
-      "equipment": "Sheet pan, oven, pot for rice",
-      "ingredients": [
-        "10 chicken drumsticks (about 3.5 lb, 2 per person)",
-        "1 tsp smoked paprika",
-        "1 tsp garlic powder",
-        "1 tsp onion powder",
-        "1 tsp oregano",
-        "1 tsp salt",
-        "1/2 tsp black pepper",
-        "1–2 Tbsp oil",
-        "White rice (about 2 cups dry for 5 people)",
-        "1 bag frozen green beans"
-      ],
-      "steps": [
-        {
-          "title": "Heat the oven",
-          "detail": "Heat oven to 425°F. Line a sheet pan with foil for easier cleanup."
-        },
-        {
-          "title": "Season the chicken",
-          "detail": "Pat drumsticks dry with paper towels. Toss with oil, paprika, garlic powder, onion powder, oregano, salt, and pepper until coated. Spread in a single layer on the pan."
-        },
-        {
-          "title": "Bake",
-          "detail": "Bake about 40–45 minutes, flipping once halfway, until the thickest part hits 165°F and juices run clear (not pink)."
-        },
-        {
-          "title": "Cook rice and beans",
-          "detail": "While chicken bakes, cook rice per package directions. Steam or microwave frozen green beans with a pinch of salt until hot."
-        },
-        {
-          "title": "Serve",
-          "detail": "Plate drumsticks with rice and green beans. Wash anything that touched raw chicken."
-        }
-      ],
-      "doneness": "Drumsticks must reach 165°F at the thickest part near the bone. No pink juice.",
-      "tip": "Drying the skin first helps it crisp. Do not rinse raw chicken — just pat dry."
-    },
-    "tortillacasserole": {
-      "servings": "5",
-      "prep": "15 min",
-      "cook": "About 35–40 min bake (about 50 min total)",
-      "equipment": "9×13 baking dish, oven, mixing bowl",
-      "ingredients": [
-        "3 cups shredded rotisserie chicken",
-        "1 taco seasoning packet",
-        "1 can (4 oz) diced green chiles",
-        "2 cups frozen corn",
-        "1 can (10 oz) red enchilada sauce",
-        "8 corn tortillas, cut in half",
-        "2 cups shredded Mexican-blend cheese"
-      ],
-      "steps": [
-        {
-          "title": "Heat the oven",
-          "detail": "Heat oven to 375°F. Lightly grease a 9×13 baking dish."
-        },
-        {
-          "title": "Mix the filling",
-          "detail": "In a big bowl, stir shredded chicken, taco seasoning, green chiles, frozen corn, and about half the enchilada sauce until coated."
-        },
-        {
-          "title": "Layer",
-          "detail": "Spread a thin spoon of enchilada sauce on the bottom of the dish. Lay half the tortilla halves to cover. Add half the chicken mix, then half the cheese. Repeat with remaining tortillas, chicken, sauce, and cheese on top."
-        },
-        {
-          "title": "Bake",
-          "detail": "Bake uncovered 35–40 minutes until the cheese is melted and bubbly and the center is hot."
-        },
-        {
-          "title": "Rest and serve",
-          "detail": "Let it sit 5 minutes so it slices cleaner. Serve with salsa or sour cream if you have them."
-        }
-      ],
-      "doneness": "Center should be steaming hot (about 165°F). Cheese melted and edges lightly browned.",
-      "tip": "Shred rotisserie chicken while it is still warm — it is easier."
-    },
-    "burritocasserole": {
-      "servings": "5",
-      "prep": "10 min (if beef and rice are already cooked)",
-      "cook": "About 35–40 min bake (about 50 min total)",
-      "equipment": "9×13 baking dish, oven",
-      "ingredients": [
-        "1/2–1 lb ground beef, browned and drained",
-        "4 cups cooked white rice",
-        "1 can black beans, drained and rinsed",
-        "1 jar (16 oz) salsa",
-        "2 green onions, sliced",
-        "1 tsp chili powder",
-        "4 oz cream cheese, cubed",
-        "1 cup shredded cheddar"
-      ],
-      "steps": [
-        {
-          "title": "Heat the oven",
-          "detail": "Heat oven to 375°F. Grease a 9×13 dish."
-        },
-        {
-          "title": "Mix",
-          "detail": "In the dish or a big bowl, mix cooked beef, rice, black beans, salsa, green onions, chili powder, and cream cheese cubes until mostly combined."
-        },
-        {
-          "title": "Top and bake",
-          "detail": "Spread in the dish. Sprinkle cheddar on top. Bake 35–40 minutes until hot and cheese is melted."
-        },
-        {
-          "title": "Rest",
-          "detail": "Wait 5 minutes, then scoop into bowls."
-        }
-      ],
-      "doneness": "Center should be steaming hot (165°F). Cream cheese should be melted into the rice.",
-      "tip": "Brown the beef and cook the rice on Sunday so this night is mostly dump-and-bake."
-    },
-    "tacocasserole": {
-      "servings": "5",
-      "prep": "15 min",
-      "cook": "About 45 min",
-      "equipment": "Skillet, 9×13 baking dish, oven",
-      "ingredients": [
-        "1 lb ground beef",
-        "1/2 onion, diced",
-        "1 green bell pepper, diced",
-        "1 Tbsp chili powder",
-        "1 tsp cumin",
-        "1 tsp paprika",
-        "1/2 tsp oregano",
-        "Salt and pepper",
-        "16 oz salsa",
-        "1 can black beans, drained",
-        "2 cups shredded cheddar",
-        "6 burrito-size flour tortillas"
-      ],
-      "steps": [
-        {
-          "title": "Heat oven and brown beef",
-          "detail": "Heat oven to 375°F. Brown beef with onion and bell pepper. Drain. Stir in spices, then most of the salsa and the black beans."
-        },
-        {
-          "title": "Layer",
-          "detail": "In a greased 9×13, layer tortillas, beef mix, and cheese. Repeat, ending with cheese. Spoon a little leftover salsa on top."
-        },
-        {
-          "title": "Bake",
-          "detail": "Bake about 25–30 minutes until bubbly and hot in the center."
-        },
-        {
-          "title": "Rest",
-          "detail": "Cool 5 minutes, then cut into squares."
-        }
-      ],
-      "doneness": "Beef fully browned before baking. Casserole center steaming hot (165°F).",
-      "tip": "Warm tortillas 10 seconds so they do not crack when you layer them."
-    },
-    "beefbowls": {
-      "servings": "5",
-      "prep": "10 min",
-      "cook": "About 30 min",
-      "equipment": "Large pot with lid",
-      "ingredients": [
-        "1 lb ground beef",
-        "1 cup beef broth",
-        "1 taco seasoning packet",
-        "1 can corn, drained",
-        "1 can black beans, drained and rinsed",
-        "1 cup salsa",
-        "1 can (4.5 oz) green chiles",
-        "1 cup long-grain white rice",
-        "1 cup shredded cheese"
-      ],
-      "steps": [
         {
           "title": "Brown the beef",
-          "detail": "In a large pot, cook ground beef over medium heat until no pink remains. Drain extra fat. Stir in the taco seasoning."
+          "detail": "Heat the oven to 375°F. Brown the beef and onion in a skillet until no pink remains. Drain the fat. Stir in the taco seasoning and water and simmer 5 minutes."
         },
         {
-          "title": "Add rice and the rest",
-          "detail": "Stir in broth, rice, corn, beans, salsa, and green chiles. Bring to a boil."
+          "title": "Fill",
+          "detail": "Spread a spoon of refried beans down each tortilla. Add beef and a little cheese. Roll them up."
         },
         {
-          "title": "Simmer",
-          "detail": "Cover and cook on low 18–20 minutes, until the rice is tender. Add a splash of water if the pot looks dry before the rice is done."
+          "title": "Sauce",
+          "detail": "Pour 1/2 cup enchilada sauce in the 9x13 dish. Set the burritos in it seam-side down. Pour the rest of the sauce over the top and cover with the rest of the cheese."
         },
         {
-          "title": "Finish",
-          "detail": "Stir, sprinkle cheese on top, and cover 2 minutes so it melts."
-        }
-      ],
-      "doneness": "Ground beef fully browned (160°F) before the rice goes in. Rice tender, not crunchy. Center steaming hot.",
-      "tip": "One pot on the stove. Keep the lid on while the rice cooks so it steams evenly."
-    },
-    "onepotteriyaki": {
-      "servings": "5",
-      "prep": "15 min",
-      "cook": "About 35 min",
-      "equipment": "Large pot or deep skillet with lid (or Instant Pot)",
-      "ingredients": [
-        "1.5 lb chicken breast in small pieces",
-        "1 Tbsp oil",
-        "2 garlic cloves, minced",
-        "1 tsp grated ginger",
-        "1.5 cups jasmine rice",
-        "2.5 cups water",
-        "12–16 oz frozen stir-fry veggies",
-        "1/4 cup soy sauce",
-        "2 Tbsp brown sugar",
-        "1 tsp sesame oil",
-        "Green onions"
-      ],
-      "steps": [
-        {
-          "title": "Brown the chicken",
-          "detail": "Heat oil in a large pot. Cook chicken pieces until no pink remains (165°F). Stir in garlic and ginger for 30 seconds."
-        },
-        {
-          "title": "Add rice and water",
-          "detail": "Add rice and water. Bring to a boil, then cover and simmer on low 12 minutes."
-        },
-        {
-          "title": "Add veggies and sauce",
-          "detail": "Stir in frozen veggies, soy sauce, brown sugar, and sesame oil. Cover and cook 8–10 more minutes until rice is tender and veggies are hot."
+          "title": "Bake",
+          "detail": "Bake 20–25 minutes until the cheese bubbles."
         },
         {
           "title": "Serve",
-          "detail": "Fluff with a fork. Top with sliced green onions."
+          "detail": "Top with shredded cabbage and sour cream."
         }
       ],
-      "doneness": "Chicken to 165°F. Rice soft, veggies hot.",
-      "tip": "Keep the lid on while the rice cooks so it steams evenly."
-    }
-  },
-  "sundayByWeek": {
-    "1": {
-      "servings": "5",
-      "prep": "5–10 min",
-      "cook": "About 20–25 min",
-      "equipment": "Big pot, colander, skillet",
-      "ingredients": [
-        "1 box spaghetti (use about 12 oz of a 16 oz box, or the whole box if everyone is hungry)",
-        "1 jar pasta sauce",
-        "Grated cheese if you have it"
-      ],
-      "steps": [
-        {
-          "title": "Boil the pasta",
-          "detail": "Bring a big pot of salted water to a boil. Cook about 12 oz spaghetti (three-quarters of a 16 oz box) per the box time, or the whole box for bigger appetites. Drain."
-        },
-        {
-          "title": "Warm the sauce",
-          "detail": "Warm the jarred sauce in a skillet. Toss with the pasta."
-        },
-        {
-          "title": "Serve",
-          "detail": "Plate and top with grated cheese if you have it."
-        }
-      ],
-      "doneness": "Pasta is ready when it is soft enough to chew easily, with a little bite in the middle.",
-      "tip": "A 16 oz box and a jar of sauce are the usual grocery packages — cook 12 oz for 5 plates, and save the rest of the dry pasta."
+      "doneness": "Ground beef is done at 160°F with no pink. Refrigerate leftovers within 2 hours.",
+      "tip": "Two cans of beans stretch 1.5 lb of beef to 10 burritos. You can make it the night before, cover and refrigerate; add 10 minutes to the bake time."
     },
-    "2": {
+    "shepherdspie": {
       "servings": "5",
-      "prep": "10 min",
-      "cook": "About 20 min",
-      "equipment": "Skillet or griddle",
+      "prep": "25 min",
+      "cook": "About 25 min in the oven",
+      "equipment": "Big pot, skillet, 9x13 baking dish, potato masher",
       "ingredients": [
-        "10 flour or corn tortillas",
-        "10 eggs (2 per person)",
-        "Shredded cheese (about 2 cups)",
-        "Butter or oil",
-        "Optional: leftover salsa, beans, or veggies",
+        "1.5 lb ground beef",
+        "3 lb potatoes, peeled and cut in chunks",
+        "1/2 cup milk + 3 Tbsp butter",
+        "1 onion, diced",
+        "2 Tbsp flour",
+        "1 cup water + 1 tsp beef bouillon",
+        "1 Tbsp Worcestershire sauce (optional)",
+        "1 bag (12–16 oz) frozen mixed vegetables",
+        "1 cup shredded cheese",
         "Salt and pepper"
       ],
       "steps": [
         {
-          "title": "Scramble the eggs",
-          "detail": "Beat eggs with a pinch of salt and pepper. Scramble in a buttered skillet until just set. Move to a plate."
+          "title": "Thaw the meat Thursday night",
+          "detail": "Move the ground beef from the freezer to the fridge Thursday night. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
         },
         {
-          "title": "Build quesadillas",
-          "detail": "Wipe the skillet. Lay a tortilla, sprinkle cheese, add scrambled egg, add more cheese, top with a second tortilla."
+          "title": "Boil the potatoes",
+          "detail": "Cover the potatoes with salted water in a big pot. Boil 15–20 minutes until a fork slides in. Drain and mash with the milk, butter, 1 tsp salt and some pepper."
         },
         {
-          "title": "Toast",
-          "detail": "Cook on medium 2–3 minutes per side until golden and cheese melts. Repeat."
+          "title": "Brown the beef",
+          "detail": "Heat the oven to 400°F. Brown the beef and onion in a skillet until no pink remains. Drain the fat."
+        },
+        {
+          "title": "Make the gravy",
+          "detail": "Sprinkle the flour over the beef and stir 1 minute. Stir in the water with bouillon and the Worcestershire. Simmer 3 minutes until thick. Stir in the frozen vegetables."
+        },
+        {
+          "title": "Layer",
+          "detail": "Spread the beef mixture in the 9x13 dish. Spread the mashed potatoes over the top and sprinkle on the cheese."
+        },
+        {
+          "title": "Bake",
+          "detail": "Bake 20–25 minutes until bubbling at the edges. Let it sit 5 minutes, then serve."
+        }
+      ],
+      "doneness": "Ground beef is done at 160°F with no pink. Refrigerate leftovers within 2 hours.",
+      "tip": "Mashed potatoes and vegetables stretch 1.5 lb of beef into a full dinner for 5."
+    },
+    "chilecolorado": {
+      "servings": "5",
+      "prep": "15 min",
+      "cook": "8–9 hr LOW or 5 hr HIGH",
+      "equipment": "6-quart crockpot, pot for rice",
+      "ingredients": [
+        "3 lb beef stew meat — double batch, save half for Sunday",
+        "2 lb potatoes, cut in 1-inch cubes (con papas)",
+        "1/4 cup flour",
+        "2 tsp cumin, 2 tsp oregano, 2 tsp salt",
+        "1 onion, diced",
+        "4 garlic cloves, minced",
+        "2 cans (28 oz each) red chile sauce (like Las Palmas)",
+        "2 cups white rice (tonight)",
+        "1 can refried beans, warmed (tonight)",
+        "10 flour tortillas (tonight)"
+      ],
+      "steps": [
+        {
+          "title": "Thaw the meat 2 nights ahead",
+          "detail": "Thursday night, move both bags of stew meat (3 lb) from the freezer to the fridge on a plate so they are fully thawed by Saturday morning. Never thaw meat on the counter, and never put frozen meat in the crockpot."
+        },
+        {
+          "title": "Season",
+          "detail": "Put the potatoes in the bottom of the crockpot. Add the beef and toss it with the flour, cumin, oregano and salt."
+        },
+        {
+          "title": "Add the sauce",
+          "detail": "Add the onion and garlic. Pour both cans of red chile sauce over the top and stir."
+        },
+        {
+          "title": "Cook",
+          "detail": "Cover and cook 8–9 hours on LOW or 5 hours on HIGH, until the beef is tender."
+        },
+        {
+          "title": "Rice",
+          "detail": "Make the rice: 4 cups water, 1 tsp salt, 2 cups rice, covered on low, 18 minutes."
+        },
+        {
+          "title": "Serve half tonight",
+          "detail": "Serve half of the chile colorado with rice, refried beans and warm tortillas."
+        },
+        {
+          "title": "Save half for Sunday",
+          "detail": "Within 2 hours of cooking, put the saved half in containers with lids, label them “Sunday leftovers” and put them in the fridge. Eat within 3–4 days."
+        }
+      ],
+      "doneness": "Beef is done when it pulls apart easily with a fork (it is safe well before that, at 145°F). Refrigerate leftovers within 2 hours.",
+      "tip": "Double batch: potatoes stretch 3 lb of beef over 2 dinners. It tastes even better the second day."
+    },
+    "lo-chilecolorado": {
+      "servings": "5",
+      "prep": "5 min",
+      "cook": "About 15–30 min",
+      "equipment": "Covered baking dish or pot, or microwave",
+      "ingredients": [
+        "Saved half of Saturday’s chile colorado",
+        "2 cups white rice",
+        "1 can refried beans",
+        "10 flour tortillas"
+      ],
+      "steps": [
+        {
+          "title": "Reheat",
+          "detail": "Put the chile colorado in a pot. Cover and heat on medium-low 15 minutes, stirring often, until steaming."
+        },
+        {
+          "title": "Make fresh rice",
+          "detail": "Make the rice: 4 cups water, 1 tsp salt, 2 cups rice, covered on low, 18 minutes. Warm the beans."
         },
         {
           "title": "Serve",
-          "detail": "Cut into wedges. Serve with salsa or leftover beans if you have them."
+          "detail": "Serve with rice, beans and warm tortillas."
         }
       ],
-      "doneness": "Eggs fully set (no runny raw egg). Cheese melted. Serve hot.",
-      "tip": "Uses eggs, tortillas, and cheese already on hand."
+      "doneness": "Reheat leftovers until steaming hot all the way through (165°F). Reheat only once; throw away anything older than 4 days.",
+      "tip": "Leftovers also make great burritos."
     }
-  }
+  },
+  "sundayByWeek": {}
 };
 });

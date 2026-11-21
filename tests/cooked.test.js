@@ -30,8 +30,8 @@ test('endpoint is one constant and storage does not use the shopping-list key', 
 test('keys are week plus stable meal id, not the day slot; Sunday is stable', () => {
   const week1 = Meals.weeks['1'].dinners.map((d) => Made.mealKey('1', Made.dinnerMealId(d)));
   const week2 = Meals.weeks['2'].dinners.map((d) => Made.mealKey('2', Made.dinnerMealId(d)));
-  assert.deepEqual(week1, ['1:salsabeef', '1:kielbasa', '1:tingabeef', '1:tortillacasserole', '1:drumsticks', '1:carnitas', '1:sunday']);
-  assert.deepEqual(week2, ['2:whitechili', '2:fajitas', '2:pozole', '2:burritocasserole', '2:bbqbeef', '2:tacobeef', '2:sunday']);
+  assert.deepEqual(week1, ['1:beeftacos', '1:meatloaf', '1:potroast', '1:lo-potroast', '1:picadillo', '1:bakedziti', '1:lo-bakedziti']);
+  assert.deepEqual(week2, ['2:chili', '2:lo-chili', '2:chickenfajitas', '2:burritobake', '2:shepherdspie', '2:chilecolorado', '2:lo-chilecolorado']);
   assert.equal(Made.dinnerMealId({ day: 'Sun', meal: null, title: 'Sunday spaghetti' }), 'sunday');
   assert.equal(Made.dinnerMealId({ day: 'Wed', meal: 'drumsticks' }), 'drumsticks');
   assert.equal(Made.mealKey('1', 'drumsticks'), '1:drumsticks');
@@ -85,7 +85,7 @@ test('queue compacts repeat taps and a reset drops that week only', () => {
 
 test('count follows the meal, so cooking out of order and reordering days stay consistent', () => {
   const dinners = Meals.weeks['1'].dinners;
-  const state = { made: { '1:drumsticks': true, '1:sunday': true, '2:pozole': true } };
+  const state = { made: { '1:lo-potroast': true, '1:bakedziti': true, '2:lo-chilecolorado': true } };
   const count = Made.countMade(state, '1', dinners);
   assert.deepEqual(count, { made: 2, total: 7 });
   assert.deepEqual(Made.countMade(state, '1', dinners.slice().reverse()), count);
@@ -225,7 +225,7 @@ test('offline queue replays on reconnect and a newer GET cannot wipe it', async 
 
 test('reset week confirms only that week on the server and leaves the other week', async () => {
   const storage = memoryStorage();
-  const server = { made: { '1:salsabeef': true, '1:sunday': true, '2:pozole': true }, updated: 't0' };
+  const server = { made: { '1:picadillo': true, '1:lo-bakedziti': true, '2:chilecolorado': true }, updated: 't0' };
   const calls = [];
   const client = Made.create({
     storage,
@@ -245,11 +245,11 @@ test('reset week confirms only that week on the server and leaves the other week
   assert.equal(await client.refresh(), true);
   assert.equal(client.count('1', Meals.weeks['1'].dinners).made, 2);
   const resetP = client.resetWeek('1');
-  assert.equal(client.isMade('1', 'salsabeef'), false, 'clears locally before the response');
-  assert.equal(client.isMade('1', 'sunday'), false);
+  assert.equal(client.isMade('1', 'picadillo'), false, 'clears locally before the response');
+  assert.equal(client.isMade('1', 'lo-bakedziti'), false);
   assert.equal(await resetP, true);
-  assert.deepEqual(server.made, { '2:pozole': true });
-  assert.equal(client.isMade('2', 'pozole'), true);
+  assert.deepEqual(server.made, { '2:chilecolorado': true });
+  assert.equal(client.isMade('2', 'chilecolorado'), true);
   assert.equal(client.count('1', Meals.weeks['1'].dinners).made, 0);
   assert.equal(client.count('2', Meals.weeks['2'].dinners).made, 1);
   const resetCall = calls.find((c) => c.method === 'POST');
