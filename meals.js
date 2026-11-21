@@ -1,14 +1,19 @@
 /* Tamayo Cart — meal plan data. Edit this file to change the plan; nothing else needs to change.
- * Source: the "Tamayo Weeknight Meals: Easy Dinners Anyone Can Make" Page (19 dinners, a 2-week plan,
- * and a week 1 grocery list), scaled so every dinner feeds exactly 5. All prices are rough Downey-area estimates from that Page.
+ * Plan of Nov 21, 2026: 14 dinners over 2 weeks, beef-forward (12 beef: ground beef, stew meat, chuck roast,
+ * sirloin, carne asada steak, beef shank; 2 chicken), every dinner feeds exactly 5, all bought in ONE trip.
+ * Week 2 meat (and Week 1 meat cooked after Wednesday) is frozen on shopping day; each recipe says when to thaw it.
+ * All prices are realistic Downey-area estimates (BLS West-region Oct 2026 beef averages, the Nov 10, 2026
+ * El Super receipt, rounded up). Not sale prices.
  *
  * Shape:
  *   sections: ordered store sections   { id, label, icon }
- *   meals:    the 19 dinners            { id, name, method, hands (min), time, cost ($ for 5, estimate), ingredients }
- *   weeks:    { '1': { label, note, dinners: [{ day, meal (meal id or null), title }], items: [...] }, '2': {...} }
+ *   meals:    the 14 dinners            { id, name, method, hands (min), time, cost ($ for 5, estimate), ingredients }
+ *   weeks:    { '1': { label, note, dinners: [{ day, meal (meal id), title, detail }], items: [...] }, '2': {...} }
+ *   lists:    { trip2: the ONE combined 2-week shopping list (week 1 + week 2 merged) }
  *   item:     { id (stable, unique per week), name, qty, section, est ($ or null = check pantry), basis?, for? }
  * Item ids are saved with check-offs in localStorage, so keep them stable when you edit names or prices.
- * Bump `version` when you change the lists. */
+ * The combined list key changed from 'both' to 'trip2' with this plan, so last trip's check-offs do not carry over.
+ * Meal ids are all new, so last plan's shared "Made it" marks do not carry over either. */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory();
   else root.TamayoMeals = factory();
@@ -16,7 +21,7 @@
   'use strict';
   var sections = [
     { id: 'produce', label: 'Produce', icon: '🥬' },
-    { id: 'meat', label: 'Meat & poultry', icon: '🍗' },
+    { id: 'meat', label: 'Meat & poultry', icon: '🥩' },
     { id: 'dairy', label: 'Dairy & eggs', icon: '🧀' },
     { id: 'bakery', label: 'Tortillas & bakery', icon: '🌮' },
     { id: 'canned', label: 'Canned & jarred', icon: '🥫' },
@@ -28,187 +33,123 @@
   ];
 
   var meals = [
-    { id: 'salsabeef', name: 'One-Pot Salsa Beef', method: 'One pot', hands: 10, time: 'About 25 min', cost: 14, ingredients: '1 lb ground beef, 1 jar salsa (16 oz), chili powder, garlic powder, onion powder. Serve with tortillas or rice, beans, cheese, lettuce.' },
-    { id: 'tingabeef', name: 'One-Pot Beef Tinga', method: 'One pot', hands: 10, time: 'About 30 min', cost: 15, ingredients: '1 lb ground beef, 1 onion (diced), 4 garlic cloves or 1 Tbsp jarred garlic, cumin, oregano, salt, pepper, 1 can fire-roasted diced tomatoes, 2 chipotle peppers in adobo plus 1 Tbsp of the sauce. Tostadas, lettuce, crema, avocado.' },
-    { id: 'carnitas', name: 'Slow Cooker Carnitas', method: 'Crockpot', hands: 15, time: 'About 4–5 hr on HIGH', cost: 16, ingredients: '2 lb pork butt or shoulder (ask the meat counter to cut it into chunks, or buy pre-cut carnitas meat), 1 onion, 4 garlic cloves, 2 cinnamon sticks, oregano, cumin, salt, pepper, chipotle powder, 2 oranges. Corn tortillas, onion, cilantro, lime.' },
-    { id: 'pozole', name: 'Slow Cooker Chicken Pozole Verde', method: 'Crockpot', hands: 10, time: 'About 8.5 hr on LOW or 4–4.5 hr on HIGH', cost: 19, ingredients: '1.5 lb boneless chicken thighs, 1 white onion, 1 poblano (seeded, chopped), chili powder, 16 oz jar salsa verde, 2 cups water, 2 cans hominy (drained, rinsed), cilantro, 1 lime. Shredded cabbage and tostadas on the side.' },
-    { id: 'tacobeef', name: 'Shredded Taco Beef', method: 'Crockpot', hands: 10, time: 'About 6–8 hr on LOW', cost: 26, ingredients: '1.5 lb boneless beef chuck or shoulder roast (ask for it cut in chunks), chili powder, cumin, oregano, red pepper flakes, salt, 3 garlic cloves. Tortillas and toppings.' },
-    { id: 'bbqbeef', name: 'One-Pot BBQ Beef Sandwiches', method: 'One pot', hands: 10, time: 'About 25 min', cost: 14, ingredients: '1.25 lb ground beef, smoked paprika, garlic powder, salt, pepper, one large bottle BBQ sauce. Hamburger buns (use 5 from a pack of 8) and bagged coleslaw mix.' },
-    { id: 'whitechili', name: 'Crockpot White Chicken Chili', method: 'Crockpot', hands: 10, time: '4 hr on HIGH or 8 hr on LOW', cost: 15, ingredients: '1 onion, 2 garlic cloves, 1.5 lb chicken breast, 2 cans cannellini beans, 1 can pinto beans, cumin, oregano, pepper, 16 oz jar salsa verde, 2 cups chicken broth. Shredded cheese and tortilla chips on top.' },
-    { id: 'beeftacosoup', name: 'Crockpot Beef Taco Soup', method: 'Crockpot', hands: 10, time: '3–4 hr on HIGH or 6–8 hr on LOW', cost: 13, ingredients: '1 lb ground beef, 1 onion, 2 garlic cloves, chili powder, cumin, smoked paprika, 1 can fire-roasted tomatoes, 1 can diced tomatoes with green chiles, 1 can black beans, 1 cup frozen corn, 4 cups beef broth. Tortilla chips, avocado, sour cream, lime.' },
-    { id: 'teriyaki', name: 'Slow Cooker Pineapple Teriyaki Chicken', method: 'Crockpot', hands: 10, time: '4 hr on HIGH or 8 hr on LOW', cost: 15, ingredients: '20 oz can pineapple chunks in juice, 1/4 cup soy sauce, 2 Tbsp brown sugar, 2 garlic cloves, 1 tsp grated ginger, 5–6 skinless chicken thighs, 1.5 Tbsp cornstarch, green onions, rice.' },
-    { id: 'chili', name: 'Crockpot Chili', method: 'Crockpot', hands: 10, time: '3–4 hr on HIGH or 6–8 hr on LOW', cost: 19, ingredients: '1 lb ground beef, onion, green bell pepper, garlic, tomato paste, 2 cans diced tomatoes (one with green chiles), kidney and pinto beans, 1 cup beef broth, chili powder, cumin, garlic and onion powder, brown sugar, salt, pepper.' },
-    { id: 'fajitas', name: 'Sheet Pan Chicken Fajitas', method: 'Sheet pan', hands: 15, time: 'About 55 min', cost: 18, ingredients: '1.5 lb chicken breast (pre-cut stir-fry strips skip knife work), 3–4 bell peppers, 2 onions (or pre-sliced fajita veggies), chili powder, paprika, onion and garlic powder, cumin, salt, sugar (or a fajita packet), oil, lime, tortillas, sour cream.' },
-    { id: 'kielbasa', name: 'Sheet Pan Kielbasa, Potatoes and Green Beans', method: 'Sheet pan', hands: 10, time: 'About 45 min', cost: 16, ingredients: '2 lb small red potatoes, 2 packs kielbasa (already cooked), 1 onion, 1 lb frozen green beans, olive oil, steak seasoning.' },
-    { id: 'honeymustard', name: 'Sheet Pan Honey Mustard Chicken and Veggies', method: 'Sheet pan', hands: 15, time: 'About 45 min', cost: 14, ingredients: 'Mayo, Dijon and yellow mustard, honey, cider vinegar, garlic powder, paprika, salt, pepper; 2 lb boneless chicken thighs, 1.5 lb red potatoes, red onion, about 12 oz green beans and 8 oz baby carrots, oil.' },
-    { id: 'drumsticks', name: 'Oven Baked Chicken Drumsticks', method: 'Sheet pan', hands: 5, time: 'About 45 min', cost: 11, ingredients: '10 drumsticks (about 3.5 lb, 2 per person), smoked paprika, garlic powder, onion powder, oregano, salt, pepper, oil. Rice and a bag of frozen veggies on the side.' },
-    { id: 'tortillacasserole', name: 'Cheesy Chicken Tortilla Casserole (enchilada bake)', method: 'Oven bake', hands: 15, time: 'About 50 min', cost: 17, ingredients: '3 cups shredded rotisserie chicken, 1 taco seasoning packet, 4 oz can green chiles, 2 cups frozen corn, 10 oz can red enchilada sauce, 8 corn tortillas cut in half, 2 cups shredded cheese.' },
-    { id: 'burritocasserole', name: 'Beef Burrito Casserole', method: 'Oven bake', hands: 10, time: 'About 50 min', cost: 16, ingredients: '1/2–1 lb ground beef (browned on Sunday), 4 cups cooked rice, 1 can black beans, 16 oz salsa, green onions, chili powder, 4 oz cream cheese, 1 cup cheddar.' },
-    { id: 'tacocasserole', name: 'Taco Casserole', method: 'Oven bake', hands: 15, time: 'About 45 min', cost: 19, ingredients: '1 lb ground beef, 1/2 onion, 1 green bell pepper, chili powder, cumin, paprika, oregano, salt, pepper, 16 oz salsa, 1 can black beans, 2 cups cheddar, 6 burrito-size flour tortillas.' },
-    { id: 'beefbowls', name: 'One-Pot Beef Burrito Bowls', method: 'One pot', hands: 10, time: 'About 30 min', cost: 15, ingredients: '1 lb ground beef, 1 cup beef broth, 1 taco seasoning packet, 1 can corn, 1 can black beans, 1 cup salsa, 4.5 oz can green chiles, 1 cup long-grain white rice, 1 cup shredded cheese.' },
-    { id: 'onepotteriyaki', name: 'One Pot Teriyaki Chicken and Rice', method: 'Instant Pot / one pot', hands: 15, time: 'About 35 min', cost: 11, ingredients: '1.5 lb chicken breast in small pieces, oil, garlic, ginger, 1.5 cups jasmine rice, 2.5 cups water, 12–16 oz frozen stir-fry veggies, 1/4 cup soy sauce, 2 Tbsp brown sugar, 1 tsp sesame oil, green onions.' }
+    {"id": "guisada", "name": "Crockpot Carne Guisada", "method": "Crockpot", "hands": 15, "time": "8 hr on LOW or 4–5 hr on HIGH", "cost": 42, "ingredients": "2.5 lb beef stew meat (carne para guisar); 2 Tbsp flour; 1 onion, diced; 1 green bell pepper, diced; 4 garlic cloves, minced; 1 can (8 oz) tomato sauce; 1 cup water + 1 tsp beef bouillon; 2 tsp cumin, 1 tsp chili powder, 1 tsp oregano; 1 tsp salt, 1/2 tsp pepper; 2 cups white rice (makes rice for 5); 10 flour tortillas."},
+    {"id": "steakbites", "name": "Sheet-Pan Steak Bites with Potatoes and Green Beans", "method": "Sheet pan", "hands": 15, "time": "About 40 min", "cost": 38, "ingredients": "2.5 lb top sirloin steak, cut in 1-inch cubes; 2 lb small red potatoes, cut in quarters; 1 lb fresh green beans, ends snapped off; 3 Tbsp oil; 2 tsp steak seasoning (or 1 tsp salt, 1 tsp pepper, 1 tsp garlic powder); 1 tsp salt for the vegetables; 3 garlic cloves, minced; 2 Tbsp butter."},
+    {"id": "carneasada", "name": "Oven Carne Asada Tacos", "method": "Oven broiler", "hands": 15, "time": "About 25 min (plus marinating)", "cost": 41, "ingredients": "2.5 lb thin carne asada steak (flap meat / ranchera or skirt); Juice of 2 oranges and 2 limes; 3 garlic cloves, minced; 2 Tbsp oil; 1 tsp cumin, 1 tsp chili powder, 1.5 tsp salt; 20 corn tortillas; 1 white onion and 1 bunch cilantro, chopped; 2 avocados, sliced; Salsa and lime wedges."},
+    {"id": "chickentinga", "name": "Crockpot Chicken Tinga Tostadas", "method": "Crockpot", "hands": 10, "time": "6 hr on LOW or 3 hr on HIGH", "cost": 39, "ingredients": "2.5 lb boneless skinless chicken thighs; 1 onion, sliced; 3 garlic cloves, minced; 1 can (15 oz) fire-roasted diced tomatoes; 2 chipotle peppers in adobo, chopped, + 1 Tbsp of the sauce; 1/2 cup water + 1/2 tsp bouillon; 1 tsp oregano, 1 tsp cumin, 1 tsp salt; 15 tostadas; 2 cans refried beans, warmed; Shredded lettuce, crema and crumbled queso fresco."},
+    {"id": "ovenburgers", "name": "Sheet-Pan Oven Cheeseburgers and Fries", "method": "Sheet pan", "hands": 15, "time": "About 35 min", "cost": 44, "ingredients": "2.5 lb ground beef (makes 10 patties, 2 per person); 1.5 tsp salt, 1 tsp pepper, 1 tsp garlic powder; 10 slices American cheese; 10 hamburger buns; Lettuce, 2 tomatoes, 1 onion and pickles, sliced; Ketchup and mustard; 2 bags (2 lb each) frozen french fries."},
+    {"id": "potroast", "name": "Crockpot Pot Roast with Potatoes and Carrots", "method": "Crockpot", "hands": 15, "time": "8–9 hr on LOW or 5–6 hr on HIGH", "cost": 38, "ingredients": "3 lb boneless beef chuck roast; 2 lb potatoes, cut in big chunks; 1 lb baby carrots; 1 onion, cut in wedges; 1 packet dry onion soup mix; 1 cup water + 1 tsp beef bouillon; 1 Tbsp Worcestershire sauce (optional); 1/2 tsp pepper; 2 Tbsp cornstarch + 2 Tbsp cold water (for gravy)."},
+    {"id": "bakedziti", "name": "Baked Ziti with Beef", "method": "Oven bake", "hands": 20, "time": "About 50 min", "cost": 40, "ingredients": "2 lb ground beef; 1 lb ziti or penne pasta; 2 jars (24 oz each) marinara sauce; 1 tsp garlic powder, 1 tsp Italian seasoning or oregano, 1/2 tsp salt; 2 cups shredded mozzarella; 1/2 cup grated parmesan; 1 bag salad and 1 loaf French bread on the side."},
+    {"id": "barbacoa", "name": "Crockpot Beef Barbacoa Tacos", "method": "Crockpot", "hands": 15, "time": "8–10 hr on LOW or 5–6 hr on HIGH", "cost": 36, "ingredients": "3 lb boneless beef chuck roast, cut in 4 big pieces; 1 onion, chopped; 4 garlic cloves; 3 chipotle peppers in adobo + 2 Tbsp of the sauce; Juice of 2 limes; 1/2 cup water + 1/2 tsp beef bouillon; 1 Tbsp cumin, 1 Tbsp oregano, 1.5 tsp salt; 2 bay leaves; 20 corn tortillas; Chopped onion, cilantro, salsa and lime wedges."},
+    {"id": "chickenfajitas", "name": "Sheet-Pan Chicken Fajitas", "method": "Sheet pan", "hands": 15, "time": "About 40 min", "cost": 29, "ingredients": "2.5 lb boneless skinless chicken breasts, cut in thin strips; 3 bell peppers, sliced; 2 onions, sliced; 3 Tbsp oil; 2 tsp chili powder, 1 tsp cumin, 1 tsp paprika, 1 tsp garlic powder, 1.5 tsp salt; 2 limes; 20 flour tortillas; Shredded cheese, sour cream and salsa."},
+    {"id": "burritobake", "name": "Beef and Bean Burrito Bake", "method": "Oven bake", "hands": 20, "time": "About 45 min", "cost": 38, "ingredients": "2 lb ground beef; 1 onion, diced; 1 packet taco seasoning + 2/3 cup water; 1 can (16 oz) refried beans; 8 burrito-size flour tortillas; 1 large can (19 oz) red enchilada sauce; 3 cups shredded Mexican-blend cheese; Shredded lettuce and sour cream."},
+    {"id": "beefbroccoli", "name": "Crockpot Beef and Broccoli", "method": "Crockpot", "hands": 15, "time": "5–6 hr on LOW or 3 hr on HIGH", "cost": 38, "ingredients": "2.5 lb boneless beef chuck (roast or steaks), sliced in thin strips; 1 cup water + 1 tsp beef bouillon; 2/3 cup soy sauce (low sodium if you have it); 1/3 cup brown sugar; 4 garlic cloves, minced; 1 tsp ground ginger; 1 Tbsp sesame oil (optional); 3 Tbsp cornstarch + 3 Tbsp cold water; 2 lb frozen broccoli florets; 2.5 cups white rice."},
+    {"id": "meatloaf", "name": "Sheet-Pan Mini Meatloaves with Potatoes and Carrots", "method": "Sheet pan", "hands": 20, "time": "About 45 min", "cost": 26, "ingredients": "2.5 lb ground beef; 2 eggs; 3/4 cup breadcrumbs; 1/2 cup milk; 1 Tbsp onion powder, 1 tsp garlic powder, 1.5 tsp salt, 1/2 tsp pepper; 1 Tbsp Worcestershire sauce (optional); Glaze: 3/4 cup ketchup, 2 Tbsp brown sugar, 1 Tbsp mustard; 2 lb potatoes, cut in 1-inch cubes; 1 lb baby carrots; 2 Tbsp oil."},
+    {"id": "caldores", "name": "Crockpot Caldo de Res (Beef Soup)", "method": "Crockpot", "hands": 20, "time": "8 hr on LOW", "cost": 44, "ingredients": "3.5 lb bone-in beef shank (chamorro); 1 onion, cut in half; 4 garlic cloves; 1 can (8 oz) tomato sauce; 1 Tbsp beef bouillon (caldo de res) + 2 tsp salt; 2 bay leaves; 7 cups water; 3 potatoes, cut in big chunks; 1 lb baby carrots; 4 frozen corn-on-the-cob pieces; 1/2 small cabbage, cut in wedges; 1.5 cups rice, cilantro, limes, tortillas."},
+    {"id": "chilecolorado", "name": "Crockpot Chile Colorado (Beef in Red Chile)", "method": "Crockpot", "hands": 10, "time": "8 hr on LOW or 4–5 hr on HIGH", "cost": 37, "ingredients": "2.5 lb beef stew meat; 2 Tbsp flour; 1 tsp cumin, 1 tsp oregano, 1 tsp salt; 1 onion, diced; 3 garlic cloves, minced; 1 can (28 oz) red chile sauce (like Las Palmas); 2 cups white rice; 2 cans refried beans, warmed; 10 flour tortillas."}
   ];
 
-  // Week 1: the Page's grocery list (6 dinners + breakfasts, lunches and snacks for 5), with dinner amounts scaled to feed 5 (about $266).
-  function w1(id, section, name, qty, est) { return { id: id, section: section, name: name, qty: qty, est: est }; }
+  // Week 1: dinners Mon–Sun plus breakfasts, lunches and snacks for 5 for BOTH weeks (bought in the same trip).
   var week1Items = [
-    w1('ground-beef', 'meat', 'Ground beef', 'about 2 lb (salsa beef 1, beef tinga 1)', 10),
-    w1('pork-shoulder', 'meat', 'Pork shoulder or butt', '2 lb (El Super or Food 4 Less)', 6),
-    w1('kielbasa', 'meat', 'Kielbasa', '2 packs', 9),
-    w1('drumsticks', 'meat', 'Chicken drumsticks', 'about 3.5 lb (10 pieces)', 6),
-    w1('rotisserie', 'meat', 'Rotisserie chickens', '2 (Costco; casserole plus lunches)', 10),
-    w1('deli', 'meat', 'Sliced deli turkey or ham', '2 lb (lunches)', 10),
-    w1('onions', 'produce', 'Onions', '3 lb bag', 3),
-    w1('garlic', 'produce', 'Garlic', '1 head or jar', 1),
-    w1('limes', 'produce', 'Limes', '10', 2),
-    w1('cilantro', 'produce', 'Cilantro', '2 bunches', 2),
-    w1('oranges', 'produce', 'Oranges', '4 lb bag (carnitas plus snacks)', 5),
-    w1('red-potatoes', 'produce', 'Red potatoes', '3 lb bag (use 2 lb for kielbasa)', 4),
-    w1('lettuce', 'produce', 'Shredded lettuce or romaine', '1', 3),
-    w1('avocados', 'produce', 'Avocados', '4', 4),
-    w1('bananas', 'produce', 'Bananas', '2 bunches', 3),
-    w1('apples', 'produce', 'Apples', '3 lb bag', 5),
-    w1('baby-carrots', 'produce', 'Baby carrots', '2 lb', 3),
-    w1('cuke-tomato', 'produce', 'Cucumbers and tomatoes', 'a few', 4),
-    w1('berries', 'produce', 'Grapes or strawberries', 'whatever is on sale', 5),
-    w1('eggs', 'dairy', 'Eggs', '5 dozen', 11),
-    w1('milk', 'dairy', 'Milk', '2 gallons', 8),
-    w1('cheese', 'dairy', 'Shredded Mexican-blend cheese', '2.5 lb (Costco)', 10),
-    w1('sour-cream', 'dairy', 'Sour cream or Mexican crema', '24 oz', 4),
-    w1('yogurt', 'dairy', 'Yogurt', '2 large tubs', 6),
-    w1('string-cheese', 'dairy', 'String cheese', '24 count', 7),
-    w1('butter', 'dairy', 'Butter', '1 lb', 4),
-    w1('corn-tortillas', 'bakery', 'Corn tortillas', '80 count', 4),
-    w1('flour-tortillas', 'bakery', 'Flour tortillas', '20 count', 4),
-    w1('tostadas', 'bakery', 'Tostadas', '1 pack', 3),
-    w1('bread', 'bakery', 'Sandwich bread', '2 loaves', 5),
-    w1('salsa', 'canned', 'Salsa', 'two 24 oz jars', 7),
-    w1('fire-tomatoes', 'canned', 'Fire-roasted diced tomatoes', '1 can', 2),
-    w1('chipotle', 'canned', 'Chipotle peppers in adobo', '1 small can', 2),
-    w1('enchilada', 'canned', 'Red enchilada sauce', '10 oz', 3),
-    w1('green-chiles', 'canned', 'Diced green chiles', '4 oz', 2),
-    w1('refried', 'canned', 'Refried beans', '2 cans', 3),
-    w1('peanut-butter', 'canned', 'Peanut butter', 'large jar', 4),
-    w1('jam', 'canned', 'Jam or jelly', '1 jar', 3),
-    w1('rice', 'pantry', 'Long-grain white rice', '10 lb', 8),
-    w1('taco-cinnamon', 'pantry', 'Taco seasoning packet and cinnamon sticks', '1 each', 3),
-    w1('oatmeal', 'pantry', 'Oatmeal', 'large canister', 4),
-    w1('cereal', 'pantry', 'Cereal', '2 family boxes', 8),
-    w1('spaghetti', 'pantry', 'Spaghetti and jarred sauce (weekend)', '1 each', 5),
-    w1('pantry-topups', 'pantry', 'Pantry top-ups (oil, spices, coffee)', 'as needed', 15),
-    w1('frozen-corn', 'frozen', 'Frozen corn', '1 lb', 2),
-    w1('frozen-green-beans', 'frozen', 'Frozen green beans', '2 lb', 3),
-    w1('backup-frozen', 'frozen', 'Backup shelf: frozen pizzas or frozen burritos', '2 pizzas or 1 bag', 12),
-    w1('granola', 'snacks', 'Granola bars', 'big box', 8),
-    w1('chips', 'snacks', 'Tortilla chips', 'big bag', 4),
-    w1('popcorn', 'snacks', 'Popcorn', '1 box', 3),
-    w1('crackers', 'snacks', 'Crackers or pretzels', '1 box', 4)
+    {"id": "stew-meat", "section": "meat", "name": "Beef stew meat (carne para guisar)", "qty": "2.5 lb — keep in FRIDGE, cook Mon", "est": 24, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["guisada"]},
+    {"id": "top-sirloin", "section": "meat", "name": "Top sirloin steak", "qty": "2.5 lb — keep in FRIDGE, cook Tue", "est": 32, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["steakbites"]},
+    {"id": "carne-asada", "section": "meat", "name": "Carne asada steak (flap meat / ranchera, or skirt)", "qty": "2.5 lb — keep in FRIDGE, cook Wed", "est": 25, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["carneasada"]},
+    {"id": "chicken-thighs", "section": "meat", "name": "Boneless skinless chicken thighs", "qty": "2.5 lb — FREEZE on shopping day", "est": 12, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["chickentinga"]},
+    {"id": "ground-beef", "section": "meat", "name": "Ground beef (80/20)", "qty": "4.5 lb (burgers 2.5, ziti 2) — FREEZE in 2 bags", "est": 33, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["ovenburgers", "bakedziti"]},
+    {"id": "chuck-roast", "section": "meat", "name": "Boneless beef chuck roast", "qty": "3 lb (pot roast) — FREEZE", "est": 29, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["potroast"]},
+    {"id": "onions", "section": "produce", "name": "Onions (yellow or white)", "qty": "5 onions", "est": 4, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["guisada", "carneasada", "chickentinga", "ovenburgers", "potroast"]},
+    {"id": "garlic", "section": "produce", "name": "Garlic", "qty": "2 heads", "est": 2, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["guisada", "steakbites", "carneasada", "chickentinga"]},
+    {"id": "green-pepper", "section": "produce", "name": "Green bell pepper", "qty": "1", "est": 1, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["guisada"]},
+    {"id": "potatoes", "section": "produce", "name": "Potatoes (red or yellow)", "qty": "4 lb (steak bites 2, pot roast 2) — one 5 lb bag", "est": 6, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["steakbites", "potroast"]},
+    {"id": "green-beans", "section": "produce", "name": "Fresh green beans", "qty": "1 lb", "est": 3, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["steakbites"]},
+    {"id": "baby-carrots", "section": "produce", "name": "Baby carrots", "qty": "1 lb", "est": 2, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["potroast"]},
+    {"id": "limes", "section": "produce", "name": "Limes", "qty": "4", "est": 2, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["carneasada"]},
+    {"id": "oranges", "section": "produce", "name": "Oranges", "qty": "2 (carne asada marinade)", "est": 2, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["carneasada"]},
+    {"id": "cilantro", "section": "produce", "name": "Cilantro", "qty": "1 bunch", "est": 1, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["carneasada"]},
+    {"id": "avocados", "section": "produce", "name": "Avocados", "qty": "2–3", "est": 5, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["carneasada"]},
+    {"id": "lettuce-tomato", "section": "produce", "name": "Lettuce and tomatoes", "qty": "1 romaine + 1 bag shredded lettuce, 2 tomatoes", "est": 6, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["chickentinga", "ovenburgers"]},
+    {"id": "salad", "section": "produce", "name": "Bagged salad", "qty": "1 large bag", "est": 4, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["bakedziti"]},
+    {"id": "mozzarella", "section": "dairy", "name": "Shredded mozzarella", "qty": "8 oz bag (2 cups)", "est": 4, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["bakedziti"]},
+    {"id": "parmesan", "section": "dairy", "name": "Grated parmesan", "qty": "small container", "est": 4, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["bakedziti"]},
+    {"id": "american-cheese", "section": "dairy", "name": "American cheese slices", "qty": "2 packs (1 for burgers, 1 for lunches)", "est": 8, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["ovenburgers"]},
+    {"id": "crema", "section": "dairy", "name": "Mexican crema or sour cream", "qty": "15 oz", "est": 4, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["chickentinga"]},
+    {"id": "queso-fresco", "section": "dairy", "name": "Queso fresco", "qty": "10 oz", "est": 4, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["chickentinga"]},
+    {"id": "flour-tortillas", "section": "bakery", "name": "Flour tortillas (taco size)", "qty": "20-count", "est": 4, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["guisada"]},
+    {"id": "corn-tortillas", "section": "bakery", "name": "Corn tortillas", "qty": "1 pack (30)", "est": 3, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["carneasada"]},
+    {"id": "tostadas", "section": "bakery", "name": "Tostadas", "qty": "1 pack (15+)", "est": 3, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["chickentinga"]},
+    {"id": "buns", "section": "bakery", "name": "Hamburger buns", "qty": "2 packs of 8", "est": 6, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["ovenburgers"]},
+    {"id": "french-bread", "section": "bakery", "name": "French bread", "qty": "1 loaf", "est": 3, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["bakedziti"]},
+    {"id": "tomato-sauce", "section": "canned", "name": "Tomato sauce", "qty": "1 can (8 oz)", "est": 1, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["guisada"]},
+    {"id": "fire-tomatoes", "section": "canned", "name": "Fire-roasted diced tomatoes", "qty": "1 can (15 oz)", "est": 2, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["chickentinga"]},
+    {"id": "chipotle", "section": "canned", "name": "Chipotle peppers in adobo", "qty": "1 small can", "est": 3, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["chickentinga"]},
+    {"id": "refried", "section": "canned", "name": "Refried beans", "qty": "2 cans", "est": 5, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["chickentinga"]},
+    {"id": "marinara", "section": "canned", "name": "Marinara sauce", "qty": "2 jars (24 oz)", "est": 7, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["bakedziti"]},
+    {"id": "salsa", "section": "canned", "name": "Salsa", "qty": "1 jar (24 oz)", "est": 4, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["carneasada", "ovenburgers"]},
+    {"id": "bouillon", "section": "pantry", "name": "Beef bouillon (Knorr caldo de res)", "qty": "1 jar — makes the broth for both weeks (1 tsp + 1 cup water = 1 cup broth)", "est": 5, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["guisada", "chickentinga", "potroast"]},
+    {"id": "onion-soup", "section": "pantry", "name": "Dry onion soup mix", "qty": "1 packet", "est": 2, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["potroast"]},
+    {"id": "rice", "section": "pantry", "name": "Long-grain white rice", "qty": "10 lb bag (dinners both weeks + lunches)", "est": 9, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["guisada"]},
+    {"id": "pasta", "section": "pantry", "name": "Ziti or penne pasta", "qty": "1 lb box", "est": 2, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["bakedziti"]},
+    {"id": "fries", "section": "frozen", "name": "Frozen french fries", "qty": "2 bags (2 lb each)", "est": 8, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["ovenburgers"]},
+    {"id": "spices", "section": "check", "name": "Spices: cumin, chili powder, oregano, paprika, garlic & onion powder, steak seasoning, bay leaves, ginger", "qty": "check you have them", "est": null, "basis": "on hand", "estimate": true, "for": ["guisada", "steakbites", "carneasada", "chickentinga", "ovenburgers", "bakedziti"]},
+    {"id": "basics", "section": "check", "name": "Oil, flour, cornstarch, salt, pepper, Worcestershire, ketchup, mustard, pickles", "qty": "check you have them", "est": null, "basis": "on hand", "estimate": true, "for": ["guisada", "steakbites", "ovenburgers", "potroast"]},
+    {"id": "eggs", "section": "dairy", "name": "Eggs", "qty": "5 dozen (breakfasts both weeks + meatloaf)", "est": 15, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true},
+    {"id": "milk", "section": "dairy", "name": "Milk", "qty": "4 gallons (check dates; open the 2nd pair in week 2)", "est": 16, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true},
+    {"id": "yogurt", "section": "dairy", "name": "Yogurt", "qty": "2 large tubs", "est": 7, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true},
+    {"id": "string-cheese", "section": "dairy", "name": "String cheese", "qty": "24 count", "est": 8, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true},
+    {"id": "butter", "section": "dairy", "name": "Butter", "qty": "1 lb", "est": 5, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true},
+    {"id": "deli", "section": "meat", "name": "Sliced deli turkey or ham (lunches)", "qty": "3 lb — freeze 1 lb for week 2", "est": 15, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true},
+    {"id": "bread", "section": "bakery", "name": "Sandwich bread", "qty": "3 loaves — freeze 1 for week 2", "est": 9, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true},
+    {"id": "bananas", "section": "produce", "name": "Bananas", "qty": "2 bunches (1 green)", "est": 5, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true},
+    {"id": "apples", "section": "produce", "name": "Apples", "qty": "5 lb bag", "est": 6, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true},
+    {"id": "berries", "section": "produce", "name": "Grapes or strawberries", "qty": "whatever is on sale", "est": 6, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true},
+    {"id": "pb-jam", "section": "canned", "name": "Peanut butter and jam", "qty": "1 large jar each", "est": 7, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true},
+    {"id": "cereal", "section": "pantry", "name": "Cereal", "qty": "2 family-size boxes", "est": 10, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true},
+    {"id": "oatmeal", "section": "pantry", "name": "Oatmeal", "qty": "1 large canister", "est": 4, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true},
+    {"id": "pantry-topups", "section": "pantry", "name": "Pantry top-ups (oil, any spice you are out of, coffee)", "qty": "as needed", "est": 15, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true},
+    {"id": "backup-frozen", "section": "frozen", "name": "Backup for a crazy night: frozen pizzas or burritos", "qty": "2 pizzas or 1 bag", "est": 12, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true},
+    {"id": "granola", "section": "snacks", "name": "Granola bars", "qty": "big box", "est": 9, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true},
+    {"id": "chips", "section": "snacks", "name": "Tortilla chips", "qty": "big bag", "est": 5, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true},
+    {"id": "crackers", "section": "snacks", "name": "Crackers, pretzels or popcorn", "qty": "1–2 boxes", "est": 5, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true}
   ];
 
-  // Week 2: the Page has no week 2 grocery list. This list combines the ingredients for
-  // week 2's dinners (amounts sized so each dinner feeds 5) and de-duplicates them. Every price is an ESTIMATE:
-  // where week 1 has the same item we use week 1's price; otherwise it's a rough guess (basis says which).
-  // Like the Page's week 1 list, it assumes salt, pepper, oil and spices are already in the pantry.
-  // It covers dinners only, not breakfasts, lunches or snacks.
-  function w2(id, section, name, qty, est, basis, forMeals) { return { id: id, section: section, name: name, qty: qty, est: est, basis: basis, for: forMeals, estimate: true }; }
+  // Week 2: dinners only. Meat here is frozen on shopping day (see each item's qty).
   var week2Items = [
-    w2('chicken-breast', 'meat', 'Boneless skinless chicken breasts', 'about 3 lb (white chili 1.5, fajitas 1.5)', 11, 'week 1 price scaled from $21 for 6 lb ($3.50/lb; 3 lb rounds to $11)', ['whitechili', 'fajitas']),
-    w2('chicken-thighs', 'meat', 'Boneless chicken thighs', '1.5 lb', 5, 'rough estimate', ['pozole']),
-    w2('ground-beef', 'meat', 'Ground beef', 'about 2.25 lb (burrito casserole 1, BBQ beef 1.25)', 11, 'rough estimate, $5/lb; 2.25 lb rounds to $11', ['burritocasserole', 'bbqbeef']),
-    w2('beef-chuck', 'meat', 'Boneless beef chuck or shoulder roast', '1.5 lb, cut in chunks', 10, 'rough estimate, scaled from a 3 lb roast', ['tacobeef']),
-    w2('onions', 'produce', 'Onions', '3 lb bag (4 onions: chili 1, fajitas 2, 1 white for pozole)', 3, 'week 1 price', ['whitechili', 'fajitas', 'pozole']),
-    w2('garlic', 'produce', 'Garlic', '1 head (about 5 cloves)', 1, 'week 1 price', ['whitechili', 'tacobeef']),
-    w2('bell-peppers', 'produce', 'Bell peppers', '3–4 (or pre-sliced fajita veggies)', 4, 'rough estimate', ['fajitas']),
-    w2('poblano', 'produce', 'Poblano pepper', '1', 1, 'rough estimate', ['pozole']),
-    w2('limes', 'produce', 'Limes', '2', 1, 'week 1 price (10 for $2)', ['fajitas', 'pozole']),
-    w2('cilantro', 'produce', 'Cilantro', '1 bunch', 1, 'week 1 price', ['pozole']),
-    w2('green-onions', 'produce', 'Green onions', '1 bunch', 1, 'rough estimate', ['burritocasserole']),
-    w2('coleslaw', 'produce', 'Bagged coleslaw mix / shredded cabbage', '2 bags (BBQ slaw + pozole topping)', 5, 'rough estimate', ['bbqbeef', 'pozole']),
-    w2('cheese', 'dairy', 'Shredded cheese (Mexican blend or cheddar)', 'about 1 lb (chili topping + 1 cup cheddar)', 4, 'week 1 price ($10 for 2.5 lb)', ['whitechili', 'burritocasserole']),
-    w2('sour-cream', 'dairy', 'Sour cream', '16 oz', 3, 'week 1 price (24 oz $4)', ['fajitas']),
-    w2('cream-cheese', 'dairy', 'Cream cheese', '4 oz (one 8 oz block)', 2, 'rough estimate', ['burritocasserole']),
-    w2('flour-tortillas', 'bakery', 'Flour tortillas', '20 count (fajitas + taco beef)', 4, 'week 1 price', ['fajitas', 'tacobeef']),
-    w2('tostadas', 'bakery', 'Tostadas', '1 pack', 3, 'week 1 price', ['pozole']),
-    w2('buns', 'bakery', 'Hamburger buns', '1 pack (8)', 3, 'rough estimate', ['bbqbeef']),
-    w2('salsa-verde', 'canned', 'Salsa verde', 'two 16 oz jars (chili + pozole)', 6, 'rough estimate', ['whitechili', 'pozole']),
-    w2('salsa', 'canned', 'Salsa', '16 oz jar', 3, 'week 1 price ($7 for two 24 oz)', ['burritocasserole']),
-    w2('cannellini', 'canned', 'Cannellini beans', '2 cans', 2, 'rough estimate', ['whitechili']),
-    w2('pinto', 'canned', 'Pinto beans', '1 can', 1, 'rough estimate', ['whitechili']),
-    w2('black-beans', 'canned', 'Black beans', '1 can', 1, 'rough estimate', ['burritocasserole']),
-    w2('hominy', 'canned', 'Hominy', '2 cans', 4, 'rough estimate', ['pozole']),
-    w2('broth', 'canned', 'Chicken broth', '2 cups (one 32 oz carton)', 2, 'rough estimate', ['whitechili']),
-    w2('bbq-sauce', 'canned', 'BBQ sauce', '1 large bottle', 3, 'rough estimate', ['bbqbeef']),
-    w2('chips', 'snacks', 'Tortilla chips', '1 bag (chili topping)', 4, 'week 1 price', ['whitechili']),
-    w2('rice', 'check', 'White rice', '4 cups cooked (left from week 1’s 10 lb bag)', null, 'on hand', ['burritocasserole']),
-    w2('spices', 'check', 'Spices: chili powder, cumin, oregano, paprika, smoked paprika, garlic & onion powder, red pepper flakes', 'check you have them', null, 'on hand', ['whitechili', 'fajitas', 'pozole', 'burritocasserole', 'bbqbeef', 'tacobeef']),
-    w2('basics', 'check', 'Oil, sugar, salt, pepper', 'check you have them', null, 'on hand', ['fajitas', 'bbqbeef', 'tacobeef'])
+    {"id": "stew-meat", "section": "meat", "name": "Beef stew meat (carne para guisar)", "qty": "2.5 lb — FREEZE on shopping day", "est": 24, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["chilecolorado"]},
+    {"id": "chicken-breast", "section": "meat", "name": "Boneless skinless chicken breasts", "qty": "2.5 lb — FREEZE on shopping day", "est": 11, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["chickenfajitas"]},
+    {"id": "ground-beef", "section": "meat", "name": "Ground beef (80/20)", "qty": "4.5 lb (burrito bake 2, meatloaf 2.5) — FREEZE in 2 bags", "est": 33, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["burritobake", "meatloaf"]},
+    {"id": "chuck-roast", "section": "meat", "name": "Boneless beef chuck roast", "qty": "5.5 lb: one 3 lb roast (barbacoa) + 2.5 lb sliced thin (beef & broccoli) — FREEZE in 2 bags", "est": 53, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["barbacoa", "beefbroccoli"]},
+    {"id": "beef-shank", "section": "meat", "name": "Bone-in beef shank (chamorro)", "qty": "3.5 lb — FREEZE", "est": 27, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["caldores"]},
+    {"id": "onions", "section": "produce", "name": "Onions (yellow or white)", "qty": "7 onions", "est": 5, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["barbacoa", "chickenfajitas", "burritobake", "caldores", "chilecolorado"]},
+    {"id": "garlic", "section": "produce", "name": "Garlic", "qty": "2 heads", "est": 2, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["barbacoa", "beefbroccoli", "caldores", "chilecolorado"]},
+    {"id": "bell-peppers", "section": "produce", "name": "Bell peppers (any color)", "qty": "3 — keep in the crisper drawer", "est": 4, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["chickenfajitas"]},
+    {"id": "potatoes", "section": "produce", "name": "Potatoes (red or yellow)", "qty": "about 3.5 lb (meatloaf 2, caldo 3 potatoes) — one 5 lb bag", "est": 6, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["meatloaf", "caldores"]},
+    {"id": "baby-carrots", "section": "produce", "name": "Baby carrots", "qty": "2 lb", "est": 4, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["meatloaf", "caldores"]},
+    {"id": "limes", "section": "produce", "name": "Limes", "qty": "6 (they keep 2+ weeks in the fridge)", "est": 2, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["barbacoa", "chickenfajitas", "caldores"]},
+    {"id": "cilantro", "section": "produce", "name": "Cilantro", "qty": "2 bunches — stand stems in a jar of water in the fridge", "est": 2, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["barbacoa", "caldores"]},
+    {"id": "iceberg", "section": "produce", "name": "Iceberg lettuce", "qty": "1 whole head (keeps about 2 weeks)", "est": 2, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["burritobake"]},
+    {"id": "cabbage", "section": "produce", "name": "Green cabbage", "qty": "1 small head", "est": 2, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["caldores"]},
+    {"id": "mexican-cheese", "section": "dairy", "name": "Shredded Mexican-blend cheese", "qty": "2 lb bag", "est": 9, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["chickenfajitas", "burritobake"]},
+    {"id": "sour-cream", "section": "dairy", "name": "Sour cream", "qty": "16 oz (check the date: good 2+ weeks)", "est": 4, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["chickenfajitas", "burritobake"]},
+    {"id": "flour-tortillas", "section": "bakery", "name": "Flour tortillas (taco size)", "qty": "2 packs of 20", "est": 8, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["chickenfajitas", "chilecolorado"]},
+    {"id": "burrito-tortillas", "section": "bakery", "name": "Burrito-size flour tortillas", "qty": "1 pack of 8–10", "est": 4, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["burritobake"]},
+    {"id": "corn-tortillas", "section": "bakery", "name": "Corn tortillas", "qty": "1 pack (30) — FREEZE it on shopping day", "est": 3, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["barbacoa", "caldores"]},
+    {"id": "tomato-sauce", "section": "canned", "name": "Tomato sauce", "qty": "1 can (8 oz)", "est": 1, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["caldores"]},
+    {"id": "chipotle", "section": "canned", "name": "Chipotle peppers in adobo", "qty": "1 small can", "est": 3, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["barbacoa"]},
+    {"id": "refried", "section": "canned", "name": "Refried beans", "qty": "3 cans", "est": 7, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["burritobake", "chilecolorado"]},
+    {"id": "enchilada", "section": "canned", "name": "Red enchilada sauce", "qty": "1 large can (19 oz)", "est": 3, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["burritobake"]},
+    {"id": "red-chile", "section": "canned", "name": "Red chile sauce (Las Palmas)", "qty": "1 can (28 oz)", "est": 4, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["chilecolorado"]},
+    {"id": "salsa", "section": "canned", "name": "Salsa", "qty": "1 jar (24 oz)", "est": 4, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["barbacoa", "chickenfajitas"]},
+    {"id": "soy-sauce", "section": "canned", "name": "Soy sauce (low sodium)", "qty": "1 bottle (15 oz)", "est": 3, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["beefbroccoli"]},
+    {"id": "taco-seasoning", "section": "pantry", "name": "Taco seasoning", "qty": "1 packet", "est": 1, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["burritobake"]},
+    {"id": "brown-sugar", "section": "pantry", "name": "Brown sugar", "qty": "2 lb bag", "est": 3, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["beefbroccoli", "meatloaf"]},
+    {"id": "breadcrumbs", "section": "pantry", "name": "Plain breadcrumbs", "qty": "1 canister", "est": 3, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["meatloaf"]},
+    {"id": "broccoli", "section": "frozen", "name": "Frozen broccoli florets", "qty": "2 lb", "est": 6, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["beefbroccoli"]},
+    {"id": "corn-cob", "section": "frozen", "name": "Frozen corn on the cob", "qty": "1 pack (4–6 pieces)", "est": 4, "basis": "estimate: Downey/SoCal price, Nov 2026", "estimate": true, "for": ["caldores"]},
+    {"id": "spices", "section": "check", "name": "Spices: cumin, chili powder, oregano, paprika, garlic & onion powder, steak seasoning, bay leaves, ginger", "qty": "check you have them", "est": null, "basis": "on hand", "estimate": true, "for": ["barbacoa", "chickenfajitas", "beefbroccoli", "meatloaf", "caldores", "chilecolorado"]},
+    {"id": "basics", "section": "check", "name": "Oil, flour, cornstarch, salt, pepper, Worcestershire, ketchup, mustard, sesame oil", "qty": "check you have them", "est": null, "basis": "on hand", "estimate": true, "for": ["beefbroccoli", "meatloaf", "chilecolorado"]}
   ];
 
-  // Real prices paid at El Super (South Gate) on Nov 10, 2026, when both weeks were bought in one trip, per list item
-  // (several receipt lines can add up to one item). An estimate is raised to at least what was paid, rounded up to whole
-  // dollars, and never lowered (if the paid amount was lower, e.g. a smaller pack, the old estimate stays).
-  var elSuperPaid = {
-    'apples': 4.75,
-    'avocados': 5.90,
-    'backup-frozen': 7.99,
-    'bananas': 2.68,
-    'bbq-sauce': 2.99,
-    'beef-chuck': 13.87,
-    'bell-peppers': 3.43,
-    'berries': 8.33,
-    'black-beans': 2.49,
-    'bread': 3.09,
-    'butter': 5.99,
-    'cheese': 5.19,
-    'chicken-breast': 7.29,
-    'chicken-thighs': 8.13,
-    'chipotle': 2.47,
-    'cilantro': 0.99,
-    'coleslaw': 1.39,
-    'cream-cheese': 3.99,
-    'cuke-tomato': 4.19,
-    'deli': 9.16,
-    'drumsticks': 7.85,
-    'eggs': 3.98,
-    'enchilada': 2.99,
-    'frozen-corn': 3.79,
-    'frozen-green-beans': 3.79,
-    'garlic': 1.49,
-    'green-onions': 1.48,
-    'ground-beef': 55.55,
-    'hominy': 7.94,
-    'kielbasa': 12.58,
-    'lettuce': 4.36,
-    'limes': 2.26,
-    'milk': 5.97,
-    'onions': 1.73,
-    'oranges': 6.59,
-    'pinto': 4.98,
-    'red-potatoes': 3.20,
-    'salsa': 4.40,
-    'salsa-verde': 3.49,
-    'sour-cream': 5.49,
-    'spaghetti': 9.93,
-    'taco-cinnamon': 2.98,
-    'tostadas': 1.99,
-    'yogurt': 7.18
-  };
-  (function applyPaid() {
-    Object.keys(elSuperPaid).forEach(function (id) {
-      var hits = week1Items.concat(week2Items).filter(function (it) { return it.id === id && it.est != null; });
-      if (!hits.length) return;
-      var cur = hits.reduce(function (a, it) { return a + it.est; }, 0), paid = elSuperPaid[id], target = Math.ceil(paid);
-      if (paid <= cur) return;
-      var left = target;
-      hits.forEach(function (it, i) {
-        var share = i === hits.length - 1 ? left : Math.round(target * it.est / cur);
-        left -= share; it.est = share;
-        it.basis = 'raised to El Super Nov 10, 2026 price: paid $' + paid.toFixed(2) + (hits.length > 1 ? ' for both weeks' : '');
-      });
-    });
-  })();
-
-  // ONE combined 2-week shopping list (Freddy, Nov 10, 2026: shop both weeks in one trip). Items that appear in both
+  // ONE combined 2-week shopping list (Freddy, Nov 10 and Nov 21, 2026: shop both weeks in one trip). Items that appear in both
   // weeks are merged into one line: quantities are listed per week and the estimates are added (never lowered).
   function combineWeeks(a, b) {
     var out = [], byId = {};
@@ -222,7 +163,7 @@
       if (cur.section === 'check' && it.section !== 'check') cur.section = it.section;
       if (it.est != null) cur.est = (cur.est || 0) + it.est;
       (it.for || []).forEach(function (m) { if (cur.for.indexOf(m) < 0) cur.for.push(m); });
-      cur.basis = /El Super/.test(cur.basis || '') ? cur.basis : /El Super/.test(it.basis || '') ? it.basis : 'week 1 + week 2 added together';
+      if (cur.est != null) cur.basis = 'week 1 + week 2 added together';
     }
     a.forEach(function (it) { add(it, '1'); });
     b.forEach(function (it) { add(it, '2'); });
@@ -234,45 +175,45 @@
       return o;
     });
   }
-  var bothItems = combineWeeks(week1Items, week2Items);
+  var tripItems = combineWeeks(week1Items, week2Items);
   var lists = {
-    both: {
+    trip2: {
       label: '2-week list',
-      note: 'One list for both weeks, so you can shop once. Items used in both weeks are merged into one line (each week’s amount is shown) and their estimates are added together. Week 1 includes breakfasts, lunches and snacks; week 2 is dinners only. Prices are estimates, raised to what was actually paid at El Super on Nov 10, 2026 where that was more (never lowered).',
-      items: bothItems
+      note: "One list for both weeks, so you shop once. Items used in both weeks are on one line with each week’s amount, and their estimates are added together. MEAT ON SHOPPING DAY: keep only the Week 1 stew meat (Mon), sirloin (Tue) and carne asada (Wed) in the fridge. Freeze everything else the same day, flat in zip bags labeled with the dinner name. Thaw each one in the fridge the night before (a full day ahead for roasts and the beef shank). If you cook out of order, any ground beef, stew meat or chicken you will not cook within 2 days goes in the freezer. Includes breakfasts, lunches and snacks for 5 for both weeks. Prices are realistic Downey-area estimates (Nov 2026), not sale prices.",
+      items: tripItems
     }
   };
 
   var weeks = {
     '1': {
       label: 'Week 1',
-      note: 'The Page’s week 1 list: 6 dinners plus breakfasts, lunches and snacks for 5. Prices are rough Downey-area estimates. Assumes salt, pepper, oil and chili powder are in the pantry. Pet food is budgeted separately.',
+      note: 'Week 1 dinners plus breakfasts, lunches and snacks for both weeks. Prices are Downey-area estimates.',
       dinners: [
-        { day: 'Mon', meal: 'salsabeef', title: 'Salsa Beef tacos', detail: 'one pot, about 25 min' },
-        { day: 'Tue', meal: 'kielbasa', title: 'Sheet Pan Kielbasa, Potatoes and Green Beans', detail: '' },
-        { day: 'Wed', meal: 'tingabeef', title: 'Beef Tinga tostadas', detail: 'one pot' },
-        { day: 'Thu', meal: 'tortillacasserole', title: 'Cheesy Chicken Tortilla Casserole', detail: 'rotisserie chicken' },
-        { day: 'Fri', meal: 'drumsticks', title: 'Oven Baked Drumsticks with rice and green beans', detail: '' },
-        { day: 'Sat', meal: 'carnitas', title: 'Slow Cooker Carnitas tacos', detail: '5 hr on HIGH' },
-        { day: 'Sun', meal: null, title: 'Sunday spaghetti', detail: 'box pasta and jarred sauce' }
+        {"day": "Mon", "meal": "guisada", "title": "Crockpot Carne Guisada", "detail": "crockpot — meat from the fridge"},
+        {"day": "Tue", "meal": "steakbites", "title": "Sheet-Pan Steak Bites with Potatoes and Green Beans", "detail": "sheet pan — meat from the fridge"},
+        {"day": "Wed", "meal": "carneasada", "title": "Oven Carne Asada Tacos", "detail": "oven broiler — meat from the fridge"},
+        {"day": "Thu", "meal": "chickentinga", "title": "Crockpot Chicken Tinga Tostadas", "detail": "crockpot — thaw chicken Wed night"},
+        {"day": "Fri", "meal": "ovenburgers", "title": "Sheet-Pan Oven Cheeseburgers and Fries", "detail": "sheet pan — thaw beef Thu night"},
+        {"day": "Sat", "meal": "potroast", "title": "Crockpot Pot Roast with Potatoes and Carrots", "detail": "crockpot — thaw roast Fri morning"},
+        {"day": "Sun", "meal": "bakedziti", "title": "Baked Ziti with Beef", "detail": "oven — thaw beef Sat night"}
       ],
       items: week1Items
     },
     '2': {
       label: 'Week 2',
-      note: 'The Page has no week 2 list, so this one is built from week 2’s recipes on the Page and de-duplicated. Dinners only (add breakfast, lunch and snack items yourself). All prices are estimates: week 1 prices where the item repeats, otherwise rough guesses.',
+      note: 'Week 2 dinners. All week 2 meat is frozen on shopping day; each recipe says when to move it to the fridge.',
       dinners: [
-        { day: 'Mon', meal: 'whitechili', title: 'White Chicken Chili', detail: 'crockpot' },
-        { day: 'Tue', meal: 'fajitas', title: 'Sheet Pan Chicken Fajitas', detail: '' },
-        { day: 'Wed', meal: 'pozole', title: 'Chicken Pozole Verde', detail: 'crockpot, parent loads on LOW' },
-        { day: 'Thu', meal: 'burritocasserole', title: 'Beef Burrito Casserole', detail: 'Sunday beef and rice' },
-        { day: 'Fri', meal: 'bbqbeef', title: 'BBQ Beef sandwiches with coleslaw', detail: 'one pot' },
-        { day: 'Sat', meal: 'tacobeef', title: 'Shredded Taco Beef', detail: '6–8 hr on LOW' },
-        { day: 'Sun', meal: null, title: 'Sunday prep, then breakfast for dinner or quesadillas', detail: 'uses eggs, tortillas, cheese on hand' }
+        {"day": "Mon", "meal": "barbacoa", "title": "Crockpot Beef Barbacoa Tacos", "detail": "crockpot — thaw roast Sun morning"},
+        {"day": "Tue", "meal": "chickenfajitas", "title": "Sheet-Pan Chicken Fajitas", "detail": "sheet pan — thaw chicken Mon night"},
+        {"day": "Wed", "meal": "burritobake", "title": "Beef and Bean Burrito Bake", "detail": "oven — thaw beef Tue night"},
+        {"day": "Thu", "meal": "beefbroccoli", "title": "Crockpot Beef and Broccoli", "detail": "crockpot — thaw beef Wed morning"},
+        {"day": "Fri", "meal": "meatloaf", "title": "Sheet-Pan Mini Meatloaves with Potatoes and Carrots", "detail": "sheet pan — thaw beef Thu night"},
+        {"day": "Sat", "meal": "caldores", "title": "Crockpot Caldo de Res (Beef Soup)", "detail": "crockpot — thaw shank Fri morning"},
+        {"day": "Sun", "meal": "chilecolorado", "title": "Crockpot Chile Colorado (Beef in Red Chile)", "detail": "crockpot — thaw beef Sat night"}
       ],
       items: week2Items
     }
   };
 
-  return { version: 3, source: 'Tamayo Weeknight Meals (Page)', defaultBudget: 325, sections: sections, meals: meals, weeks: weeks, lists: lists, listKey: 'both' };
+  return { version: 4, source: 'Tamayo 2-week beef-forward plan (Nov 21, 2026)', defaultBudget: 650, sections: sections, meals: meals, weeks: weeks, lists: lists, listKey: 'trip2' };
 });

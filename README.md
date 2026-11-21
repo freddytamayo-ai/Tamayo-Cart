@@ -6,12 +6,13 @@ confirm it, and watch the running total against your budget — so there are no 
 * 100% static + offline PWA. No accounts, no server, no tracking, no ads. Data lives in the phone's localStorage.
 * OCR: Tesseract.js 5.1.1 (LSTM, `eng` 4.0.0_best_int), vendored in `vendor/tesseract/` — no CDN.
 * Hosting how-to: see `HOSTING.md` (not deployed).
-* Default **2-week** budget: **$325** (the saved number is not changed by the list; tap the budget pill to edit it; "No budget" turns it off).
+* Default **2-week** budget: **$650** ($325/week × 2, since Nov 21, 2026). A phone still on an old default ($0 or $325) moves to $650 once; any other saved amount is kept. Tap the budget pill to edit it; "No budget" turns it off.
 
 ## 📋 Meal plan shopping list
 The **Meal plan list** tab turns the 2-week dinner plan from the *Tamayo Weeknight Meals* page into a store-ready list.
 
-* **One combined 2-week shopping list** (since Nov 10, 2026): week 1 and week 2 are merged into a single list with one total, so the family can shop both weeks in one trip. Items used in both weeks become one line showing each week's amount ("Wk 1: … · Wk 2: …"), and their estimates are added together (never lowered). **Week 1 / Week 2** only switches the dinners shown. The list is built in `meals.js` (`lists.both`, from `combineWeeks`). Estimates were raised to the real El Super (South Gate) prices paid on Nov 10, 2026 where those were higher (`elSuperPaid`; never lowered), so the 2-week list estimate is about $451. The list is de-duplicated and grouped by store section (produce, meat, dairy, tortillas, canned, pantry, frozen, snacks).
+* **One combined 2-week shopping list** (since Nov 10, 2026): week 1 and week 2 are merged into a single list with one total, so the family can shop both weeks in one trip. Items used in both weeks become one line showing each week's amount ("Wk 1: … · Wk 2: …"), and their estimates are added together (never lowered). **Week 1 / Week 2** only switches the dinners shown. The list is built in `meals.js` (`lists.trip2`, from `combineWeeks`).
+* **Nov 21, 2026 plan:** 14 beef-forward dinners (12 beef, 2 chicken), every one feeds 5, with step-by-step recipes and a shared Made it check. The 2-week list (dinners plus breakfasts, lunches and snacks for both weeks) estimates about $690 at realistic Downey-area prices. Meat for Week 1 Mon–Wed stays in the fridge; everything else is frozen on shopping day, and each recipe says when to thaw it. The list key moved from `both` to `trip2` and all meal ids are new, so last trip's check-offs and Made it marks start fresh. The list is de-duplicated and grouped by store section (produce, meat, dairy, tortillas, canned, pantry, frozen, snacks).
 * **Check off** an item with the big box (e.g. you already have it), or tap the item → **Scan price** / **Type price**:
   the cart line is linked to that list item, so it's checked off with its real price. When you add any item from the
   dock, the sheet suggests a matching list item ("✓ Check off “Milk”?") or you can pick one from the dropdown.

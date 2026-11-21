@@ -8,7 +8,9 @@
   else root.TamayoPlan = factory();
 })(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
-  var OLD_DEFAULT_BUDGET = 0, NEW_DEFAULT_BUDGET = 325, BUDGET_V = 2;
+  // v3 (Nov 21, 2026): the 2-week budget default is $650 ($325/week x 2). A phone still on an old default
+  // ($0 = none, or the old $325) moves to $650 once; any other amount the family typed is kept.
+  var OLD_DEFAULT_BUDGET = 0, OLD_DEFAULTS = [0, 325], NEW_DEFAULT_BUDGET = 650, BUDGET_V = 3;
 
   function cents(v) { return Math.round((Number(v) || 0) * 100); }
   function lineTotal(it) { return Math.round(cents(it.price) * (Number(it.qty) || 0)) / 100; }
@@ -176,7 +178,7 @@
   /** Budget migration: the old default was "no budget" (0). Move only that untouched default to $325. */
   function migrateBudget(state) {
     if (state.budgetV === BUDGET_V) return state;
-    if (state.budget == null || Number(state.budget) === OLD_DEFAULT_BUDGET) state.budget = NEW_DEFAULT_BUDGET;
+    if (state.budget == null || OLD_DEFAULTS.indexOf(Number(state.budget)) >= 0) state.budget = NEW_DEFAULT_BUDGET;
     state.budgetV = BUDGET_V;
     return state;
   }
