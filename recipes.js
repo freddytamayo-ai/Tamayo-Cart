@@ -11,89 +11,6 @@
   return {
   "version": 3,
   "byMeal": {
-    "guisada": {
-      "servings": "5",
-      "prep": "15 min",
-      "cook": "8 hr LOW or 4–5 hr HIGH",
-      "equipment": "6-quart crockpot, pot for rice",
-      "ingredients": [
-        "2.5 lb beef stew meat (carne para guisar)",
-        "2 Tbsp flour",
-        "1 onion, diced",
-        "1 green bell pepper, diced",
-        "4 garlic cloves, minced",
-        "1 can (8 oz) tomato sauce",
-        "1 cup water + 1 tsp beef bouillon",
-        "2 tsp cumin, 1 tsp chili powder, 1 tsp oregano",
-        "1 tsp salt, 1/2 tsp pepper",
-        "2 cups white rice (makes rice for 5)",
-        "10 flour tortillas"
-      ],
-      "steps": [
-        {
-          "title": "Season the beef",
-          "detail": "Put the stew meat in the crockpot. Sprinkle on the flour, cumin, chili powder, oregano, salt and pepper. Stir so every piece is coated."
-        },
-        {
-          "title": "Add the rest",
-          "detail": "Add the onion, bell pepper and garlic. Pour in the tomato sauce and the water mixed with bouillon. Stir."
-        },
-        {
-          "title": "Cook",
-          "detail": "Cover and cook 8 hours on LOW or 4–5 hours on HIGH, until a piece of beef breaks apart with a fork."
-        },
-        {
-          "title": "Make the rice",
-          "detail": "30 minutes before dinner: bring 4 cups water and 1 tsp salt to a boil, add 2 cups rice, cover, turn to low and cook 18 minutes. Turn off and leave covered 5 minutes."
-        },
-        {
-          "title": "Serve",
-          "detail": "Warm the tortillas in a dry pan. Serve the guisada over rice or in tortillas."
-        }
-      ],
-      "doneness": "Beef is done when it pulls apart easily with a fork (it is safe well before that, at 145°F). Refrigerate leftovers within 2 hours.",
-      "tip": "Load it in the morning before school or work and dinner is ready when you get home."
-    },
-    "steakbites": {
-      "servings": "5",
-      "prep": "15 min",
-      "cook": "About 40 min",
-      "equipment": "2 rimmed sheet pans, foil",
-      "ingredients": [
-        "2.5 lb top sirloin steak, cut in 1-inch cubes",
-        "2 lb small red potatoes, cut in quarters",
-        "1 lb fresh green beans, ends snapped off",
-        "3 Tbsp oil",
-        "2 tsp steak seasoning (or 1 tsp salt, 1 tsp pepper, 1 tsp garlic powder)",
-        "1 tsp salt for the vegetables",
-        "3 garlic cloves, minced",
-        "2 Tbsp butter"
-      ],
-      "steps": [
-        {
-          "title": "Heat the oven",
-          "detail": "Heat the oven to 425°F. Line 2 sheet pans with foil."
-        },
-        {
-          "title": "Roast the potatoes",
-          "detail": "Toss the potatoes with 1 Tbsp oil and 1/2 tsp salt on one pan. Roast 20 minutes."
-        },
-        {
-          "title": "Season the steak",
-          "detail": "While the potatoes roast, toss the steak cubes with 1 Tbsp oil, the steak seasoning and the garlic. Toss the green beans with the last 1 Tbsp oil and 1/2 tsp salt."
-        },
-        {
-          "title": "Add steak and beans",
-          "detail": "Take out the potatoes. Put the green beans next to them. Spread the steak in one layer on the second pan. Roast both pans 10–12 minutes."
-        },
-        {
-          "title": "Finish",
-          "detail": "Put small pieces of butter over the hot steak and stir. Serve right away."
-        }
-      ],
-      "doneness": "Steak is medium at 145°F (cut one cube: pink in the middle is fine). Potatoes are done when a fork slides in easily.",
-      "tip": "Cut the steak while it is cold from the fridge. It is much easier."
-    },
     "carneasada": {
       "servings": "5",
       "prep": "15 min + 1 hr or more marinating",
@@ -135,200 +52,258 @@
       "doneness": "Steak is done at 145°F. Throw away the used marinade. Never pour it on cooked meat.",
       "tip": "El Super and most Mexican markets sell carne asada already marinated. If you buy that, skip step 1."
     },
-    "chickentinga": {
-      "servings": "5",
-      "prep": "10 min",
-      "cook": "6 hr LOW or 3 hr HIGH",
-      "equipment": "Crockpot, small pot for beans",
-      "ingredients": [
-        "2.5 lb boneless skinless chicken thighs",
-        "1 onion, sliced",
-        "3 garlic cloves, minced",
-        "1 can (15 oz) fire-roasted diced tomatoes",
-        "2 chipotle peppers in adobo, chopped, + 1 Tbsp of the sauce",
-        "1/2 cup water + 1/2 tsp bouillon",
-        "1 tsp oregano, 1 tsp cumin, 1 tsp salt",
-        "15 tostadas",
-        "2 cans refried beans, warmed",
-        "Shredded lettuce, crema and crumbled queso fresco"
-      ],
-      "steps": [
-        {
-          "title": "Thaw the meat the night before",
-          "detail": "Move the chicken thighs from the freezer to the fridge the night before. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
-        },
-        {
-          "title": "Load the crockpot",
-          "detail": "Put the onion and garlic in the crockpot. Lay the chicken on top. Add the tomatoes, chipotles, adobo sauce, water with bouillon, oregano, cumin and salt."
-        },
-        {
-          "title": "Cook",
-          "detail": "Cover and cook 6 hours on LOW or 3 hours on HIGH."
-        },
-        {
-          "title": "Shred",
-          "detail": "Shred the chicken with 2 forks right in the sauce and stir."
-        },
-        {
-          "title": "Serve",
-          "detail": "Spread warm refried beans on each tostada, add chicken, then lettuce, crema and queso fresco."
-        }
-      ],
-      "doneness": "Chicken is done at 165°F. It should shred easily with no pink. Refrigerate leftovers within 2 hours.",
-      "tip": "Chipotles are spicy. Use 1 pepper if the family likes it milder."
-    },
-    "ovenburgers": {
+    "steakbites": {
       "servings": "5",
       "prep": "15 min",
-      "cook": "About 25 min",
+      "cook": "About 40 min",
       "equipment": "2 rimmed sheet pans, foil",
       "ingredients": [
-        "2.5 lb ground beef (makes 10 patties, 2 per person)",
-        "1.5 tsp salt, 1 tsp pepper, 1 tsp garlic powder",
-        "10 slices American cheese",
-        "10 hamburger buns",
-        "Lettuce, 2 tomatoes, 1 onion and pickles, sliced",
-        "Ketchup and mustard",
-        "2 bags (2 lb each) frozen french fries"
+        "2.5 lb top sirloin steak, cut in 1-inch cubes",
+        "2 lb small red potatoes, cut in quarters",
+        "1 lb fresh green beans, ends snapped off",
+        "3 Tbsp oil",
+        "2 tsp steak seasoning (or 1 tsp salt, 1 tsp pepper, 1 tsp garlic powder)",
+        "1 tsp salt for the vegetables",
+        "3 garlic cloves, minced",
+        "2 Tbsp butter"
       ],
       "steps": [
         {
-          "title": "Thaw the meat the night before",
-          "detail": "Move the ground beef from the freezer to the fridge the night before. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
+          "title": "Heat the oven",
+          "detail": "Heat the oven to 425°F. Line 2 sheet pans with foil."
         },
         {
-          "title": "Start the fries",
-          "detail": "Heat the oven to 425°F. Spread the fries on a foil-lined pan and bake as the bag says (usually 20–25 minutes). Stir once halfway."
+          "title": "Roast the potatoes",
+          "detail": "Toss the potatoes with 1 Tbsp oil and 1/2 tsp salt on one pan. Roast 20 minutes."
         },
         {
-          "title": "Make patties",
-          "detail": "Split the beef into 10 equal balls and press each flat, a little wider than a bun. Set them on the second foil-lined pan. Sprinkle with salt, pepper and garlic powder."
+          "title": "Season the steak",
+          "detail": "While the potatoes roast, toss the steak cubes with 1 Tbsp oil, the steak seasoning and the garlic. Toss the green beans with the last 1 Tbsp oil and 1/2 tsp salt."
         },
         {
-          "title": "Bake",
-          "detail": "Bake the patties 12–15 minutes."
+          "title": "Add steak and beans",
+          "detail": "Take out the potatoes. Put the green beans next to them. Spread the steak in one layer on the second pan. Roast both pans 10–12 minutes."
         },
         {
-          "title": "Add cheese",
-          "detail": "Put a cheese slice on each patty and bake 1 more minute to melt."
-        },
-        {
-          "title": "Build",
-          "detail": "Toast the buns if you like. Add a patty, lettuce, tomato, onion, pickles, ketchup and mustard."
+          "title": "Finish",
+          "detail": "Put small pieces of butter over the hot steak and stir. Serve right away."
         }
       ],
-      "doneness": "Ground beef is done at 160°F with no pink in the middle.",
-      "tip": "Press a small dent in the middle of each patty so it stays flat while it bakes."
+      "doneness": "Steak is medium at 145°F (cut one cube: pink in the middle is fine). Potatoes are done when a fork slides in easily.",
+      "tip": "Cut the steak while it is cold from the fridge. It is much easier."
     },
     "potroast": {
       "servings": "5",
-      "prep": "15 min",
-      "cook": "8–9 hr LOW or 5–6 hr HIGH",
-      "equipment": "6-quart crockpot",
+      "prep": "20 min",
+      "cook": "9–10 hr LOW or 6 hr HIGH",
+      "equipment": "7-quart or bigger crockpot (or a 6-quart plus a 9x13 pan and foil)",
       "ingredients": [
-        "3 lb boneless beef chuck roast",
-        "2 lb potatoes, cut in big chunks",
-        "1 lb baby carrots",
-        "1 onion, cut in wedges",
-        "1 packet dry onion soup mix",
-        "1 cup water + 1 tsp beef bouillon",
-        "1 Tbsp Worcestershire sauce (optional)",
-        "1/2 tsp pepper",
-        "2 Tbsp cornstarch + 2 Tbsp cold water (for gravy)"
+        "6 lb boneless beef chuck roast (2 roasts, about 3 lb each) — double batch, save half for Thursday",
+        "4 lb potatoes, cut in big chunks",
+        "2 lb baby carrots",
+        "2 onions, cut in wedges",
+        "2 packets dry onion soup mix",
+        "2 cups water + 2 tsp beef bouillon",
+        "2 Tbsp Worcestershire sauce (optional)",
+        "1 tsp pepper",
+        "3 Tbsp cornstarch + 3 Tbsp cold water (for gravy)"
       ],
       "steps": [
         {
-          "title": "Thaw the meat a full day ahead",
-          "detail": "The morning of the day before, move the chuck roast from the freezer to the fridge on a plate. A big piece needs about 24 hours. Never thaw it on the counter, and never put frozen meat in the crockpot."
-        },
-        {
           "title": "Vegetables first",
-          "detail": "Put the potatoes, carrots and onion in the bottom of the crockpot."
+          "detail": "Put the potatoes, carrots and onions in the bottom of the crockpot. If your crockpot is only 6 quarts, use half the vegetables now and see step 4."
         },
         {
-          "title": "Add the roast",
-          "detail": "Set the roast on top. Sprinkle the onion soup mix and pepper over it. Pour the water with bouillon and the Worcestershire around it."
+          "title": "Add the roasts",
+          "detail": "Set both roasts on top. Sprinkle the onion soup mix and pepper over them. Pour the water with bouillon and the Worcestershire around them."
         },
         {
           "title": "Cook",
-          "detail": "Cover and cook 8–9 hours on LOW or 5–6 hours on HIGH, until the beef falls apart."
+          "detail": "Cover and cook 9–10 hours on LOW or 6 hours on HIGH, until the beef falls apart."
         },
         {
-          "title": "Make gravy (optional)",
-          "detail": "Move the meat and vegetables to a platter. Stir the cornstarch and cold water together, stir it into the liquid in the crockpot, turn it to HIGH and cook 10 minutes until thick."
+          "title": "Extra vegetables (6-quart crockpot only)",
+          "detail": "An hour before dinner, put the rest of the potatoes and carrots in a 9x13 pan with 1 cup of liquid from the crockpot. Cover with foil and bake at 400°F for 50 minutes."
         },
         {
-          "title": "Serve",
-          "detail": "Pull the beef into chunks and serve with the vegetables and gravy."
+          "title": "Make gravy",
+          "detail": "Move the meat and vegetables to a platter. Stir the cornstarch and cold water together, stir it into the liquid in the crockpot, turn to HIGH and cook 10 minutes until thick."
+        },
+        {
+          "title": "Serve half tonight",
+          "detail": "Pull the beef into chunks and serve half of the meat, vegetables and gravy."
+        },
+        {
+          "title": "Save half for Thursday",
+          "detail": "Within 2 hours of cooking, put the saved half in containers with lids, label them “Thursday leftovers” and put them in the fridge. Eat within 3–4 days."
         }
       ],
       "doneness": "Beef is done when it pulls apart easily with a fork (it is safe well before that, at 145°F). Refrigerate leftovers within 2 hours.",
-      "tip": "Do not lift the lid while it cooks. Every peek adds about 20 minutes."
+      "tip": "Double batch: this one dinner feeds 5 tonight and 5 again on Thursday. Do not lift the lid while it cooks."
     },
-    "bakedziti": {
+    "lo-potroast": {
       "servings": "5",
-      "prep": "20 min",
-      "cook": "About 25 min in the oven",
-      "equipment": "Big pot, skillet, 9x13 baking dish",
+      "prep": "5 min",
+      "cook": "About 15–30 min",
+      "equipment": "Covered baking dish or pot, or microwave",
       "ingredients": [
-        "2 lb ground beef",
-        "1 lb ziti or penne pasta",
-        "2 jars (24 oz each) marinara sauce",
-        "1 tsp garlic powder, 1 tsp Italian seasoning or oregano, 1/2 tsp salt",
-        "2 cups shredded mozzarella",
-        "1/2 cup grated parmesan",
-        "1 bag salad and 1 loaf French bread on the side"
+        "Saved half of Wednesday’s pot roast, vegetables and gravy",
+        "1/2 cup water"
+      ],
+      "steps": [
+        {
+          "title": "Reheat in the oven",
+          "detail": "Heat the oven to 350°F. Put the meat, vegetables and gravy in a baking dish, add the water, cover with foil and heat 25–30 minutes, stirring once."
+        },
+        {
+          "title": "Or the microwave",
+          "detail": "Heat each plate covered for 2–3 minutes, stir, then 1–2 minutes more until steaming."
+        },
+        {
+          "title": "Serve",
+          "detail": "Serve hot with the gravy."
+        }
+      ],
+      "doneness": "Reheat leftovers until steaming hot all the way through (165°F). Reheat only once; throw away anything older than 4 days.",
+      "tip": "Pot roast also makes great sandwiches on bread from the pantry."
+    },
+    "guisada": {
+      "servings": "5",
+      "prep": "15 min",
+      "cook": "8 hr LOW or 4–5 hr HIGH",
+      "equipment": "6-quart crockpot, pot for rice",
+      "ingredients": [
+        "2.5 lb beef stew meat (carne para guisar)",
+        "2 Tbsp flour",
+        "1 onion, diced",
+        "1 green bell pepper, diced",
+        "4 garlic cloves, minced",
+        "1 can (8 oz) tomato sauce",
+        "1 cup water + 1 tsp beef bouillon",
+        "2 tsp cumin, 1 tsp chili powder, 1 tsp oregano",
+        "1 tsp salt, 1/2 tsp pepper",
+        "2 cups white rice (makes rice for 5)",
+        "10 flour tortillas"
       ],
       "steps": [
         {
           "title": "Thaw the meat the night before",
-          "detail": "Move the ground beef from the freezer to the fridge the night before. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
+          "detail": "Move the stew meat from the freezer to the fridge the night before. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
         },
         {
-          "title": "Boil the pasta",
-          "detail": "Heat the oven to 375°F. Boil the pasta in salted water 2 minutes less than the box says. Drain."
+          "title": "Season the beef",
+          "detail": "Put the stew meat in the crockpot. Sprinkle on the flour, cumin, chili powder, oregano, salt and pepper. Stir so every piece is coated."
         },
         {
-          "title": "Brown the beef",
-          "detail": "While the pasta cooks, brown the beef in a big skillet until no pink remains. Drain the fat. Stir in the marinara, garlic powder, seasoning and salt."
+          "title": "Add the rest",
+          "detail": "Add the onion, bell pepper and garlic. Pour in the tomato sauce and the water mixed with bouillon. Stir."
         },
         {
-          "title": "Mix and top",
-          "detail": "Stir the pasta into the sauce. Pour it into the 9x13 dish. Cover the top with mozzarella and parmesan."
+          "title": "Cook",
+          "detail": "Cover and cook 8 hours on LOW or 4–5 hours on HIGH, until a piece of beef breaks apart with a fork."
         },
         {
-          "title": "Bake",
-          "detail": "Bake 20–25 minutes until the cheese melts and bubbles."
+          "title": "Make the rice",
+          "detail": "30 minutes before dinner: bring 4 cups water and 1 tsp salt to a boil, add 2 cups rice, cover, turn to low and cook 18 minutes. Turn off and leave covered 5 minutes."
         },
         {
           "title": "Serve",
-          "detail": "Serve with the bagged salad and sliced French bread."
+          "detail": "Warm the tortillas in a dry pan. Serve the guisada over rice or in tortillas."
+        }
+      ],
+      "doneness": "Beef is done when it pulls apart easily with a fork (it is safe well before that, at 145°F). Refrigerate leftovers within 2 hours.",
+      "tip": "Load it in the morning before school or work and dinner is ready when you get home."
+    },
+    "bakedziti": {
+      "servings": "5",
+      "prep": "30 min",
+      "cook": "About 25 min in the oven",
+      "equipment": "Biggest pot, big skillet, 2 baking dishes (9x13), foil",
+      "ingredients": [
+        "4 lb ground beef — double batch, save one pan for Sunday",
+        "2 lb ziti or penne pasta",
+        "4 jars (24 oz each) marinara sauce",
+        "2 tsp garlic powder, 2 tsp Italian seasoning or oregano, 1 tsp salt",
+        "4 cups shredded mozzarella",
+        "1 cup grated parmesan",
+        "1 bag salad and 1 loaf French bread tonight (another of each for Sunday)"
+      ],
+      "steps": [
+        {
+          "title": "Thaw the meat the night before",
+          "detail": "Move the ground beef (both bags) from the freezer to the fridge the night before. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
+        },
+        {
+          "title": "Boil the pasta",
+          "detail": "Heat the oven to 375°F. Boil the pasta in your biggest pot of salted water (or in 2 batches) 2 minutes less than the box says. Drain."
+        },
+        {
+          "title": "Brown the beef",
+          "detail": "Brown the beef in 2 batches in a big skillet until no pink remains. Drain the fat. Return it all to the pasta pot with the marinara, garlic powder, seasoning and salt."
+        },
+        {
+          "title": "Fill 2 pans",
+          "detail": "Stir the pasta into the sauce. Split it between the 2 dishes. Cover each top with half the mozzarella and parmesan."
+        },
+        {
+          "title": "Bake one pan",
+          "detail": "Bake one pan 20–25 minutes until the cheese melts and bubbles. Serve with salad and French bread."
+        },
+        {
+          "title": "Save the second pan for Sunday",
+          "detail": "Cover the second (unbaked) pan tightly with foil, label it “Sunday” and put it in the fridge right away. Eat within 3 days."
         }
       ],
       "doneness": "Ground beef is done at 160°F with no pink. Refrigerate leftovers within 2 hours.",
-      "tip": "Undercooking the pasta a little keeps it from getting mushy in the oven."
+      "tip": "Double batch: the second pan is Sunday’s dinner, already made. Undercooking the pasta a little keeps it from getting mushy."
+    },
+    "lo-bakedziti": {
+      "servings": "5",
+      "prep": "5 min",
+      "cook": "About 15–30 min",
+      "equipment": "Covered baking dish or pot, or microwave",
+      "ingredients": [
+        "The second (unbaked) pan of ziti saved Saturday",
+        "1 bag salad and 1 loaf French bread"
+      ],
+      "steps": [
+        {
+          "title": "Bake from the fridge",
+          "detail": "Heat the oven to 375°F. Keep the foil on and bake 30 minutes."
+        },
+        {
+          "title": "Brown the top",
+          "detail": "Take off the foil and bake 15 minutes more, until the cheese bubbles and the middle is hot."
+        },
+        {
+          "title": "Serve",
+          "detail": "Serve with the salad and sliced French bread."
+        }
+      ],
+      "doneness": "Reheat leftovers until steaming hot all the way through (165°F). Reheat only once; throw away anything older than 4 days.",
+      "tip": "The pan goes into the oven cold, so give it the full time."
     },
     "barbacoa": {
       "servings": "5",
-      "prep": "15 min",
-      "cook": "8–10 hr LOW or 5–6 hr HIGH",
-      "equipment": "6-quart crockpot",
+      "prep": "20 min",
+      "cook": "9–10 hr LOW or 6 hr HIGH",
+      "equipment": "6-quart or bigger crockpot",
       "ingredients": [
-        "3 lb boneless beef chuck roast, cut in 4 big pieces",
-        "1 onion, chopped",
-        "4 garlic cloves",
-        "3 chipotle peppers in adobo + 2 Tbsp of the sauce",
-        "Juice of 2 limes",
-        "1/2 cup water + 1/2 tsp beef bouillon",
-        "1 Tbsp cumin, 1 Tbsp oregano, 1.5 tsp salt",
-        "2 bay leaves",
-        "20 corn tortillas",
+        "6 lb boneless beef chuck roast, cut in 8 big pieces — double batch, save half for Tuesday",
+        "2 onions, chopped",
+        "8 garlic cloves",
+        "5 chipotle peppers in adobo + 3 Tbsp of the sauce",
+        "Juice of 4 limes",
+        "1 cup water + 1 tsp beef bouillon",
+        "2 Tbsp cumin, 2 Tbsp oregano, 1 Tbsp salt",
+        "3 bay leaves",
+        "20 corn tortillas for tonight",
         "Chopped onion, cilantro, salsa and lime wedges"
       ],
       "steps": [
         {
-          "title": "Thaw the meat a full day ahead",
-          "detail": "The morning of the day before, move the chuck roast from the freezer to the fridge on a plate. A big piece needs about 24 hours. Never thaw it on the counter, and never put frozen meat in the crockpot."
+          "title": "Thaw the meat 2 days ahead",
+          "detail": "Saturday morning, move both bags of chuck roast (6 lb) from the freezer to the fridge on a plate. That much meat needs about 2 days. Never thaw it on the counter, and never put frozen meat in the crockpot."
         },
         {
           "title": "Season",
@@ -336,23 +311,54 @@
         },
         {
           "title": "Add the sauce",
-          "detail": "Add the onion, garlic, chipotles, adobo sauce, lime juice, water with bouillon and bay leaves."
+          "detail": "Add the onions, garlic, chipotles, adobo sauce, lime juice, water with bouillon and bay leaves."
         },
         {
           "title": "Cook",
-          "detail": "Cover and cook 8–10 hours on LOW or 5–6 hours on HIGH, until it shreds easily."
+          "detail": "Cover and cook 9–10 hours on LOW or 6 hours on HIGH, until it shreds easily."
         },
         {
           "title": "Shred",
           "detail": "Take out the bay leaves. Shred the beef with 2 forks and stir it back into the juices."
         },
         {
-          "title": "Serve",
+          "title": "Serve half tonight",
           "detail": "Warm the tortillas. Fill with barbacoa and top with onion, cilantro, salsa and lime."
+        },
+        {
+          "title": "Save half for Tuesday",
+          "detail": "Within 2 hours of cooking, put the saved half in containers with lids, label them “Tuesday leftovers” and put them in the fridge. Eat within 3–4 days."
         }
       ],
       "doneness": "Beef is done when it pulls apart easily with a fork (it is safe well before that, at 145°F). Refrigerate leftovers within 2 hours.",
-      "tip": "Leftover barbacoa makes great burritos or quesadillas for lunch."
+      "tip": "Double batch: save half with plenty of the juices so it stays moist when you reheat it."
+    },
+    "lo-barbacoa": {
+      "servings": "5",
+      "prep": "5 min",
+      "cook": "About 15–30 min",
+      "equipment": "Covered baking dish or pot, or microwave",
+      "ingredients": [
+        "Saved half of Monday’s barbacoa with its juices",
+        "20 corn tortillas",
+        "Chopped onion, cilantro, salsa and lime wedges"
+      ],
+      "steps": [
+        {
+          "title": "Reheat",
+          "detail": "Put the barbacoa and its juices in a pot. Cover and heat on medium-low 10–15 minutes, stirring often, until steaming."
+        },
+        {
+          "title": "Warm tortillas",
+          "detail": "Warm the tortillas in a dry pan."
+        },
+        {
+          "title": "Serve",
+          "detail": "Fill with barbacoa and top with onion, cilantro, salsa and lime."
+        }
+      ],
+      "doneness": "Reheat leftovers until steaming hot all the way through (165°F). Reheat only once; throw away anything older than 4 days.",
+      "tip": "Add a splash of water if it looks dry."
     },
     "chickenfajitas": {
       "servings": "5",
@@ -442,52 +448,6 @@
       "doneness": "Ground beef is done at 160°F with no pink. Refrigerate leftovers within 2 hours.",
       "tip": "Make it the night before, cover and refrigerate. Add 10 minutes to the bake time."
     },
-    "beefbroccoli": {
-      "servings": "5",
-      "prep": "15 min",
-      "cook": "5–6 hr LOW or 3 hr HIGH",
-      "equipment": "Crockpot, pot for rice",
-      "ingredients": [
-        "2.5 lb boneless beef chuck (roast or steaks), sliced in thin strips",
-        "1 cup water + 1 tsp beef bouillon",
-        "2/3 cup soy sauce (low sodium if you have it)",
-        "1/3 cup brown sugar",
-        "4 garlic cloves, minced",
-        "1 tsp ground ginger",
-        "1 Tbsp sesame oil (optional)",
-        "3 Tbsp cornstarch + 3 Tbsp cold water",
-        "2 lb frozen broccoli florets",
-        "2.5 cups white rice"
-      ],
-      "steps": [
-        {
-          "title": "Thaw the meat a full day ahead",
-          "detail": "The morning of the day before, move the beef chuck from the freezer to the fridge on a plate. A big piece needs about 24 hours. Never thaw it on the counter, and never put frozen meat in the crockpot."
-        },
-        {
-          "title": "Slice the beef",
-          "detail": "Slice the beef across the grain into thin strips. It is easiest while it is still a little frozen."
-        },
-        {
-          "title": "Load the crockpot",
-          "detail": "Stir the water with bouillon, soy sauce, brown sugar, garlic, ginger and sesame oil in the crockpot. Add the beef and stir."
-        },
-        {
-          "title": "Cook",
-          "detail": "Cover and cook 5–6 hours on LOW or 3 hours on HIGH."
-        },
-        {
-          "title": "Thicken and add broccoli",
-          "detail": "30 minutes before dinner, turn to HIGH. Stir the cornstarch and cold water together and stir it in. Add the frozen broccoli, cover and cook 30 minutes."
-        },
-        {
-          "title": "Rice and serve",
-          "detail": "Make the rice: 5 cups water, 1 tsp salt, 2.5 cups rice, cover, low heat 18 minutes. Serve the beef and broccoli over rice."
-        }
-      ],
-      "doneness": "Beef is done when it pulls apart easily with a fork (it is safe well before that, at 145°F). Refrigerate leftovers within 2 hours.",
-      "tip": "If you can, ask the meat counter to slice the chuck thin before you freeze it."
-    },
     "meatloaf": {
       "servings": "5",
       "prep": "20 min",
@@ -534,74 +494,26 @@
       "doneness": "Meatloaf is done at 160°F in the middle, with no pink.",
       "tip": "Wash your hands well after mixing raw beef, before you touch anything else."
     },
-    "caldores": {
-      "servings": "5",
-      "prep": "20 min",
-      "cook": "8 hr LOW",
-      "equipment": "6-quart or bigger crockpot, pot for rice",
-      "ingredients": [
-        "3.5 lb bone-in beef shank (chamorro)",
-        "1 onion, cut in half",
-        "4 garlic cloves",
-        "1 can (8 oz) tomato sauce",
-        "1 Tbsp beef bouillon (caldo de res) + 2 tsp salt",
-        "2 bay leaves",
-        "7 cups water",
-        "3 potatoes, cut in big chunks",
-        "1 lb baby carrots",
-        "4 frozen corn-on-the-cob pieces",
-        "1/2 small cabbage, cut in wedges",
-        "1.5 cups rice, cilantro, limes, tortillas"
-      ],
-      "steps": [
-        {
-          "title": "Thaw the meat a full day ahead",
-          "detail": "The morning of the day before, move the beef shank from the freezer to the fridge on a plate. A big piece needs about 24 hours. Never thaw it on the counter, and never put frozen meat in the crockpot."
-        },
-        {
-          "title": "Load the crockpot",
-          "detail": "Put the shank, onion, garlic, tomato sauce, bouillon, salt and bay leaves in the crockpot. Add the potatoes, carrots and corn. Pour in the water (stop about 1 inch from the top)."
-        },
-        {
-          "title": "Cook",
-          "detail": "Cover and cook 8 hours on LOW, until the meat falls off the bone."
-        },
-        {
-          "title": "Add cabbage",
-          "detail": "45 minutes before dinner, turn to HIGH and push the cabbage wedges into the soup."
-        },
-        {
-          "title": "Make rice",
-          "detail": "Cook 1.5 cups rice with 3 cups water and 1 tsp salt, covered on low, 18 minutes."
-        },
-        {
-          "title": "Serve",
-          "detail": "Take out the bones and bay leaves. Taste and add salt if needed. Serve in bowls with rice, cilantro, lime and warm tortillas."
-        }
-      ],
-      "doneness": "Beef is done when it pulls apart easily with a fork (it is safe well before that, at 145°F). Refrigerate leftovers within 2 hours.",
-      "tip": "Fill bowls with plenty of broth, meat and vegetables. The bone marrow is a treat for anyone who likes it."
-    },
     "chilecolorado": {
       "servings": "5",
-      "prep": "10 min",
-      "cook": "8 hr LOW or 4–5 hr HIGH",
-      "equipment": "Crockpot, pot for rice",
+      "prep": "15 min",
+      "cook": "8–9 hr LOW or 5 hr HIGH",
+      "equipment": "6-quart crockpot, pot for rice",
       "ingredients": [
-        "2.5 lb beef stew meat",
-        "2 Tbsp flour",
-        "1 tsp cumin, 1 tsp oregano, 1 tsp salt",
-        "1 onion, diced",
-        "3 garlic cloves, minced",
-        "1 can (28 oz) red chile sauce (like Las Palmas)",
-        "2 cups white rice",
-        "2 cans refried beans, warmed",
-        "10 flour tortillas"
+        "5 lb beef stew meat — double batch, save half for Sunday",
+        "1/4 cup flour",
+        "2 tsp cumin, 2 tsp oregano, 2 tsp salt",
+        "2 onions, diced",
+        "6 garlic cloves, minced",
+        "2 cans (28 oz each) red chile sauce (like Las Palmas)",
+        "2 cups white rice (tonight)",
+        "2 cans refried beans, warmed (tonight)",
+        "10 flour tortillas (tonight)"
       ],
       "steps": [
         {
-          "title": "Thaw the meat the night before",
-          "detail": "Move the stew meat from the freezer to the fridge the night before. Set it on a plate to catch drips. Never thaw meat on the counter, and never put frozen meat in the crockpot."
+          "title": "Thaw the meat 2 nights ahead",
+          "detail": "Thursday night, move both bags of stew meat (5 lb) from the freezer to the fridge on a plate so they are fully thawed by Saturday morning. Never thaw meat on the counter, and never put frozen meat in the crockpot."
         },
         {
           "title": "Season",
@@ -609,23 +521,55 @@
         },
         {
           "title": "Add the sauce",
-          "detail": "Add the onion and garlic. Pour the red chile sauce over the top and stir."
+          "detail": "Add the onions and garlic. Pour both cans of red chile sauce over the top and stir."
         },
         {
           "title": "Cook",
-          "detail": "Cover and cook 8 hours on LOW or 4–5 hours on HIGH, until the beef is tender."
+          "detail": "Cover and cook 8–9 hours on LOW or 5 hours on HIGH, until the beef is tender."
         },
         {
           "title": "Rice",
           "detail": "Make the rice: 4 cups water, 1 tsp salt, 2 cups rice, covered on low, 18 minutes."
         },
         {
-          "title": "Serve",
-          "detail": "Serve the chile colorado with rice, refried beans and warm tortillas."
+          "title": "Serve half tonight",
+          "detail": "Serve half of the chile colorado with rice, refried beans and warm tortillas."
+        },
+        {
+          "title": "Save half for Sunday",
+          "detail": "Within 2 hours of cooking, put the saved half in containers with lids, label them “Sunday leftovers” and put them in the fridge. Eat within 3–4 days."
         }
       ],
       "doneness": "Beef is done when it pulls apart easily with a fork (it is safe well before that, at 145°F). Refrigerate leftovers within 2 hours.",
-      "tip": "Leftovers make great burritos the next day."
+      "tip": "Double batch: it tastes even better the second day."
+    },
+    "lo-chilecolorado": {
+      "servings": "5",
+      "prep": "5 min",
+      "cook": "About 15–30 min",
+      "equipment": "Covered baking dish or pot, or microwave",
+      "ingredients": [
+        "Saved half of Saturday’s chile colorado",
+        "2 cups white rice",
+        "2 cans refried beans",
+        "10 flour tortillas"
+      ],
+      "steps": [
+        {
+          "title": "Reheat",
+          "detail": "Put the chile colorado in a pot. Cover and heat on medium-low 15 minutes, stirring often, until steaming."
+        },
+        {
+          "title": "Make fresh rice",
+          "detail": "Make the rice: 4 cups water, 1 tsp salt, 2 cups rice, covered on low, 18 minutes. Warm the beans."
+        },
+        {
+          "title": "Serve",
+          "detail": "Serve with rice, beans and warm tortillas."
+        }
+      ],
+      "doneness": "Reheat leftovers until steaming hot all the way through (165°F). Reheat only once; throw away anything older than 4 days.",
+      "tip": "Leftovers also make great burritos."
     }
   },
   "sundayByWeek": {}

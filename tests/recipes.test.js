@@ -29,26 +29,31 @@ test('every dinner recipe serves exactly 5', () => {
       r.ingredients,
       r.steps.map((s) => (typeof s === 'string' ? s : (s.title || '') + ' ' + (s.detail || '')))
     ).join(' ').toLowerCase();
-    assert.equal(/freeze half|leftovers for burritos|serve half/.test(blob), false, id + ' should not plan extra leftover batches');
   }
 });
 
-test('each dinner has ingredients and step-by-step instructions on the meal, sized for 5, with freezer thaw steps', () => {
+test('each night has ingredients and step-by-step instructions, sized for 5; double batches save half; leftovers reheat; freezer thaw steps', () => {
   const by = Recipes.byMeal;
-  const beefMeals = Meals.meals.filter((m) => !/chicken/i.test(m.name)).map((m) => m.id);
-  assert.equal(beefMeals.length, 12);
-  for (const id of beefMeals) {
-    assert.ok(by[id].ingredients.some((i) => /beef|steak|sirloin|chuck|carne asada/i.test(i)), id + ' is a beef dinner');
+  const cooked = Meals.meals.filter((m) => !/^lo-/.test(m.id));
+  const beef = cooked.filter((m) => !/chicken/i.test(m.name)).map((m) => m.id);
+  assert.equal(beef.length, 9);
+  for (const id of beef) assert.ok(by[id].ingredients.some((i) => /beef|steak|sirloin|chuck|carne asada/i.test(i)), id + ' is a beef dinner');
+  for (const m of cooked) assert.ok(by[m.id].steps.length >= 4, m.id + ' has step-by-step instructions');
+  const doubles = { potroast: 'Thursday', bakedziti: 'Sunday', barbacoa: 'Tuesday', chilecolorado: 'Sunday' };
+  for (const [id, day] of Object.entries(doubles)) {
+    assert.ok(by[id].ingredients.some((i) => new RegExp('double batch, save (half|one pan) for ' + day).test(i)), id + ' says double batch, save for ' + day);
+    assert.ok(by[id].steps.some((s) => /fridge/.test(s.detail) && new RegExp(day).test(s.title + s.detail)), id + ' has a storage step');
+    const lo = by['lo-' + id];
+    assert.ok(lo, 'leftover recipe for ' + id);
+    assert.equal(lo.servings, '5');
+    assert.ok(lo.steps.length >= 3);
+    assert.match(lo.doneness, /165°F/);
   }
-  for (const m of Meals.meals) assert.ok(by[m.id].steps.length >= 4, m.id + ' has step-by-step instructions');
-  assert.ok(by.guisada.ingredients.some((i) => /2\.5 lb beef stew meat/.test(i)));
-  assert.ok(by.ovenburgers.ingredients.some((i) => /2\.5 lb ground beef/.test(i)));
-  assert.ok(by.potroast.ingredients.some((i) => /3 lb boneless beef chuck roast/.test(i)));
-  // meat frozen on shopping day gets a thaw step; fridge meat (week 1 Mon-Wed) does not
-  const frozen = ['chickentinga', 'ovenburgers', 'potroast', 'bakedziti', 'barbacoa', 'chickenfajitas', 'burritobake', 'beefbroccoli', 'meatloaf', 'caldores', 'chilecolorado'];
+  assert.ok(by.potroast.ingredients.some((i) => /^6 lb boneless beef chuck roast/.test(i)));
+  assert.ok(by.chilecolorado.ingredients.some((i) => /^5 lb beef stew meat/.test(i)));
+  assert.ok(by.bakedziti.ingredients.some((i) => /^4 lb ground beef/.test(i)));
+  const frozen = ['guisada', 'bakedziti', 'barbacoa', 'chickenfajitas', 'burritobake', 'meatloaf', 'chilecolorado'];
   frozen.forEach((id) => assert.match(by[id].steps[0].title, /^Thaw/, id));
-  ['guisada', 'steakbites', 'carneasada'].forEach((id) => assert.doesNotMatch(by[id].steps[0].title, /^Thaw/, id));
-  // no prices or account data in recipes
-  const blob = JSON.stringify(Recipes);
-  assert.doesNotMatch(blob, /\$\d/);
+  ['carneasada', 'steakbites', 'potroast'].forEach((id) => assert.doesNotMatch(by[id].steps[0].title, /^Thaw/, id));
+  assert.doesNotMatch(JSON.stringify(Recipes), /\$\d/);
 });

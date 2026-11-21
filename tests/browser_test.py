@@ -25,7 +25,7 @@ try:
         page.goto(URL); page.wait_for_load_state('networkidle')
         check(page.title() == 'Tamayo Cart', 'title is Tamayo Cart')
         check('2-week' in page.inner_text('#budgetBtn').lower(), 'budget pill is a 2-week amount')
-        check(page.inner_text('#remaining') == '$40.00 over', 'empty cart still counts the $690 2-week list against $650 (got %s)' % page.inner_text('#remaining'))
+        check(page.inner_text('#remaining') == '$33.00 over', 'empty cart still counts the $683 2-week list against $650 (got %s)' % page.inner_text('#remaining'))
         # wait for SW to control the page
         page.wait_for_function('navigator.serviceWorker && navigator.serviceWorker.ready.then(()=>true)', timeout=60000)
         page.reload(); page.wait_for_function('!!navigator.serviceWorker.controller', timeout=60000)
@@ -38,7 +38,7 @@ try:
         check('both weeks' in page.inner_text('#dlgBody').lower() and page.input_value('#bIn') == '650.00', 'dialog labels the 2-week budget and shows 650.00')
         page.fill('#bIn', '900'); page.click('#bSave')
         check(page.evaluate("JSON.parse(localStorage.getItem('tamayoCart.v1')).budget") == 900, 'saving writes the edited budget number')
-        check(page.inner_text('#remaining') == '$210.00', 'left of 2-week budget is 900 − 690 (got %s)' % page.inner_text('#remaining'))
+        check(page.inner_text('#remaining') == '$217.00', 'left of 2-week budget is 900 − 683 (got %s)' % page.inner_text('#remaining'))
         # --- manual add
         def add(price, name='', qty=None, taxable=False):
             page.click('#addBtn'); page.fill('#fPrice', price); page.fill('#fName', name)
@@ -54,10 +54,10 @@ try:
         page.click('#store'); page.fill('#store', 'Food 4 Less – Downey'); page.keyboard.press('Tab')
         page.wait_for_timeout(2500)
         page.screenshot(path=os.path.join(ROOT, 'screenshots', '01_cart_light.png'))
-        add('22.00', 'Chicken thighs family pack')   # cart 46.64; trip 736.64 is 82% of 900
+        add('22.00', 'Chicken thighs family pack')   # cart 46.64; trip 729.64 is 81% of 900
         check(page.get_attribute('#summary', 'data-level') == 'warn', 'bar turns amber at >=80% of the 2-week budget')
         add('2.00', 'Tortillas')                       # cart 48.64; trip still in the warning band
-        add('15.00', 'Coffee')                         # cart 63.64; trip 753.64 is still under 900
+        add('15.00', 'Coffee')                         # cart 63.64; trip 746.64 is still under 900
         page.click('#budgetBtn'); page.fill('#bIn', '700'); page.click('#bSave')
         check(page.get_attribute('#summary', 'data-level') == 'over', 'bar turns red when the 2-week trip goes over the budget')
         check('over' in page.inner_text('#remaining'), 'remaining shows "over": ' + page.inner_text('#remaining'))
