@@ -676,7 +676,15 @@
   madeSync.refresh();
   if ('serviceWorker' in navigator && location.protocol !== 'file:') {
     var hadController = !!navigator.serviceWorker.controller;
-    navigator.serviceWorker.register('sw.js').then(function (reg) {
+    // A new release took over this page: reload once so the new meal plan and list show right away.
+    var reloading = false;
+    navigator.serviceWorker.addEventListener('controllerchange', function () {
+      if (!hadController || reloading) return;
+      reloading = true; location.reload();
+    });
+    navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).then(function (reg) {
+      // Home-screen apps resume without reloading, so look for a new release whenever the app comes back.
+      document.addEventListener('visibilitychange', function () { if (!document.hidden) reg.update().catch(function () {}); });
       reg.addEventListener('updatefound', function () {
         var nw = reg.installing; if (!nw) return;
         nw.addEventListener('statechange', function () { if (nw.state === 'activated' && !hadController) toast('✓ Ready to work offline'); });
